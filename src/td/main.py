@@ -15,6 +15,10 @@ Where command can be:
 '''
 
 
+def _set_arg(string):
+  return(set(string.split(',')))
+
+
 def _add_arguments_generic(parser):
   """Adds argparse arguments that apply universally to all commands."""
   parser.add_argument(
@@ -47,6 +51,9 @@ class Program(object):
     p.add_argument(
       'text', type=str, help='The text of this todo entry')
     p.add_argument(
+      '--tags', type=_set_arg,
+      help='Comma separated list of tags for this todo item')
+    p.add_argument(
       '--urgent', dest='priority', action='store_const',
       const=td.classes.PriorityEnum.URGENT.value,
       help='Sets this todo item as an urgent todo')
@@ -59,7 +66,7 @@ class Program(object):
 
     # Load todo list, add an entry, then save the results
     tl = td.fileio.load_todo_list(fname=args.file)
-    todo = td.classes.Todo(args.text, priority=args.priority)
+    todo = td.classes.Todo(args.text, priority=args.priority, tags=args.tags)
     tl.add_todo(todo)
     td.fileio.save_todo_list(tl, fname=args.file)
 
