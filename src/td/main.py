@@ -47,8 +47,13 @@ class Program(object):
     p.add_argument(
       'text', type=str, help='The text of this todo entry')
     p.add_argument(
-      '--priority', type=_priority_arg,
-      help='The priority of this todo item')
+      '--urgent', dest='priority', action='store_const',
+      const=td.classes.PriorityEnum.URGENT.value,
+      help='Sets this todo item as an urgent todo')
+    p.add_argument(
+      '--longterm', dest='priority', action='store_const',
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      help='Sets this todo item as a long term todo')
     _add_arguments_generic(p)
     args = p.parse_args(sys.argv[2:])
 

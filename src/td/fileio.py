@@ -1,10 +1,13 @@
 import os,json,warnings
 import td.classes
 
+
 def _encode_todo(todo):
+  todo.validate()
   return {
     'id': todo.id,
     'tags': list(todo.tags),
+    'priority': todo.priority,
     'text': todo.text,
     'finished': todo.finished,
     'created_date': todo.created_date,
@@ -14,7 +17,8 @@ def _encode_todo(todo):
 def _decode_todo(json_object):
   return(td.classes.Todo(
     text=json_object['text'],
-    tags=json_object['tags'],
+    tags=set(json_object['tags']),
+    priority=json_object['priority'],
     finished=json_object['finished'],
     created_date=json_object['created_date'],
     finished_date=json_object['finished_date'],

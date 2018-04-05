@@ -1,17 +1,92 @@
-import time
+import time, enum
+
+
+def _default_if_none(value, default):
+  """Returns value if it is not None, otherwise default."""
+  if value is None:
+    return(default)
+  else:
+    return(value)
+
+
+class PriorityEnum(enum.Enum):
+  DEFAULT = 1
+  URGENT = 2
+  LONG_TERM = 3
 
 
 class Todo:
 
-  def __init__(self, text, tags={}, finished=False, created_date=None, finished_date=None, id=None):
+  def __init__(
+    self, text, priority=None, tags=None, finished=None, created_date=None, finished_date=None, id=None):
+    # Values that should be set at construction time
     self.text = text
-    self.tags = set(tags)
+    self.priority = _default_if_none(priority, PriorityEnum.DEFAULT.value)
+    self.tags = _default_if_none(tags, set())
+
+    # Values that should only be set when reading from file
     self.finished = finished
     self.created_date = created_date
     self.finished_date = finished_date
     self.id = id
 
+    # Validate todo: maybe should not be called from constructor.
+    self.validate()
+
+  def validate(self):
+    """Validates that the values of this item are sensible.
+
+    This method should be called twice: The first time at the end of the
+    initialization code to make sure the user is not misusing the constructor.
+    The second time should be before saving to a database to make sure that
+    manipulations made to this item after initialization were valid.
+    
+    These two possible reasons for calling correspond to two different states: 
+      1 If the id is set, then this TODO is assumed to be loaded from a todo
+        list. In this is the case, created_date and finished should also be set
+      2 If the id is not set, then finished, created_date, finished_date should
+        all be None.
+
+    Raises:
+      InvalidTodoError: If validation fails
+    """
+    if not isinstance(self.text, str) or str == '':
+      raise InvalidTodoError('Bad todo text: '+str(text))
+    if not isinstance(self.tags, set):
+      raise InvalidTodoError('Bad tags (not a set): '+str(self.tags))
+    if not self.priority in [e.value for e in PriorityEnum]:
+      raise InvalidTodoError('Bad priority: '+str(self.priority))
+
+    if self.id is not None:
+      if not isinstance(self.id, int):
+        raise InvalidTodoError('Non int id: '+str(self.id))
+      if not isinstance(self.finished, bool):
+        raise InvalidTodoError('Non bool finished state: '+str(self.finished))
+      # TODO: More thorough date validation. (also below)
+      if not isinstance(self.created_date, float):
+        raise InvalidTodoError('Non float created_date: '+str(self.created_date))
+      # Finished items must have finished dates.
+      if self.finished and not isinstance(self.finished_date, float):
+          raise InvalidTodoError('Todo finished but no finished_date')
+      # Non-finished items must not have finished dates.
+      if not self.finished and self.finished_date is not None:
+        raise InvalidTodoError('Non finished todo has finished_date')
+    if self.id is None:
+      if self.finished is not None:
+        raise InvalidTodoError('No id set, but has not none finished: '+str(self.finished))
+      if self.created_date is not None:
+        raise InvalidTodoError('No id set, but has created_date: '+str(self.created_date))
+      if self.finished_date is not None:
+        raise InvalidTodoError('No id set, but has finished_date: '+str(self.finished_date))
+
+
 class TodoList:
+  """Class that represents a list of todo entries. 
+
+  It is typically read from a file at the start of a session and written to a
+  file at the end of a session. It also has methods for updating entries and
+  querying subsets of the full list.
+  """
 
   def __init__(self, modified_date=None, src_fname=None):
     self.src_fname = src_fname
@@ -23,6 +98,11 @@ class TodoList:
     self.todos = []
     self.tag_set = set()
     self.id_set = set()
+
+  def _set_next_todo_id(self):
+    """Returns a suitable ID for a new item and increments ID state."""
+    self.last_todo_id += 1
+    return(self.last_todo_id)
 
   def get_todo(self, id):
     """Returns todo with the given id.
@@ -60,18 +140,15 @@ class TodoList:
 
     # Make sure any 'init load' todo already has an id
     if initial_load and not todo.id:
-      raise ProgrammingError(
-        'TodoList.add_todo', 'missing ID on initial_load Todo')
-
+      raise ProgrammingError('TodoList.add_todo', 'Old Todo missing ID!')
+    # Make sure any new todo does not have an id
+    if not initial_load and todo.id:
+      raise ProgrammingError('Todo.add_todo', 'New Todo already has ID')
+    
     if not initial_load:
-      # Make sure any new todo does not have any protected field set.
-      if todo.id or todo.created_date or todo.finished_date:
-        raise ProgrammingError(
-          'Todo.add_todo', 'Added Todo already has some protected fields set')
-      # Set the id, creation date,
-      todo.id = self.last_todo_id + 1
-      self.last_todo_id += 1
-      self.created_date = time.time()
+      todo.id = self._set_next_todo_id()
+      todo.created_date = time.time()
+      todo.finished = False
 
       # Mark todo list as modified
       self._mark_modified()
@@ -92,7 +169,6 @@ class TodoList:
       raise IllegalStateError(
         'TodoList._update_object_maps', 'duplicate ID found.')
     self.id_set.add(todo.id)
-
 
     for tag in todo.tags:
       self.tag_set.add(tag)
@@ -133,6 +209,17 @@ class InvalidIDError(Error):
   def __init__(self, method, msg):
     self.message = '%s in method %s\n\tMSG: %s' % \
       ('InvalidIDError', method, msg)
+
+
+class InvalidTodoError(Error):
+  """Exception raised when todo validation fails.
+
+  This most likely indicates an issue with either encoding, decoding, or 
+  reading a todo list made by a prior version.
+  """
+  def __init__(self, msg):
+    self.message = '%s: %s' % \
+      ('InvalidTodoError', msg)
     
 
 class ProgrammingError(Error):
