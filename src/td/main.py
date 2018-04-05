@@ -74,11 +74,26 @@ class Program(object):
     p = argparse.ArgumentParser(
       prog = PROGRAM + ' show',
       description='Show the todo list or a subsection of it')
+    p.add_argument(
+      '--urgent', dest='priority', action='store_const',
+      const=td.classes.PriorityEnum.URGENT.value,
+      help='Only show urgent todos')
+    p.add_argument(
+      '--longterm', dest='priority', action='store_const',
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      help='Only show todos with priority "long term"')
+    p.add_argument(
+      '--default', dest='priority', action='store_const',
+      const=td.classes.PriorityEnum.DEFAULT.value,
+      help='Only show todos with priority "default"')
+    p.add_argument(
+      '--tags', type=_set_arg,
+      help='Only show todos which match this comma separated list of tags')
     _add_arguments_generic(p)
     args = p.parse_args(sys.argv[2:])
     
     tl = td.fileio.load_todo_list(fname=args.file)
-    todos = tl.get_todos()
+    todos = tl.get_todos(priority=args.priority, tags=args.tags)
     td.display.display_todos(todos)
 
 if __name__ == '__main__':

@@ -33,6 +33,14 @@ class Todo:
     # Validate todo: maybe should not be called from constructor.
     self.validate()
 
+  def matches(self, priority=None, tags=None):
+    if (priority is not None and priority is not self.priority):
+      return False
+    for tag in (tags or []):
+      if not tag in self.tags:
+        return False
+    return True
+
   def validate(self):
     """Validates that the values of this item are sensible.
 
@@ -119,8 +127,20 @@ class TodoList:
     raise InvalidIDError(
       'TodoList.get_todo', 'non-existent todo id '+str(id))
 
-  def get_todos(self):
-    return self.todos
+  def get_todos(self, priority=None, tags=None):
+    """Gets a list of todos that match the given conditions.
+
+    Currently the method is configured to use AND logic (all conditions must be satisfied.)
+
+    Arguments:
+      priority: If not None, will only return items matching the given
+        priority.
+      tags: If not None, will only return items matching all of the given tags.
+
+    Returns:
+      list: List of todo items matching criteria.
+    """
+    return([todo for todo in self.todos if todo.matches(priority, tags)])
 
   def add_todo(self, todo, initial_load=False):
     """Adds a todo to this todo list.
