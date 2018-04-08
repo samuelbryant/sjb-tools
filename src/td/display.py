@@ -16,6 +16,14 @@ def prompt_yes_no(question, default=None):
     else:
       sys.stdout.write("Invalid reponse\n")
 
+def get_num_cols():
+  return int(os.popen('stty size', 'r').read().split()[1])
+
+def indent_paragraph(paragraph, indent_size):
+  text = textwrap.wrap(paragraph, width = get_num_cols() - indent_size)
+  prefix = '\n' + (' ' * indent_size)
+  return prefix.join(text)
+
 def _repr_tags(tags):
   return((tags and '#' + ', #'.join(tags)) or '')
 
@@ -40,7 +48,8 @@ def repr_todo(todo, simple=False):
   Returns:
     str: String representation of a todo item.
   """
-  return '%-3d %1s %s %s' % (todo.id, _repr_priority(todo.priority), todo.text, _repr_tags(todo.tags))
+  return(indent_paragraph(
+    '%-3d %1s %s %s' % (todo.id, _repr_priority(todo.priority), todo.text, _repr_tags(todo.tags)), 6))
 
 def display_todo(todo):
   print(repr_todo(todo))
