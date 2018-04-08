@@ -33,12 +33,15 @@ class Todo:
     # Validate todo: maybe should not be called from constructor.
     self.validate()
 
-  def matches(self, priority=None, tags=None):
+  def matches(self, priority=None, tags=None, finished=None):
+    """Returns true only if todo matches ALL conditions."""
     if (priority is not None and priority is not self.priority):
       return False
     for tag in (tags or []):
       if not tag in self.tags:
         return False
+    if finished is not None and self.finished is not finished:
+      return False
     return True
 
   def validate(self):
@@ -112,6 +115,21 @@ class TodoList:
     self.last_todo_id += 1
     return(self.last_todo_id)
 
+  def get_todo_index(self, id):
+    """Returns the index of the todo with the given id.
+
+    Returns:
+      int: the index in self.todos of the todo with the matching ID.
+
+    Raises:
+      InvalidIDError: If no todo has a matching ID.
+    """
+    for i in range(len(self.todos)):
+      if id is self.todos[i].id:
+        return i
+    raise InvalidIDError(
+      'TodoList.get_todo_index', 'non-existent todo id '+str(id))
+
   def get_todo(self, id):
     """Returns todo with the given id.
 
@@ -127,7 +145,7 @@ class TodoList:
     raise InvalidIDError(
       'TodoList.get_todo', 'non-existent todo id '+str(id))
 
-  def get_todos(self, priority=None, tags=None):
+  def get_todos(self, priority=None, tags=None, finished=None):
     """Gets a list of todos that match the given conditions.
 
     Currently the method is configured to use AND logic (all conditions must be satisfied.)
@@ -136,11 +154,14 @@ class TodoList:
       priority: If not None, will only return items matching the given
         priority.
       tags: If not None, will only return items matching all of the given tags.
+      finished: If not None, will only return items with the given finished 
+        status.
 
     Returns:
       list: List of todo items matching criteria.
     """
-    return([todo for todo in self.todos if todo.matches(priority, tags)])
+    return(
+      [todo for todo in self.todos if todo.matches(priority, tags, finished)])
 
   def add_todo(self, todo, initial_load=False):
     """Adds a todo to this todo list.
@@ -177,6 +198,27 @@ class TodoList:
     self.todos.append(todo)
     self._update_object_maps(todo)
 
+  def complete_todo(self, id):
+    """Marks the todo with the specified ID as completed.
+
+    Returns:
+      Todo: The completed todo object.
+
+    Raises:
+      InvalidIDError: If no todo has a matching ID.
+      IllegalStateError: If the todo is already completed.
+    """
+    todo = self.get_todo(id)
+    if todo.finished:
+      raise IllegalStateError(
+        'TodoList.complete_todo','specified todo was already completed')
+    todo.finished = True
+    todo.finished_date = time.time()
+    self._mark_modified()
+    ## TODO: Not needed yet, but may be needed if maps are completion aware.
+    # self._recompute_object_maps()
+    return(todo)
+
   def remove_todo(self, id):
     """Removes the todo item with the specified ID and updates meta data.
 
@@ -186,16 +228,12 @@ class TodoList:
     Raises:
       InvalidIDError: If no todo has a matching ID.
     """
-    for i in range(len(self.todos)):
-      if id is self.todos[i].id:
-        removed = self.todos.pop(i)
-        # Mark as modified and recompute meta maps.
-        self._mark_modified()
-        self._recompute_object_maps()
-
-        return(removed)
-    raise InvalidIDError(
-      'TodoList.remove_todo', 'non-existent todo id '+str(id))
+    index = self.get_todo_index(id)
+    removed = self.todos.pop(index)
+    # Mark as modified and recompute meta maps.
+    self._mark_modified()
+    self._recompute_object_maps()
+    return(removed)
 
   def _update_object_maps(self, todo):
     """Updates meta object maps like tag_set to reflect contents of todo.

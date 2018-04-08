@@ -10,9 +10,11 @@ USAGE='''\
 sjb_todo command [<args>]
 
 Where command can be:
-  add     Add a new todo item to the todo list
-  remove  Removes a todo item entirely from the cheatsheet
-  show    Shows the todos from the todo list
+  add      Add a new todo item to the todo list
+  complete Marks a todo item as completed
+  remove   Removes a todo item entirely from the cheatsheet
+  update   Updates some fields from a todo item in todo list.
+  show     Shows the todos from the todo list
 '''
 
 
@@ -88,14 +90,48 @@ class Program(object):
       const=td.classes.PriorityEnum.DEFAULT.value,
       help='Only show todos with priority "default"')
     p.add_argument(
+      '--completed', dest='completed', action='store_const', const=True, 
+      default=False, help='If set, will only show completed items. Otherwise this will only show uncompleted items')
+    p.add_argument(
       '--tags', type=_set_arg,
       help='Only show todos which match this comma separated list of tags')
     _add_arguments_generic(p)
     args = p.parse_args(sys.argv[2:])
     
     tl = td.fileio.load_todo_list(fname=args.file)
-    todos = tl.get_todos(priority=args.priority, tags=args.tags)
+    todos = tl.get_todos(
+      priority=args.priority, tags=args.tags, finished=args.completed)
     td.display.display_todos(todos)
+
+  def complete(self):
+    p = argparse.ArgumentParser(
+      prog = PROGRAM + ' complete',
+      description='Marks a todo item as completed')
+    p.add_argument(
+      'id', type=int, help='ID of the todo you wish to mark as completed')
+    p.add_argument(
+      '--prompt', dest='force', action='store_const', const=0, default=1,
+      help='Prompt the user before marking the item as completed')
+    _add_arguments_generic(p)
+    args = p.parse_args(sys.argv[2:])
+
+    tl = td.fileio.load_todo_list(fname=args.file)
+    
+    # If not in force mode, ask user before proceeding.
+    todo = tl.get_todo(args.id)
+    if not args.force:
+      question=\
+        'The todo item given by id '+str(args.id)+' is:\n' + \
+        td.display.repr_todo(todo, simple=False) + \
+        '\nAre you sure you want to mark it as completed? '
+      cont = td.display.prompt_yes_no(question, default=False)
+      if not cont:
+        exit(0)
+
+    completed = tl.complete_todo(args.id)
+    td.fileio.save_todo_list(tl, fname=args.file)
+
+    td.display.display_todo(completed)
 
   def remove(self):
     p = argparse.ArgumentParser(
@@ -116,7 +152,7 @@ class Program(object):
       question=\
         'The todo item given by id '+str(args.id)+' is:\n' + \
         td.display.repr_todo(todo, simple=False) + \
-        '\n Are you sure you want to delete it? '
+        '\nAre you sure you want to delete it? '
       cont = td.display.prompt_yes_no(question, default=False)
       if not cont:
         exit(0)
