@@ -177,6 +177,26 @@ class TodoList:
     self.todos.append(todo)
     self._update_object_maps(todo)
 
+  def remove_todo(self, id):
+    """Removes the todo item with the specified ID and updates meta data.
+
+    Returns:
+      Todo: The removed Todo object.
+
+    Raises:
+      InvalidIDError: If no todo has a matching ID.
+    """
+    for i in range(len(self.todos)):
+      if id is self.todos[i].id:
+        removed = self.todos.pop(i)
+        # Mark as modified and recompute meta maps.
+        self._mark_modified()
+        self._recompute_object_maps()
+
+        return(removed)
+    raise InvalidIDError(
+      'TodoList.remove_todo', 'non-existent todo id '+str(id))
+
   def _update_object_maps(self, todo):
     """Updates meta object maps like tag_set to reflect contents of todo.
 

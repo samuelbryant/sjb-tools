@@ -10,8 +10,9 @@ USAGE='''\
 sjb_todo command [<args>]
 
 Where command can be:
-  add   Add a new todo item to the todo list
-  show  Shows the todos from the todo list
+  add     Add a new todo item to the todo list
+  remove  Removes a todo item entirely from the cheatsheet
+  show    Shows the todos from the todo list
 '''
 
 
@@ -95,6 +96,34 @@ class Program(object):
     tl = td.fileio.load_todo_list(fname=args.file)
     todos = tl.get_todos(priority=args.priority, tags=args.tags)
     td.display.display_todos(todos)
+
+  def remove(self):
+    p = argparse.ArgumentParser(
+      prog = PROGRAM + ' remove',
+      description='Remove a todo from list completely (this does NOT mark it as done)')
+    p.add_argument('id', type=int, help='ID of the todo you wish to delete')
+    p.add_argument(
+      '--f', dest='force', action='store_const', const=1, default=0,
+      help='Force: dont ask before completing the removal')
+    _add_arguments_generic(p)
+    args = p.parse_args(sys.argv[2:])
+
+    tl = td.fileio.load_todo_list(fname=args.file)
+    
+    # If not in force mode, ask user before proceeding.
+    todo = tl.get_todo(args.id)
+    if not args.force:
+      question=\
+        'The todo item given by id '+str(args.id)+' is:\n' + \
+        td.display.repr_todo(todo, simple=False) + \
+        '\n Are you sure you want to delete it? '
+      cont = td.display.prompt_yes_no(question, default=False)
+      if not cont:
+        exit(0)
+
+    removed = tl.remove_todo(args.id)
+    td.fileio.save_todo_list(tl, fname=args.file)
+
 
 if __name__ == '__main__':
   Program()

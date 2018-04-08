@@ -1,6 +1,20 @@
 import os,textwrap,sys
 import td.classes
 
+def prompt_yes_no(question, default=None):
+  """Asks a yes/no question and returns either True or False."""
+  prompt = (default is True and 'Y/n') or (default is False and 'y/N') or 'y/n'
+  valid = {'yes': True, 'ye': True, 'y': True, 'no': False, 'n': False}
+
+  while True:
+    choice = input(question + prompt + ': ').lower()
+
+    if not choice and default is not None:
+      return default
+    if choice in valid:
+      return valid[choice]
+    else:
+      sys.stdout.write("Invalid reponse\n")
 
 def _repr_tags(tags):
   return((tags and '#' + ', #'.join(tags)) or '')
