@@ -1,13 +1,7 @@
 ************* Module classes
 W: 81, 0: TODO: More thorough date validation. (also below) (fixme)
 W:228, 0: TODO: Not needed yet, but may be needed if maps are completion aware. (fixme)
-************* Module main
-R: 51, 2: Method could be a function (no-self-use)
-R: 80, 2: Method could be a function (no-self-use)
-R:117, 2: Method could be a function (no-self-use)
-R:149, 2: Method could be a function (no-self-use)
-R:179, 2: Method could be a function (no-self-use)
 
 ------------------------------------------------------------------
-Your code has been rated at 9.78/10 (previous run: 9.36/10, +0.41)
+Your code has been rated at 9.94/10 (previous run: 6.48/10, +3.46)
 
