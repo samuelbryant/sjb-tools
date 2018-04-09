@@ -20,9 +20,15 @@ def get_num_cols():
   return int(os.popen('stty size', 'r').read().split()[1])
 
 def indent_paragraph(paragraph, indent_size):
-  text = textwrap.wrap(paragraph, width = get_num_cols() - indent_size)
+  width = get_num_cols() - indent_size
+
+  # Have to treat new lines specially
+  lines = paragraph.split('\n')
+  indented = [textwrap.wrap(line, width=width) for line in lines]
+  indented = [y for x in indented for y in x]
+
   prefix = '\n' + (' ' * indent_size)
-  return prefix.join(text)
+  return prefix.join(indented)
 
 def _repr_tags(tags):
   return((tags and '#' + ', #'.join(tags)) or '')

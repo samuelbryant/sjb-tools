@@ -61,8 +61,9 @@ class Todo:
     Raises:
       InvalidTodoError: If validation fails
     """
-    if not isinstance(self.text, str) or str == '':
-      raise InvalidTodoError('Bad todo text: '+str(text))
+    if not self.text or not isinstance(self.text, str):
+      raise InvalidTodoError('Bad todo text: '+str(self.
+        text))
     if not isinstance(self.tags, set):
       raise InvalidTodoError('Bad tags (not a set): '+str(self.tags))
     if not self.priority in [e.value for e in PriorityEnum]:
@@ -320,8 +321,7 @@ class InvalidTodoError(Error):
   reading a todo list made by a prior version.
   """
   def __init__(self, msg):
-    self.message = '%s: %s' % \
-      ('InvalidTodoError', msg)
+    self.message = '%s: %s' % ('InvalidTodoError', msg)
     
 
 class ProgrammingError(Error):
