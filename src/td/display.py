@@ -1,4 +1,7 @@
-import os,textwrap,sys
+"""Module responsible for representing todo items and writing to terminal."""
+import os
+import textwrap
+import sys
 import td.classes
 
 def prompt_yes_no(question, default=None):
@@ -16,11 +19,11 @@ def prompt_yes_no(question, default=None):
     else:
       sys.stdout.write("Invalid reponse\n")
 
-def get_num_cols():
+def _get_num_cols():
   return int(os.popen('stty size', 'r').read().split()[1])
 
-def indent_paragraph(paragraph, indent_size):
-  width = get_num_cols() - indent_size
+def _indent_paragraph(paragraph, indent_size):
+  width = _get_num_cols() - indent_size
 
   # Have to treat new lines specially
   lines = paragraph.split('\n')
@@ -31,7 +34,7 @@ def indent_paragraph(paragraph, indent_size):
   return prefix.join(indented)
 
 def _repr_tags(tags):
-  return((tags and '#' + ', #'.join(tags)) or '')
+  return '#' + ', #'.join(tags) if tags else ''
 
 def _repr_priority(priority):
   if priority is td.classes.PriorityEnum.DEFAULT.value:
@@ -44,22 +47,27 @@ def _repr_priority(priority):
     raise td.classes.ProgrammingError(
       'display._repr_priority', 'Illegal priority argument: '+str(priority))
 
-def repr_todo(todo, simple=False):
+def repr_todo(todo):
   """Returns a string reprentation of a todo item.
-  
+
   This outputs todo items with the following format:
     53  ! This is the todo item text #tag1,#tag2
-  Where 53 is the ID, the '!' is because the item is Urgent, and tag1,tag2 are the tags.
+  Where 53 is the oid, the '!' is because the item is Urgent, and tag1,tag2
+  are the tags.
 
   Returns:
     str: String representation of a todo item.
   """
-  return(indent_paragraph(
-    '%-3d %1s %s %s' % (todo.id, _repr_priority(todo.priority), todo.text, _repr_tags(todo.tags)), 6))
+  return _indent_paragraph(
+    '%-3d %1s %s %s' % (
+      todo.oid, _repr_priority(todo.priority), todo.text,
+      _repr_tags(todo.tags)), 6)
 
 def display_todo(todo):
+  """Prints a string representation of a todo item to stdout."""
   print(repr_todo(todo))
 
 def display_todos(todo_list):
+  """Prints a string representation of a todo list to stdout."""
   for todo in todo_list:
     display_todo(todo)
