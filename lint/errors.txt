@@ -1,0 +1,1878 @@
+************* Module classes
+W: 77, 0: TODO: More thorough date validation. (also below) (fixme)
+W:219, 0: TODO: Not needed yet, but may be needed if maps are completion aware. (fixme)
+W:  5, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  6, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  7, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:  7, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W:  8, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  9, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:  9, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 13, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 14, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 15, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 20, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 21, 0: Wrong hanging indentation before block.
+    self, text, priority=None, tags=None, finished=None, created_date=None, finished_date=None, id=None):
+    ^ |   | (bad-continuation)
+C: 21, 0: Line too long (105/100) (line-too-long)
+W: 23, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 24, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 25, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 28, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 29, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 30, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 31, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 34, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 36, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 37, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 38, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 38, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+W: 39, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 40, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 40, 0: Unnecessary parens after 'in' keyword (superfluous-parens)
+W: 41, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 42, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 43, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 44, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 45, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 47, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 54, 0: Trailing whitespace (trailing-whitespace)
+C: 55, 0: Trailing whitespace (trailing-whitespace)
+W: 48, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 64, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 65, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C: 66, 0: Wrong continued indentation (add 43 spaces).
+        text))
+        ^                                          | (bad-continuation)
+W: 67, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 68, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 69, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 70, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 72, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 73, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 74, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 75, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 76, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 78, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 79, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 81, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 82, 0: Bad indentation. Found 10 spaces, expected 16 (bad-indentation)
+W: 84, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 85, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 86, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 87, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 88, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 89, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 90, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 91, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 92, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+C: 96, 0: Trailing whitespace (trailing-whitespace)
+W: 96, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:103, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:104, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:105, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:106, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:107, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:108, 0: Trailing whitespace (trailing-whitespace)
+W:110, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:111, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:112, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:114, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:115, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:116, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:117, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:117, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W:119, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:120, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:128, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:129, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:130, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W:131, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:132, 0: Wrong hanging indentation (add 2 spaces).
+      'TodoList.get_todo_index', 'non-existent todo id '+str(id))
+      ^ | (bad-continuation)
+W:134, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:135, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:143, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:144, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:145, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W:146, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:147, 0: Wrong hanging indentation (add 2 spaces).
+      'TodoList.get_todo', 'non-existent todo id '+str(id))
+      ^ | (bad-continuation)
+W:149, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:158, 0: Trailing whitespace (trailing-whitespace)
+W:150, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:164, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:165, 0: Wrong hanging indentation (add 2 spaces).
+      [todo for todo in self.todos if todo.matches(priority, tags, finished)])
+      ^ | (bad-continuation)
+W:167, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:171, 0: Trailing whitespace (trailing-whitespace)
+C:172, 0: Trailing whitespace (trailing-whitespace)
+C:173, 0: Trailing whitespace (trailing-whitespace)
+W:168, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:184, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:185, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:187, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:188, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:189, 0: Trailing whitespace (trailing-whitespace)
+W:190, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:191, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:192, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:193, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:196, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:199, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:200, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:202, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:203, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:212, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:213, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:214, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:215, 0: Wrong hanging indentation (add 2 spaces).
+        'TodoList.complete_todo','specified todo was already completed')
+        ^ | (bad-continuation)
+C:215, 0: Exactly one space required after comma
+        'TodoList.complete_todo','specified todo was already completed')
+                                ^ (bad-whitespace)
+W:216, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:217, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:218, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:221, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:221, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W:223, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:224, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:232, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:233, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:235, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:236, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:237, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:237, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W:239, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:240, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:252, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:254, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:255, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:256, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:257, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:258, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:259, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:261, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:261, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W:263, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:264, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:269, 0: Trailing whitespace (trailing-whitespace)
+W:271, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:272, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:273, 0: Wrong hanging indentation (add 2 spaces).
+        'TodoList._update_object_maps', 'duplicate ID found.')
+        ^ | (bad-continuation)
+W:274, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:276, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:277, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:280, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:281, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:283, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:286, 0: Line too long (125/100) (line-too-long)
+W:284, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:288, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:289, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:290, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:292, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:293, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:294, 0: Trailing whitespace (trailing-whitespace)
+W:295, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:296, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:300, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:300, 0: Exactly one space required around assignment
+    self.modified=True
+                 ^ (bad-whitespace)
+W:301, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:301, 0: Exactly one space required around assignment
+    self.modified_date=time.time()
+                      ^ (bad-whitespace)
+W:305, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:306, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:310, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:312, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:313, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:320, 0: Trailing whitespace (trailing-whitespace)
+W:318, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:323, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:324, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:325, 0: Trailing whitespace (trailing-whitespace)
+W:328, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:331, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:332, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:337, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:338, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:339, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (time, enum) (multiple-imports)
+R:  6, 2: Unnecessary "else" after "return" (no-else-return)
+C: 12, 0: Missing class docstring (missing-docstring)
+R: 12, 0: Too few public methods (0/2) (too-few-public-methods)
+C: 31, 4: Invalid attribute name "id" (invalid-name)
+C: 18, 0: Missing class docstring (missing-docstring)
+C: 18, 0: Old-style class defined. (old-style-class)
+W: 21,96: Redefining built-in 'id' (redefined-builtin)
+C: 20, 2: Invalid argument name "id" (invalid-name)
+R: 20, 2: Too many arguments (8/5) (too-many-arguments)
+R: 47, 2: Too many branches (13/12) (too-many-branches)
+C: 95, 0: Old-style class defined. (old-style-class)
+W:119,27: Redefining built-in 'id' (redefined-builtin)
+C:119, 2: Invalid argument name "id" (invalid-name)
+W:134,21: Redefining built-in 'id' (redefined-builtin)
+C:134, 2: Invalid argument name "id" (invalid-name)
+C:143, 8: Invalid variable name "t" (invalid-name)
+W:202,26: Redefining built-in 'id' (redefined-builtin)
+C:202, 2: Invalid argument name "id" (invalid-name)
+W:223,24: Redefining built-in 'id' (redefined-builtin)
+C:223, 2: Invalid argument name "id" (invalid-name)
+W:239,24: Redefining built-in 'id' (redefined-builtin)
+C:239, 2: Invalid argument name "id" (invalid-name)
+W:312, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+W:323, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+W:331, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+W:338, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+************* Module fileio
+C:  1, 0: Exactly one space required after comma
+import os,json,warnings
+         ^ (bad-whitespace)
+C:  1, 0: Exactly one space required after comma
+import os,json,warnings
+              ^ (bad-whitespace)
+W:  6, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  7, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:  8, 0: Wrong hanging indentation (add 2 spaces).
+    'id': todo.id,
+    ^ | (bad-continuation)
+C:  9, 0: Wrong hanging indentation (add 2 spaces).
+    'tags': list(todo.tags),
+    ^ | (bad-continuation)
+C: 10, 0: Wrong hanging indentation (add 2 spaces).
+    'priority': todo.priority,
+    ^ | (bad-continuation)
+C: 11, 0: Wrong hanging indentation (add 2 spaces).
+    'text': todo.text,
+    ^ | (bad-continuation)
+C: 12, 0: Wrong hanging indentation (add 2 spaces).
+    'finished': todo.finished,
+    ^ | (bad-continuation)
+C: 13, 0: Wrong hanging indentation (add 2 spaces).
+    'created_date': todo.created_date,
+    ^ | (bad-continuation)
+C: 14, 0: Wrong hanging indentation (add 2 spaces).
+    'finished_date': todo.finished_date,
+    ^ | (bad-continuation)
+W: 18, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 19, 0: Wrong hanging indentation (add 2 spaces).
+    text=json_object['text'],
+    ^ | (bad-continuation)
+C: 20, 0: Wrong hanging indentation (add 2 spaces).
+    tags=set(json_object['tags']),
+    ^ | (bad-continuation)
+C: 21, 0: Wrong hanging indentation (add 2 spaces).
+    priority=json_object['priority'],
+    ^ | (bad-continuation)
+C: 22, 0: Wrong hanging indentation (add 2 spaces).
+    finished=json_object['finished'],
+    ^ | (bad-continuation)
+C: 23, 0: Wrong hanging indentation (add 2 spaces).
+    created_date=json_object['created_date'],
+    ^ | (bad-continuation)
+C: 24, 0: Wrong hanging indentation (add 2 spaces).
+    finished_date=json_object['finished_date'],
+    ^ | (bad-continuation)
+C: 25, 0: Wrong hanging indentation (add 2 spaces).
+    id=json_object['id']))
+    ^ | (bad-continuation)
+W: 28, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 29, 0: Wrong hanging indentation (add 2 spaces).
+    'todo_list': {
+    ^ | (bad-continuation)
+C: 30, 0: Wrong hanging indentation (add 2 spaces).
+      'modified_date': todo_list.modified_date,
+      ^ | (bad-continuation)
+C: 31, 0: Wrong hanging indentation (add 2 spaces).
+      'todos': [_encode_todo(todo) for todo in todo_list.todos]
+      ^ | (bad-continuation)
+W: 36, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 37, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 37, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 38, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 39, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 39, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 42, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 43, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 45, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 46, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 47, 0: Trailing whitespace (trailing-whitespace)
+W: 48, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 51, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 54, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 55, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 56, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 56, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 58, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 59, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 60, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 63, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 64, 0: Wrong hanging indentation (add 2 spaces).
+    modified_date=modified_date, src_fname=fname)
+    ^ | (bad-continuation)
+C: 65, 0: Trailing whitespace (trailing-whitespace)
+W: 67, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 68, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 69, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 71, 0: Final newline missing (missing-final-newline)
+W: 71, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (os, json, warnings) (multiple-imports)
+E:  2, 0: Unable to import 'td.classes' (import-error)
+R: 36, 2: Unnecessary "else" after "return" (no-else-return)
+W: 46, 2: Redefining built-in 'file' (redefined-builtin)
+W: 58, 2: Redefining built-in 'file' (redefined-builtin)
+C: 50, 0: Missing function docstring (missing-docstring)
+C: 59, 2: Invalid variable name "ob" (invalid-name)
+R: 60, 2: Consider using ternary (ob['modified_date'] if 'modified_date' in ob else None) (consider-using-ternary)
+************* Module display
+C:  1, 0: Exactly one space required after comma
+import os,textwrap,sys
+         ^ (bad-whitespace)
+C:  1, 0: Exactly one space required after comma
+import os,textwrap,sys
+                  ^ (bad-whitespace)
+W:  5, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  6, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  7, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  9, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 10, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 12, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 13, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 14, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 15, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 16, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 17, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 20, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 23, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 26, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 27, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 28, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 30, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 31, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 34, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 34, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 37, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 38, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 39, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 40, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 41, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 42, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 43, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 44, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 45, 0: Wrong hanging indentation (add 2 spaces).
+      'display._repr_priority', 'Illegal priority argument: '+str(priority))
+      ^ | (bad-continuation)
+C: 49, 0: Trailing whitespace (trailing-whitespace)
+W: 48, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 57, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 58, 0: Wrong hanging indentation (add 2 spaces).
+    '%-3d %1s %s %s' % (todo.id, _repr_priority(todo.priority), todo.text, _repr_tags(todo.tags)), 6))
+    ^ | (bad-continuation)
+C: 58, 0: Line too long (102/100) (line-too-long)
+W: 61, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 61, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+W: 64, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 65, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (os, textwrap, sys) (multiple-imports)
+E:  2, 0: Unable to import 'td.classes' (import-error)
+C: 19, 0: Missing function docstring (missing-docstring)
+C: 22, 0: Missing function docstring (missing-docstring)
+R: 34, 2: Consider using ternary (('#') + (', #'.join(tags)) if tags else '') (consider-using-ternary)
+W: 47,20: Unused argument 'simple' (unused-argument)
+C: 60, 0: Missing function docstring (missing-docstring)
+C: 63, 0: Missing function docstring (missing-docstring)
+************* Module main
+C:  2, 0: Exactly one space required after comma
+import os,sys,argparse
+         ^ (bad-whitespace)
+C:  2, 0: Exactly one space required after comma
+import os,sys,argparse
+             ^ (bad-whitespace)
+C:  8, 0: Exactly one space required around assignment
+PROGRAM='sjb_todo'
+       ^ (bad-whitespace)
+C:  9, 0: Exactly one space required around assignment
+USAGE='''\
+     ^ (bad-whitespace)
+W: 22, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 22, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 26, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 27, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 28, 0: Wrong hanging indentation (add 2 spaces).
+    '--file', type=str,
+    ^ | (bad-continuation)
+C: 29, 0: Wrong hanging indentation (add 2 spaces).
+    help='Manually specify a todo file to work with')
+    ^ | (bad-continuation)
+W: 34, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 35, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 36, 0: Wrong hanging indentation (add 2 spaces).
+      description='Todo list program', usage=USAGE)
+      ^ | (bad-continuation)
+W: 37, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 38, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 40, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 41, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C: 41, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+W: 42, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 43, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 46, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 48, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 49, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 50, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' add',
+      ^ | (bad-continuation)
+C: 50, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' add',
+           ^ (bad-whitespace)
+C: 51, 0: Wrong hanging indentation (add 2 spaces).
+      description='Add a todo entry to your todo list')
+      ^ | (bad-continuation)
+W: 54, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 55, 0: Wrong hanging indentation (add 2 spaces).
+      'text', type=str, help='The text of this todo entry')
+      ^ | (bad-continuation)
+W: 56, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 57, 0: Wrong hanging indentation (add 2 spaces).
+      '--tags', type=_set_arg,
+      ^ | (bad-continuation)
+C: 58, 0: Wrong hanging indentation (add 2 spaces).
+      help='Comma separated list of tags for this todo item')
+      ^ | (bad-continuation)
+W: 59, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 60, 0: Wrong hanging indentation (add 2 spaces).
+      '--urgent', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 61, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.URGENT.value,
+      ^ | (bad-continuation)
+C: 62, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as an urgent todo')
+      ^ | (bad-continuation)
+W: 63, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 64, 0: Wrong hanging indentation (add 2 spaces).
+      '--longterm', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 65, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      ^ | (bad-continuation)
+C: 66, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as a long term todo')
+      ^ | (bad-continuation)
+W: 67, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 68, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 71, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 72, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 73, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 74, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 76, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 77, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 78, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' update',
+      ^ | (bad-continuation)
+C: 78, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' update',
+           ^ (bad-whitespace)
+C: 79, 0: Wrong hanging indentation (add 2 spaces).
+      description='Alter any of the fields of a todo item')
+      ^ | (bad-continuation)
+W: 81, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 82, 0: Wrong hanging indentation (add 2 spaces).
+      'id', type=int,
+      ^ | (bad-continuation)
+C: 83, 0: Wrong hanging indentation (add 2 spaces).
+      help='ID of the entry you wish to update')
+      ^ | (bad-continuation)
+W: 84, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 85, 0: Wrong hanging indentation (add 2 spaces).
+      '--text', type=str, help='The text for this todo item')
+      ^ | (bad-continuation)
+W: 86, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 87, 0: Wrong hanging indentation (add 2 spaces).
+      '--tags', type=_set_arg,
+      ^ | (bad-continuation)
+C: 88, 0: Wrong hanging indentation (add 2 spaces).
+      help='Comma separated list of tags for this todo item')
+      ^ | (bad-continuation)
+W: 89, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 90, 0: Wrong hanging indentation (add 2 spaces).
+      '--urgent', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 91, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.URGENT.value,
+      ^ | (bad-continuation)
+C: 92, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as an urgent todo')
+      ^ | (bad-continuation)
+W: 93, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 94, 0: Wrong hanging indentation (add 2 spaces).
+      '--default', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 95, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.DEFAULT.value,
+      ^ | (bad-continuation)
+C: 96, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo items priority to default')
+      ^ | (bad-continuation)
+W: 97, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 98, 0: Wrong hanging indentation (add 2 spaces).
+      '--longterm', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 99, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      ^ | (bad-continuation)
+C:100, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as a long term todo')
+      ^ | (bad-continuation)
+W:101, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:102, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:105, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:106, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:107, 0: Wrong hanging indentation (add 2 spaces).
+      args.id, text=args.text, priority=args.priority, tags=args.tags)
+      ^ | (bad-continuation)
+W:109, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:110, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:112, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:113, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:114, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' show',
+      ^ | (bad-continuation)
+C:114, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' show',
+           ^ (bad-whitespace)
+C:115, 0: Wrong hanging indentation (add 2 spaces).
+      description='Show the todo list or a subsection of it')
+      ^ | (bad-continuation)
+W:116, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:117, 0: Wrong hanging indentation (add 2 spaces).
+      '--urgent', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C:118, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.URGENT.value,
+      ^ | (bad-continuation)
+C:119, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show urgent todos')
+      ^ | (bad-continuation)
+W:120, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:121, 0: Wrong hanging indentation (add 2 spaces).
+      '--longterm', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C:122, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      ^ | (bad-continuation)
+C:123, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show todos with priority "long term"')
+      ^ | (bad-continuation)
+W:124, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:125, 0: Wrong hanging indentation (add 2 spaces).
+      '--default', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C:126, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.DEFAULT.value,
+      ^ | (bad-continuation)
+C:127, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show todos with priority "default"')
+      ^ | (bad-continuation)
+W:128, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:129, 0: Wrong hanging indentation (add 2 spaces).
+      '--completed', dest='completed', action='store_const', const=True, 
+      ^ | (bad-continuation)
+C:129, 0: Trailing whitespace (trailing-whitespace)
+C:130, 0: Wrong hanging indentation (add 2 spaces).
+      default=False, help='If set, will only show completed items. Otherwise this will only show uncompleted items')
+      ^ | (bad-continuation)
+C:130, 0: Line too long (116/100) (line-too-long)
+W:131, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:132, 0: Wrong hanging indentation (add 2 spaces).
+      '--tags', type=_set_arg,
+      ^ | (bad-continuation)
+C:133, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show todos which match this comma separated list of tags')
+      ^ | (bad-continuation)
+W:134, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:135, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:136, 0: Trailing whitespace (trailing-whitespace)
+W:137, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:138, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:139, 0: Wrong hanging indentation (add 2 spaces).
+      priority=args.priority, tags=args.tags, finished=args.completed)
+      ^ | (bad-continuation)
+W:140, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:142, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:143, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:144, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' complete',
+      ^ | (bad-continuation)
+C:144, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' complete',
+           ^ (bad-whitespace)
+C:145, 0: Wrong hanging indentation (add 2 spaces).
+      description='Marks a todo item as completed')
+      ^ | (bad-continuation)
+W:146, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:147, 0: Wrong hanging indentation (add 2 spaces).
+      'id', type=int, help='ID of the todo you wish to mark as completed')
+      ^ | (bad-continuation)
+W:148, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:149, 0: Wrong hanging indentation (add 2 spaces).
+      '--prompt', dest='force', action='store_const', const=0, default=1,
+      ^ | (bad-continuation)
+C:150, 0: Wrong hanging indentation (add 2 spaces).
+      help='Prompt the user before marking the item as completed')
+      ^ | (bad-continuation)
+W:151, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:152, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:154, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:155, 0: Trailing whitespace (trailing-whitespace)
+W:157, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:158, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:159, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:159, 0: Exactly one space required before assignment
+      question=\
+              ^ (bad-whitespace)
+W:163, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:164, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:165, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W:167, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:168, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:170, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:172, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:173, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:174, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' remove',
+      ^ | (bad-continuation)
+C:174, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' remove',
+           ^ (bad-whitespace)
+C:175, 0: Wrong hanging indentation (add 2 spaces).
+      description='Remove a todo from list completely (this does NOT mark it as done)')
+      ^ | (bad-continuation)
+W:176, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:177, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:178, 0: Wrong hanging indentation (add 2 spaces).
+      '--f', dest='force', action='store_const', const=1, default=0,
+      ^ | (bad-continuation)
+C:179, 0: Wrong hanging indentation (add 2 spaces).
+      help='Force: dont ask before completing the removal')
+      ^ | (bad-continuation)
+W:180, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:181, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:183, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:184, 0: Trailing whitespace (trailing-whitespace)
+W:186, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:187, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:188, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:188, 0: Exactly one space required before assignment
+      question=\
+              ^ (bad-whitespace)
+W:192, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:193, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:194, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W:196, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:197, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:201, 0: Final newline missing (missing-final-newline)
+W:201, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  2, 0: Multiple imports on one line (os, sys, argparse) (multiple-imports)
+E:  3, 0: Unable to import 'td.classes' (import-error)
+E:  4, 0: Unable to import 'td.fileio' (import-error)
+E:  5, 0: Unable to import 'td.display' (import-error)
+C: 32, 0: Missing class docstring (missing-docstring)
+C: 48, 2: Missing method docstring (missing-docstring)
+C: 49, 4: Invalid variable name "p" (invalid-name)
+C: 71, 4: Invalid variable name "tl" (invalid-name)
+R: 48, 2: Method could be a function (no-self-use)
+C: 76, 2: Missing method docstring (missing-docstring)
+C: 77, 4: Invalid variable name "p" (invalid-name)
+C:105, 4: Invalid variable name "tl" (invalid-name)
+R: 76, 2: Method could be a function (no-self-use)
+C:112, 2: Missing method docstring (missing-docstring)
+C:113, 4: Invalid variable name "p" (invalid-name)
+C:137, 4: Invalid variable name "tl" (invalid-name)
+R:112, 2: Method could be a function (no-self-use)
+C:142, 2: Missing method docstring (missing-docstring)
+C:143, 4: Invalid variable name "p" (invalid-name)
+C:154, 4: Invalid variable name "tl" (invalid-name)
+R:142, 2: Method could be a function (no-self-use)
+C:172, 2: Missing method docstring (missing-docstring)
+C:173, 4: Invalid variable name "p" (invalid-name)
+C:183, 4: Invalid variable name "tl" (invalid-name)
+W:196, 4: Unused variable 'removed' (unused-variable)
+R:172, 2: Method could be a function (no-self-use)
+W:  2, 0: Unused import os (unused-import)
+
+--------------------------------------------------------------------
+Your code has been rated at -7.52/10 (previous run: -7.52/10, +0.00)
+
+************* Module classes
+W: 77, 0: TODO: More thorough date validation. (also below) (fixme)
+W:219, 0: TODO: Not needed yet, but may be needed if maps are completion aware. (fixme)
+W:  5, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  6, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  7, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:  7, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W:  8, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  9, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:  9, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 13, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 14, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 15, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 20, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 21, 0: Wrong hanging indentation before block.
+    self, text, priority=None, tags=None, finished=None, created_date=None, finished_date=None, id=None):
+    ^ |   | (bad-continuation)
+C: 21, 0: Line too long (105/100) (line-too-long)
+W: 23, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 24, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 25, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 28, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 29, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 30, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 31, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 34, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 36, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 37, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 38, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 38, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+W: 39, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 40, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 40, 0: Unnecessary parens after 'in' keyword (superfluous-parens)
+W: 41, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 42, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 43, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 44, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 45, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 47, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 54, 0: Trailing whitespace (trailing-whitespace)
+C: 55, 0: Trailing whitespace (trailing-whitespace)
+W: 48, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 64, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 65, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C: 66, 0: Wrong continued indentation (add 43 spaces).
+        text))
+        ^                                          | (bad-continuation)
+W: 67, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 68, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 69, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 70, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 72, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 73, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 74, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 75, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 76, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 78, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 79, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 81, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 82, 0: Bad indentation. Found 10 spaces, expected 16 (bad-indentation)
+W: 84, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 85, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 86, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 87, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 88, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 89, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 90, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W: 91, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 92, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+C: 96, 0: Trailing whitespace (trailing-whitespace)
+W: 96, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:103, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:104, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:105, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:106, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:107, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:108, 0: Trailing whitespace (trailing-whitespace)
+W:110, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:111, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:112, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:114, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:115, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:116, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:117, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:117, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W:119, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:120, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:128, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:129, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:130, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W:131, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:132, 0: Wrong hanging indentation (add 2 spaces).
+      'TodoList.get_todo_index', 'non-existent todo id '+str(id))
+      ^ | (bad-continuation)
+W:134, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:135, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:143, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:144, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:145, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W:146, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:147, 0: Wrong hanging indentation (add 2 spaces).
+      'TodoList.get_todo', 'non-existent todo id '+str(id))
+      ^ | (bad-continuation)
+W:149, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:158, 0: Trailing whitespace (trailing-whitespace)
+W:150, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:164, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:165, 0: Wrong hanging indentation (add 2 spaces).
+      [todo for todo in self.todos if todo.matches(priority, tags, finished)])
+      ^ | (bad-continuation)
+W:167, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:171, 0: Trailing whitespace (trailing-whitespace)
+C:172, 0: Trailing whitespace (trailing-whitespace)
+C:173, 0: Trailing whitespace (trailing-whitespace)
+W:168, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:184, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:185, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:187, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:188, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:189, 0: Trailing whitespace (trailing-whitespace)
+W:190, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:191, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:192, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:193, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:196, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:199, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:200, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:202, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:203, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:212, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:213, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:214, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:215, 0: Wrong hanging indentation (add 2 spaces).
+        'TodoList.complete_todo','specified todo was already completed')
+        ^ | (bad-continuation)
+C:215, 0: Exactly one space required after comma
+        'TodoList.complete_todo','specified todo was already completed')
+                                ^ (bad-whitespace)
+W:216, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:217, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:218, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:221, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:221, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W:223, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:224, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:232, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:233, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:235, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:236, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:237, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:237, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W:239, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:240, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:252, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:254, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:255, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:256, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:257, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:258, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:259, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:261, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:261, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W:263, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:264, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:269, 0: Trailing whitespace (trailing-whitespace)
+W:271, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:272, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:273, 0: Wrong hanging indentation (add 2 spaces).
+        'TodoList._update_object_maps', 'duplicate ID found.')
+        ^ | (bad-continuation)
+W:274, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:276, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:277, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:280, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:281, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:283, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:286, 0: Line too long (125/100) (line-too-long)
+W:284, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:288, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:289, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:290, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:292, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:293, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:294, 0: Trailing whitespace (trailing-whitespace)
+W:295, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:296, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:300, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:300, 0: Exactly one space required around assignment
+    self.modified=True
+                 ^ (bad-whitespace)
+W:301, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:301, 0: Exactly one space required around assignment
+    self.modified_date=time.time()
+                      ^ (bad-whitespace)
+W:305, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:306, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:310, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:312, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:313, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:320, 0: Trailing whitespace (trailing-whitespace)
+W:318, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:323, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:324, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:325, 0: Trailing whitespace (trailing-whitespace)
+W:328, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:331, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:332, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:337, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:338, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:339, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (time, enum) (multiple-imports)
+R:  6, 2: Unnecessary "else" after "return" (no-else-return)
+C: 12, 0: Missing class docstring (missing-docstring)
+R: 12, 0: Too few public methods (0/2) (too-few-public-methods)
+C: 31, 4: Invalid attribute name "id" (invalid-name)
+C: 18, 0: Missing class docstring (missing-docstring)
+C: 18, 0: Old-style class defined. (old-style-class)
+W: 21,96: Redefining built-in 'id' (redefined-builtin)
+C: 20, 2: Invalid argument name "id" (invalid-name)
+R: 20, 2: Too many arguments (8/5) (too-many-arguments)
+R: 47, 2: Too many branches (13/12) (too-many-branches)
+C: 95, 0: Old-style class defined. (old-style-class)
+W:119,27: Redefining built-in 'id' (redefined-builtin)
+C:119, 2: Invalid argument name "id" (invalid-name)
+W:134,21: Redefining built-in 'id' (redefined-builtin)
+C:134, 2: Invalid argument name "id" (invalid-name)
+C:143, 8: Invalid variable name "t" (invalid-name)
+W:202,26: Redefining built-in 'id' (redefined-builtin)
+C:202, 2: Invalid argument name "id" (invalid-name)
+W:223,24: Redefining built-in 'id' (redefined-builtin)
+C:223, 2: Invalid argument name "id" (invalid-name)
+W:239,24: Redefining built-in 'id' (redefined-builtin)
+C:239, 2: Invalid argument name "id" (invalid-name)
+W:312, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+W:323, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+W:331, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+W:338, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+************* Module fileio
+C:  1, 0: Exactly one space required after comma
+import os,json,warnings
+         ^ (bad-whitespace)
+C:  1, 0: Exactly one space required after comma
+import os,json,warnings
+              ^ (bad-whitespace)
+W:  6, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  7, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:  8, 0: Wrong hanging indentation (add 2 spaces).
+    'id': todo.id,
+    ^ | (bad-continuation)
+C:  9, 0: Wrong hanging indentation (add 2 spaces).
+    'tags': list(todo.tags),
+    ^ | (bad-continuation)
+C: 10, 0: Wrong hanging indentation (add 2 spaces).
+    'priority': todo.priority,
+    ^ | (bad-continuation)
+C: 11, 0: Wrong hanging indentation (add 2 spaces).
+    'text': todo.text,
+    ^ | (bad-continuation)
+C: 12, 0: Wrong hanging indentation (add 2 spaces).
+    'finished': todo.finished,
+    ^ | (bad-continuation)
+C: 13, 0: Wrong hanging indentation (add 2 spaces).
+    'created_date': todo.created_date,
+    ^ | (bad-continuation)
+C: 14, 0: Wrong hanging indentation (add 2 spaces).
+    'finished_date': todo.finished_date,
+    ^ | (bad-continuation)
+W: 18, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 19, 0: Wrong hanging indentation (add 2 spaces).
+    text=json_object['text'],
+    ^ | (bad-continuation)
+C: 20, 0: Wrong hanging indentation (add 2 spaces).
+    tags=set(json_object['tags']),
+    ^ | (bad-continuation)
+C: 21, 0: Wrong hanging indentation (add 2 spaces).
+    priority=json_object['priority'],
+    ^ | (bad-continuation)
+C: 22, 0: Wrong hanging indentation (add 2 spaces).
+    finished=json_object['finished'],
+    ^ | (bad-continuation)
+C: 23, 0: Wrong hanging indentation (add 2 spaces).
+    created_date=json_object['created_date'],
+    ^ | (bad-continuation)
+C: 24, 0: Wrong hanging indentation (add 2 spaces).
+    finished_date=json_object['finished_date'],
+    ^ | (bad-continuation)
+C: 25, 0: Wrong hanging indentation (add 2 spaces).
+    id=json_object['id']))
+    ^ | (bad-continuation)
+W: 28, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 29, 0: Wrong hanging indentation (add 2 spaces).
+    'todo_list': {
+    ^ | (bad-continuation)
+C: 30, 0: Wrong hanging indentation (add 2 spaces).
+      'modified_date': todo_list.modified_date,
+      ^ | (bad-continuation)
+C: 31, 0: Wrong hanging indentation (add 2 spaces).
+      'todos': [_encode_todo(todo) for todo in todo_list.todos]
+      ^ | (bad-continuation)
+W: 36, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 37, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 37, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 38, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 39, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 39, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 42, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 43, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 45, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 46, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 47, 0: Trailing whitespace (trailing-whitespace)
+W: 48, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 51, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 54, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 55, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 56, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 56, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 58, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 59, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 60, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 63, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 64, 0: Wrong hanging indentation (add 2 spaces).
+    modified_date=modified_date, src_fname=fname)
+    ^ | (bad-continuation)
+C: 65, 0: Trailing whitespace (trailing-whitespace)
+W: 67, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 68, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 69, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 71, 0: Final newline missing (missing-final-newline)
+W: 71, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (os, json, warnings) (multiple-imports)
+E:  2, 0: Unable to import 'td.classes' (import-error)
+R: 36, 2: Unnecessary "else" after "return" (no-else-return)
+W: 46, 2: Redefining built-in 'file' (redefined-builtin)
+W: 58, 2: Redefining built-in 'file' (redefined-builtin)
+C: 50, 0: Missing function docstring (missing-docstring)
+C: 59, 2: Invalid variable name "ob" (invalid-name)
+R: 60, 2: Consider using ternary (ob['modified_date'] if 'modified_date' in ob else None) (consider-using-ternary)
+************* Module display
+C:  1, 0: Exactly one space required after comma
+import os,textwrap,sys
+         ^ (bad-whitespace)
+C:  1, 0: Exactly one space required after comma
+import os,textwrap,sys
+                  ^ (bad-whitespace)
+W:  5, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  6, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  7, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:  9, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 10, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 12, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 13, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 14, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 15, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 16, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 17, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 20, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 23, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 26, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 27, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 28, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 30, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 31, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 34, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 34, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 37, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 38, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 39, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 40, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 41, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 42, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 43, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 44, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 45, 0: Wrong hanging indentation (add 2 spaces).
+      'display._repr_priority', 'Illegal priority argument: '+str(priority))
+      ^ | (bad-continuation)
+C: 49, 0: Trailing whitespace (trailing-whitespace)
+W: 48, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 57, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 58, 0: Wrong hanging indentation (add 2 spaces).
+    '%-3d %1s %s %s' % (todo.id, _repr_priority(todo.priority), todo.text, _repr_tags(todo.tags)), 6))
+    ^ | (bad-continuation)
+C: 58, 0: Line too long (102/100) (line-too-long)
+W: 61, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 61, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+W: 64, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 65, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (os, textwrap, sys) (multiple-imports)
+E:  2, 0: Unable to import 'td.classes' (import-error)
+C: 19, 0: Missing function docstring (missing-docstring)
+C: 22, 0: Missing function docstring (missing-docstring)
+R: 34, 2: Consider using ternary (('#') + (', #'.join(tags)) if tags else '') (consider-using-ternary)
+W: 47,20: Unused argument 'simple' (unused-argument)
+C: 60, 0: Missing function docstring (missing-docstring)
+C: 63, 0: Missing function docstring (missing-docstring)
+************* Module main
+C:  2, 0: Exactly one space required after comma
+import os,sys,argparse
+         ^ (bad-whitespace)
+C:  2, 0: Exactly one space required after comma
+import os,sys,argparse
+             ^ (bad-whitespace)
+C:  8, 0: Exactly one space required around assignment
+PROGRAM='sjb_todo'
+       ^ (bad-whitespace)
+C:  9, 0: Exactly one space required around assignment
+USAGE='''\
+     ^ (bad-whitespace)
+W: 22, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 22, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+W: 26, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 27, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C: 28, 0: Wrong hanging indentation (add 2 spaces).
+    '--file', type=str,
+    ^ | (bad-continuation)
+C: 29, 0: Wrong hanging indentation (add 2 spaces).
+    help='Manually specify a todo file to work with')
+    ^ | (bad-continuation)
+W: 34, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 35, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 36, 0: Wrong hanging indentation (add 2 spaces).
+      description='Todo list program', usage=USAGE)
+      ^ | (bad-continuation)
+W: 37, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 38, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 40, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 41, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C: 41, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+W: 42, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 43, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W: 46, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 48, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 49, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 50, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' add',
+      ^ | (bad-continuation)
+C: 50, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' add',
+           ^ (bad-whitespace)
+C: 51, 0: Wrong hanging indentation (add 2 spaces).
+      description='Add a todo entry to your todo list')
+      ^ | (bad-continuation)
+W: 54, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 55, 0: Wrong hanging indentation (add 2 spaces).
+      'text', type=str, help='The text of this todo entry')
+      ^ | (bad-continuation)
+W: 56, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 57, 0: Wrong hanging indentation (add 2 spaces).
+      '--tags', type=_set_arg,
+      ^ | (bad-continuation)
+C: 58, 0: Wrong hanging indentation (add 2 spaces).
+      help='Comma separated list of tags for this todo item')
+      ^ | (bad-continuation)
+W: 59, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 60, 0: Wrong hanging indentation (add 2 spaces).
+      '--urgent', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 61, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.URGENT.value,
+      ^ | (bad-continuation)
+C: 62, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as an urgent todo')
+      ^ | (bad-continuation)
+W: 63, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 64, 0: Wrong hanging indentation (add 2 spaces).
+      '--longterm', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 65, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      ^ | (bad-continuation)
+C: 66, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as a long term todo')
+      ^ | (bad-continuation)
+W: 67, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 68, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 71, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 72, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 73, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 74, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W: 76, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W: 77, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 78, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' update',
+      ^ | (bad-continuation)
+C: 78, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' update',
+           ^ (bad-whitespace)
+C: 79, 0: Wrong hanging indentation (add 2 spaces).
+      description='Alter any of the fields of a todo item')
+      ^ | (bad-continuation)
+W: 81, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 82, 0: Wrong hanging indentation (add 2 spaces).
+      'id', type=int,
+      ^ | (bad-continuation)
+C: 83, 0: Wrong hanging indentation (add 2 spaces).
+      help='ID of the entry you wish to update')
+      ^ | (bad-continuation)
+W: 84, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 85, 0: Wrong hanging indentation (add 2 spaces).
+      '--text', type=str, help='The text for this todo item')
+      ^ | (bad-continuation)
+W: 86, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 87, 0: Wrong hanging indentation (add 2 spaces).
+      '--tags', type=_set_arg,
+      ^ | (bad-continuation)
+C: 88, 0: Wrong hanging indentation (add 2 spaces).
+      help='Comma separated list of tags for this todo item')
+      ^ | (bad-continuation)
+W: 89, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 90, 0: Wrong hanging indentation (add 2 spaces).
+      '--urgent', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 91, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.URGENT.value,
+      ^ | (bad-continuation)
+C: 92, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as an urgent todo')
+      ^ | (bad-continuation)
+W: 93, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 94, 0: Wrong hanging indentation (add 2 spaces).
+      '--default', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 95, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.DEFAULT.value,
+      ^ | (bad-continuation)
+C: 96, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo items priority to default')
+      ^ | (bad-continuation)
+W: 97, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C: 98, 0: Wrong hanging indentation (add 2 spaces).
+      '--longterm', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 99, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      ^ | (bad-continuation)
+C:100, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as a long term todo')
+      ^ | (bad-continuation)
+W:101, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:102, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:105, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:106, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:107, 0: Wrong hanging indentation (add 2 spaces).
+      args.id, text=args.text, priority=args.priority, tags=args.tags)
+      ^ | (bad-continuation)
+W:109, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:110, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:112, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:113, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:114, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' show',
+      ^ | (bad-continuation)
+C:114, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' show',
+           ^ (bad-whitespace)
+C:115, 0: Wrong hanging indentation (add 2 spaces).
+      description='Show the todo list or a subsection of it')
+      ^ | (bad-continuation)
+W:116, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:117, 0: Wrong hanging indentation (add 2 spaces).
+      '--urgent', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C:118, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.URGENT.value,
+      ^ | (bad-continuation)
+C:119, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show urgent todos')
+      ^ | (bad-continuation)
+W:120, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:121, 0: Wrong hanging indentation (add 2 spaces).
+      '--longterm', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C:122, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      ^ | (bad-continuation)
+C:123, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show todos with priority "long term"')
+      ^ | (bad-continuation)
+W:124, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:125, 0: Wrong hanging indentation (add 2 spaces).
+      '--default', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C:126, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.DEFAULT.value,
+      ^ | (bad-continuation)
+C:127, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show todos with priority "default"')
+      ^ | (bad-continuation)
+W:128, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:129, 0: Wrong hanging indentation (add 2 spaces).
+      '--completed', dest='completed', action='store_const', const=True, 
+      ^ | (bad-continuation)
+C:129, 0: Trailing whitespace (trailing-whitespace)
+C:130, 0: Wrong hanging indentation (add 2 spaces).
+      default=False, help='If set, will only show completed items. Otherwise this will only show uncompleted items')
+      ^ | (bad-continuation)
+C:130, 0: Line too long (116/100) (line-too-long)
+W:131, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:132, 0: Wrong hanging indentation (add 2 spaces).
+      '--tags', type=_set_arg,
+      ^ | (bad-continuation)
+C:133, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show todos which match this comma separated list of tags')
+      ^ | (bad-continuation)
+W:134, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:135, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:136, 0: Trailing whitespace (trailing-whitespace)
+W:137, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:138, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:139, 0: Wrong hanging indentation (add 2 spaces).
+      priority=args.priority, tags=args.tags, finished=args.completed)
+      ^ | (bad-continuation)
+W:140, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:142, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:143, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:144, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' complete',
+      ^ | (bad-continuation)
+C:144, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' complete',
+           ^ (bad-whitespace)
+C:145, 0: Wrong hanging indentation (add 2 spaces).
+      description='Marks a todo item as completed')
+      ^ | (bad-continuation)
+W:146, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:147, 0: Wrong hanging indentation (add 2 spaces).
+      'id', type=int, help='ID of the todo you wish to mark as completed')
+      ^ | (bad-continuation)
+W:148, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:149, 0: Wrong hanging indentation (add 2 spaces).
+      '--prompt', dest='force', action='store_const', const=0, default=1,
+      ^ | (bad-continuation)
+C:150, 0: Wrong hanging indentation (add 2 spaces).
+      help='Prompt the user before marking the item as completed')
+      ^ | (bad-continuation)
+W:151, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:152, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:154, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:155, 0: Trailing whitespace (trailing-whitespace)
+W:157, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:158, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:159, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:159, 0: Exactly one space required before assignment
+      question=\
+              ^ (bad-whitespace)
+W:163, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:164, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:165, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W:167, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:168, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:170, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:172, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+W:173, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:174, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' remove',
+      ^ | (bad-continuation)
+C:174, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' remove',
+           ^ (bad-whitespace)
+C:175, 0: Wrong hanging indentation (add 2 spaces).
+      description='Remove a todo from list completely (this does NOT mark it as done)')
+      ^ | (bad-continuation)
+W:176, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:177, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:178, 0: Wrong hanging indentation (add 2 spaces).
+      '--f', dest='force', action='store_const', const=1, default=0,
+      ^ | (bad-continuation)
+C:179, 0: Wrong hanging indentation (add 2 spaces).
+      help='Force: dont ask before completing the removal')
+      ^ | (bad-continuation)
+W:180, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:181, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:183, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:184, 0: Trailing whitespace (trailing-whitespace)
+W:186, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:187, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:188, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+C:188, 0: Exactly one space required before assignment
+      question=\
+              ^ (bad-whitespace)
+W:192, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:193, 0: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+W:194, 0: Bad indentation. Found 8 spaces, expected 16 (bad-indentation)
+W:196, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+W:197, 0: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+C:201, 0: Final newline missing (missing-final-newline)
+W:201, 0: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  2, 0: Multiple imports on one line (os, sys, argparse) (multiple-imports)
+E:  3, 0: Unable to import 'td.classes' (import-error)
+E:  4, 0: Unable to import 'td.fileio' (import-error)
+E:  5, 0: Unable to import 'td.display' (import-error)
+C: 32, 0: Missing class docstring (missing-docstring)
+C: 48, 2: Missing method docstring (missing-docstring)
+C: 49, 4: Invalid variable name "p" (invalid-name)
+C: 71, 4: Invalid variable name "tl" (invalid-name)
+R: 48, 2: Method could be a function (no-self-use)
+C: 76, 2: Missing method docstring (missing-docstring)
+C: 77, 4: Invalid variable name "p" (invalid-name)
+C:105, 4: Invalid variable name "tl" (invalid-name)
+R: 76, 2: Method could be a function (no-self-use)
+C:112, 2: Missing method docstring (missing-docstring)
+C:113, 4: Invalid variable name "p" (invalid-name)
+C:137, 4: Invalid variable name "tl" (invalid-name)
+R:112, 2: Method could be a function (no-self-use)
+C:142, 2: Missing method docstring (missing-docstring)
+C:143, 4: Invalid variable name "p" (invalid-name)
+C:154, 4: Invalid variable name "tl" (invalid-name)
+R:142, 2: Method could be a function (no-self-use)
+C:172, 2: Missing method docstring (missing-docstring)
+C:173, 4: Invalid variable name "p" (invalid-name)
+C:183, 4: Invalid variable name "tl" (invalid-name)
+W:196, 4: Unused variable 'removed' (unused-variable)
+R:172, 2: Method could be a function (no-self-use)
+W:  2, 0: Unused import os (unused-import)
+
+--------------------------------------------------------------------
+Your code has been rated at -7.52/10 (previous run: -7.52/10, +0.00)
+
+************* Module classes
+W: 77, 0: TODO: More thorough date validation. (also below) (fixme)
+W:219, 0: TODO: Not needed yet, but may be needed if maps are completion aware. (fixme)
+C:  7, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C:  9, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C: 21, 0: Wrong hanging indentation (add 2 spaces).
+    self, text, priority=None, tags=None, finished=None, created_date=None, finished_date=None, id=None):
+    ^ | (bad-continuation)
+C: 21, 0: Line too long (105/80) (line-too-long)
+C: 38, 0: Unnecessary parens after 'if' keyword (superfluous-parens)
+C: 40, 0: Unnecessary parens after 'in' keyword (superfluous-parens)
+C: 54, 0: Trailing whitespace (trailing-whitespace)
+C: 55, 0: Trailing whitespace (trailing-whitespace)
+C: 66, 0: Wrong continued indentation (add 43 spaces).
+        text))
+        ^                                          | (bad-continuation)
+C: 79, 0: Line too long (81/80) (line-too-long)
+W: 82, 0: Bad indentation. Found 10 spaces, expected 8 (bad-indentation)
+C: 88, 0: Line too long (91/80) (line-too-long)
+C: 90, 0: Line too long (90/80) (line-too-long)
+C: 92, 0: Line too long (92/80) (line-too-long)
+C: 96, 0: Trailing whitespace (trailing-whitespace)
+C:108, 0: Trailing whitespace (trailing-whitespace)
+C:117, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C:132, 0: Wrong hanging indentation (add 2 spaces).
+      'TodoList.get_todo_index', 'non-existent todo id '+str(id))
+      ^ | (bad-continuation)
+C:147, 0: Wrong hanging indentation (add 2 spaces).
+      'TodoList.get_todo', 'non-existent todo id '+str(id))
+      ^ | (bad-continuation)
+C:152, 0: Line too long (91/80) (line-too-long)
+C:158, 0: Trailing whitespace (trailing-whitespace)
+C:165, 0: Wrong hanging indentation (add 2 spaces).
+      [todo for todo in self.todos if todo.matches(priority, tags, finished)])
+      ^ | (bad-continuation)
+C:171, 0: Trailing whitespace (trailing-whitespace)
+C:172, 0: Trailing whitespace (trailing-whitespace)
+C:173, 0: Trailing whitespace (trailing-whitespace)
+C:189, 0: Trailing whitespace (trailing-whitespace)
+C:215, 0: Wrong hanging indentation (add 2 spaces).
+        'TodoList.complete_todo','specified todo was already completed')
+        ^ | (bad-continuation)
+C:215, 0: Exactly one space required after comma
+        'TodoList.complete_todo','specified todo was already completed')
+                                ^ (bad-whitespace)
+C:221, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C:237, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C:261, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C:269, 0: Trailing whitespace (trailing-whitespace)
+C:273, 0: Wrong hanging indentation (add 2 spaces).
+        'TodoList._update_object_maps', 'duplicate ID found.')
+        ^ | (bad-continuation)
+C:286, 0: Line too long (125/80) (line-too-long)
+C:294, 0: Trailing whitespace (trailing-whitespace)
+C:300, 0: Exactly one space required around assignment
+    self.modified=True
+                 ^ (bad-whitespace)
+C:301, 0: Exactly one space required around assignment
+    self.modified_date=time.time()
+                      ^ (bad-whitespace)
+C:320, 0: Trailing whitespace (trailing-whitespace)
+C:325, 0: Trailing whitespace (trailing-whitespace)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (time, enum) (multiple-imports)
+R:  6, 2: Unnecessary "else" after "return" (no-else-return)
+C: 12, 0: Missing class docstring (missing-docstring)
+R: 12, 0: Too few public methods (0/2) (too-few-public-methods)
+C: 31, 4: Invalid attribute name "id" (invalid-name)
+C: 18, 0: Missing class docstring (missing-docstring)
+C: 18, 0: Old-style class defined. (old-style-class)
+W: 21,96: Redefining built-in 'id' (redefined-builtin)
+C: 20, 2: Invalid argument name "id" (invalid-name)
+R: 20, 2: Too many arguments (8/5) (too-many-arguments)
+R: 47, 2: Too many branches (13/12) (too-many-branches)
+C: 95, 0: Old-style class defined. (old-style-class)
+W:119,27: Redefining built-in 'id' (redefined-builtin)
+C:119, 2: Invalid argument name "id" (invalid-name)
+W:134,21: Redefining built-in 'id' (redefined-builtin)
+C:134, 2: Invalid argument name "id" (invalid-name)
+C:143, 8: Invalid variable name "t" (invalid-name)
+W:202,26: Redefining built-in 'id' (redefined-builtin)
+C:202, 2: Invalid argument name "id" (invalid-name)
+W:223,24: Redefining built-in 'id' (redefined-builtin)
+C:223, 2: Invalid argument name "id" (invalid-name)
+W:239,24: Redefining built-in 'id' (redefined-builtin)
+C:239, 2: Invalid argument name "id" (invalid-name)
+W:312, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+W:323, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+W:331, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+W:338, 2: __init__ method from base class 'Error' is not called (super-init-not-called)
+************* Module fileio
+C:  1, 0: Exactly one space required after comma
+import os,json,warnings
+         ^ (bad-whitespace)
+C:  1, 0: Exactly one space required after comma
+import os,json,warnings
+              ^ (bad-whitespace)
+C:  8, 0: Wrong hanging indentation (add 2 spaces).
+    'id': todo.id,
+    ^ | (bad-continuation)
+C:  9, 0: Wrong hanging indentation (add 2 spaces).
+    'tags': list(todo.tags),
+    ^ | (bad-continuation)
+C: 10, 0: Wrong hanging indentation (add 2 spaces).
+    'priority': todo.priority,
+    ^ | (bad-continuation)
+C: 11, 0: Wrong hanging indentation (add 2 spaces).
+    'text': todo.text,
+    ^ | (bad-continuation)
+C: 12, 0: Wrong hanging indentation (add 2 spaces).
+    'finished': todo.finished,
+    ^ | (bad-continuation)
+C: 13, 0: Wrong hanging indentation (add 2 spaces).
+    'created_date': todo.created_date,
+    ^ | (bad-continuation)
+C: 14, 0: Wrong hanging indentation (add 2 spaces).
+    'finished_date': todo.finished_date,
+    ^ | (bad-continuation)
+C: 19, 0: Wrong hanging indentation (add 2 spaces).
+    text=json_object['text'],
+    ^ | (bad-continuation)
+C: 20, 0: Wrong hanging indentation (add 2 spaces).
+    tags=set(json_object['tags']),
+    ^ | (bad-continuation)
+C: 21, 0: Wrong hanging indentation (add 2 spaces).
+    priority=json_object['priority'],
+    ^ | (bad-continuation)
+C: 22, 0: Wrong hanging indentation (add 2 spaces).
+    finished=json_object['finished'],
+    ^ | (bad-continuation)
+C: 23, 0: Wrong hanging indentation (add 2 spaces).
+    created_date=json_object['created_date'],
+    ^ | (bad-continuation)
+C: 24, 0: Wrong hanging indentation (add 2 spaces).
+    finished_date=json_object['finished_date'],
+    ^ | (bad-continuation)
+C: 25, 0: Wrong hanging indentation (add 2 spaces).
+    id=json_object['id']))
+    ^ | (bad-continuation)
+C: 29, 0: Wrong hanging indentation (add 2 spaces).
+    'todo_list': {
+    ^ | (bad-continuation)
+C: 30, 0: Wrong hanging indentation (add 2 spaces).
+      'modified_date': todo_list.modified_date,
+      ^ | (bad-continuation)
+C: 31, 0: Wrong hanging indentation (add 2 spaces).
+      'todos': [_encode_todo(todo) for todo in todo_list.todos]
+      ^ | (bad-continuation)
+C: 37, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C: 39, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C: 47, 0: Trailing whitespace (trailing-whitespace)
+C: 56, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C: 64, 0: Wrong hanging indentation (add 2 spaces).
+    modified_date=modified_date, src_fname=fname)
+    ^ | (bad-continuation)
+C: 65, 0: Trailing whitespace (trailing-whitespace)
+C: 71, 0: Final newline missing (missing-final-newline)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (os, json, warnings) (multiple-imports)
+E:  2, 0: Unable to import 'td.classes' (import-error)
+R: 36, 2: Unnecessary "else" after "return" (no-else-return)
+W: 46, 2: Redefining built-in 'file' (redefined-builtin)
+W: 58, 2: Redefining built-in 'file' (redefined-builtin)
+C: 50, 0: Missing function docstring (missing-docstring)
+C: 59, 2: Invalid variable name "ob" (invalid-name)
+R: 60, 2: Consider using ternary (ob['modified_date'] if 'modified_date' in ob else None) (consider-using-ternary)
+************* Module display
+C:  1, 0: Exactly one space required after comma
+import os,textwrap,sys
+         ^ (bad-whitespace)
+C:  1, 0: Exactly one space required after comma
+import os,textwrap,sys
+                  ^ (bad-whitespace)
+C: 34, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C: 45, 0: Wrong hanging indentation (add 2 spaces).
+      'display._repr_priority', 'Illegal priority argument: '+str(priority))
+      ^ | (bad-continuation)
+C: 49, 0: Trailing whitespace (trailing-whitespace)
+C: 52, 0: Line too long (88/80) (line-too-long)
+C: 58, 0: Wrong hanging indentation (add 2 spaces).
+    '%-3d %1s %s %s' % (todo.id, _repr_priority(todo.priority), todo.text, _repr_tags(todo.tags)), 6))
+    ^ | (bad-continuation)
+C: 58, 0: Line too long (102/80) (line-too-long)
+C: 61, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  1, 0: Multiple imports on one line (os, textwrap, sys) (multiple-imports)
+E:  2, 0: Unable to import 'td.classes' (import-error)
+C: 19, 0: Missing function docstring (missing-docstring)
+C: 22, 0: Missing function docstring (missing-docstring)
+R: 34, 2: Consider using ternary (('#') + (', #'.join(tags)) if tags else '') (consider-using-ternary)
+W: 47,20: Unused argument 'simple' (unused-argument)
+C: 60, 0: Missing function docstring (missing-docstring)
+C: 63, 0: Missing function docstring (missing-docstring)
+************* Module main
+C:  2, 0: Exactly one space required after comma
+import os,sys,argparse
+         ^ (bad-whitespace)
+C:  2, 0: Exactly one space required after comma
+import os,sys,argparse
+             ^ (bad-whitespace)
+C:  8, 0: Exactly one space required around assignment
+PROGRAM='sjb_todo'
+       ^ (bad-whitespace)
+C:  9, 0: Exactly one space required around assignment
+USAGE='''\
+     ^ (bad-whitespace)
+C: 22, 0: Unnecessary parens after 'return' keyword (superfluous-parens)
+C: 28, 0: Wrong hanging indentation (add 2 spaces).
+    '--file', type=str,
+    ^ | (bad-continuation)
+C: 29, 0: Wrong hanging indentation (add 2 spaces).
+    help='Manually specify a todo file to work with')
+    ^ | (bad-continuation)
+C: 36, 0: Wrong hanging indentation (add 2 spaces).
+      description='Todo list program', usage=USAGE)
+      ^ | (bad-continuation)
+C: 41, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+C: 50, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' add',
+      ^ | (bad-continuation)
+C: 50, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' add',
+           ^ (bad-whitespace)
+C: 51, 0: Wrong hanging indentation (add 2 spaces).
+      description='Add a todo entry to your todo list')
+      ^ | (bad-continuation)
+C: 55, 0: Wrong hanging indentation (add 2 spaces).
+      'text', type=str, help='The text of this todo entry')
+      ^ | (bad-continuation)
+C: 57, 0: Wrong hanging indentation (add 2 spaces).
+      '--tags', type=_set_arg,
+      ^ | (bad-continuation)
+C: 58, 0: Wrong hanging indentation (add 2 spaces).
+      help='Comma separated list of tags for this todo item')
+      ^ | (bad-continuation)
+C: 60, 0: Wrong hanging indentation (add 2 spaces).
+      '--urgent', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 61, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.URGENT.value,
+      ^ | (bad-continuation)
+C: 62, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as an urgent todo')
+      ^ | (bad-continuation)
+C: 64, 0: Wrong hanging indentation (add 2 spaces).
+      '--longterm', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 65, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      ^ | (bad-continuation)
+C: 66, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as a long term todo')
+      ^ | (bad-continuation)
+C: 78, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' update',
+      ^ | (bad-continuation)
+C: 78, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' update',
+           ^ (bad-whitespace)
+C: 79, 0: Wrong hanging indentation (add 2 spaces).
+      description='Alter any of the fields of a todo item')
+      ^ | (bad-continuation)
+C: 82, 0: Wrong hanging indentation (add 2 spaces).
+      'id', type=int,
+      ^ | (bad-continuation)
+C: 83, 0: Wrong hanging indentation (add 2 spaces).
+      help='ID of the entry you wish to update')
+      ^ | (bad-continuation)
+C: 85, 0: Wrong hanging indentation (add 2 spaces).
+      '--text', type=str, help='The text for this todo item')
+      ^ | (bad-continuation)
+C: 87, 0: Wrong hanging indentation (add 2 spaces).
+      '--tags', type=_set_arg,
+      ^ | (bad-continuation)
+C: 88, 0: Wrong hanging indentation (add 2 spaces).
+      help='Comma separated list of tags for this todo item')
+      ^ | (bad-continuation)
+C: 90, 0: Wrong hanging indentation (add 2 spaces).
+      '--urgent', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 91, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.URGENT.value,
+      ^ | (bad-continuation)
+C: 92, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as an urgent todo')
+      ^ | (bad-continuation)
+C: 94, 0: Wrong hanging indentation (add 2 spaces).
+      '--default', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 95, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.DEFAULT.value,
+      ^ | (bad-continuation)
+C: 96, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo items priority to default')
+      ^ | (bad-continuation)
+C: 98, 0: Wrong hanging indentation (add 2 spaces).
+      '--longterm', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C: 99, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      ^ | (bad-continuation)
+C:100, 0: Wrong hanging indentation (add 2 spaces).
+      help='Sets this todo item as a long term todo')
+      ^ | (bad-continuation)
+C:107, 0: Wrong hanging indentation (add 2 spaces).
+      args.id, text=args.text, priority=args.priority, tags=args.tags)
+      ^ | (bad-continuation)
+C:114, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' show',
+      ^ | (bad-continuation)
+C:114, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' show',
+           ^ (bad-whitespace)
+C:115, 0: Wrong hanging indentation (add 2 spaces).
+      description='Show the todo list or a subsection of it')
+      ^ | (bad-continuation)
+C:117, 0: Wrong hanging indentation (add 2 spaces).
+      '--urgent', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C:118, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.URGENT.value,
+      ^ | (bad-continuation)
+C:119, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show urgent todos')
+      ^ | (bad-continuation)
+C:121, 0: Wrong hanging indentation (add 2 spaces).
+      '--longterm', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C:122, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      ^ | (bad-continuation)
+C:123, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show todos with priority "long term"')
+      ^ | (bad-continuation)
+C:125, 0: Wrong hanging indentation (add 2 spaces).
+      '--default', dest='priority', action='store_const',
+      ^ | (bad-continuation)
+C:126, 0: Wrong hanging indentation (add 2 spaces).
+      const=td.classes.PriorityEnum.DEFAULT.value,
+      ^ | (bad-continuation)
+C:127, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show todos with priority "default"')
+      ^ | (bad-continuation)
+C:129, 0: Wrong hanging indentation (add 2 spaces).
+      '--completed', dest='completed', action='store_const', const=True, 
+      ^ | (bad-continuation)
+C:129, 0: Trailing whitespace (trailing-whitespace)
+C:130, 0: Wrong hanging indentation (add 2 spaces).
+      default=False, help='If set, will only show completed items. Otherwise this will only show uncompleted items')
+      ^ | (bad-continuation)
+C:130, 0: Line too long (116/80) (line-too-long)
+C:132, 0: Wrong hanging indentation (add 2 spaces).
+      '--tags', type=_set_arg,
+      ^ | (bad-continuation)
+C:133, 0: Wrong hanging indentation (add 2 spaces).
+      help='Only show todos which match this comma separated list of tags')
+      ^ | (bad-continuation)
+C:136, 0: Trailing whitespace (trailing-whitespace)
+C:139, 0: Wrong hanging indentation (add 2 spaces).
+      priority=args.priority, tags=args.tags, finished=args.completed)
+      ^ | (bad-continuation)
+C:144, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' complete',
+      ^ | (bad-continuation)
+C:144, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' complete',
+           ^ (bad-whitespace)
+C:145, 0: Wrong hanging indentation (add 2 spaces).
+      description='Marks a todo item as completed')
+      ^ | (bad-continuation)
+C:147, 0: Wrong hanging indentation (add 2 spaces).
+      'id', type=int, help='ID of the todo you wish to mark as completed')
+      ^ | (bad-continuation)
+C:149, 0: Wrong hanging indentation (add 2 spaces).
+      '--prompt', dest='force', action='store_const', const=0, default=1,
+      ^ | (bad-continuation)
+C:150, 0: Wrong hanging indentation (add 2 spaces).
+      help='Prompt the user before marking the item as completed')
+      ^ | (bad-continuation)
+C:155, 0: Trailing whitespace (trailing-whitespace)
+C:159, 0: Exactly one space required before assignment
+      question=\
+              ^ (bad-whitespace)
+C:174, 0: Wrong hanging indentation (add 2 spaces).
+      prog = PROGRAM + ' remove',
+      ^ | (bad-continuation)
+C:174, 0: No space allowed around keyword argument assignment
+      prog = PROGRAM + ' remove',
+           ^ (bad-whitespace)
+C:175, 0: Wrong hanging indentation (add 2 spaces).
+      description='Remove a todo from list completely (this does NOT mark it as done)')
+      ^ | (bad-continuation)
+C:175, 0: Line too long (87/80) (line-too-long)
+C:178, 0: Wrong hanging indentation (add 2 spaces).
+      '--f', dest='force', action='store_const', const=1, default=0,
+      ^ | (bad-continuation)
+C:179, 0: Wrong hanging indentation (add 2 spaces).
+      help='Force: dont ask before completing the removal')
+      ^ | (bad-continuation)
+C:184, 0: Trailing whitespace (trailing-whitespace)
+C:188, 0: Exactly one space required before assignment
+      question=\
+              ^ (bad-whitespace)
+C:201, 0: Final newline missing (missing-final-newline)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  2, 0: Multiple imports on one line (os, sys, argparse) (multiple-imports)
+E:  3, 0: Unable to import 'td.classes' (import-error)
+E:  4, 0: Unable to import 'td.fileio' (import-error)
+E:  5, 0: Unable to import 'td.display' (import-error)
+C: 32, 0: Missing class docstring (missing-docstring)
+C: 48, 2: Missing method docstring (missing-docstring)
+C: 49, 4: Invalid variable name "p" (invalid-name)
+C: 71, 4: Invalid variable name "tl" (invalid-name)
+R: 48, 2: Method could be a function (no-self-use)
+C: 76, 2: Missing method docstring (missing-docstring)
+C: 77, 4: Invalid variable name "p" (invalid-name)
+C:105, 4: Invalid variable name "tl" (invalid-name)
+R: 76, 2: Method could be a function (no-self-use)
+C:112, 2: Missing method docstring (missing-docstring)
+C:113, 4: Invalid variable name "p" (invalid-name)
+C:137, 4: Invalid variable name "tl" (invalid-name)
+R:112, 2: Method could be a function (no-self-use)
+C:142, 2: Missing method docstring (missing-docstring)
+C:143, 4: Invalid variable name "p" (invalid-name)
+C:154, 4: Invalid variable name "tl" (invalid-name)
+R:142, 2: Method could be a function (no-self-use)
+C:172, 2: Missing method docstring (missing-docstring)
+C:173, 4: Invalid variable name "p" (invalid-name)
+C:183, 4: Invalid variable name "tl" (invalid-name)
+W:196, 4: Unused variable 'removed' (unused-variable)
+R:172, 2: Method could be a function (no-self-use)
+W:  2, 0: Unused import os (unused-import)
+
+-------------------------------------------------------------------
+Your code has been rated at 1.88/10 (previous run: -7.52/10, +9.41)
+
