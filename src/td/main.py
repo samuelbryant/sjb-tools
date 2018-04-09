@@ -73,6 +73,42 @@ class Program(object):
     tl.add_todo(todo)
     td.fileio.save_todo_list(tl, fname=args.file)
 
+  def update(self):
+    p = argparse.ArgumentParser(
+      prog = PROGRAM + ' update',
+      description='Alter any of the fields of a todo item')
+
+    p.add_argument(
+      'id', type=int,
+      help='ID of the entry you wish to update')
+    p.add_argument(
+      '--text', type=str, help='The text for this todo item')
+    p.add_argument(
+      '--tags', type=_set_arg,
+      help='Comma separated list of tags for this todo item')
+    p.add_argument(
+      '--urgent', dest='priority', action='store_const',
+      const=td.classes.PriorityEnum.URGENT.value,
+      help='Sets this todo item as an urgent todo')
+    p.add_argument(
+      '--default', dest='priority', action='store_const',
+      const=td.classes.PriorityEnum.DEFAULT.value,
+      help='Sets this todo items priority to default')
+    p.add_argument(
+      '--longterm', dest='priority', action='store_const',
+      const=td.classes.PriorityEnum.LONG_TERM.value,
+      help='Sets this todo item as a long term todo')
+    _add_arguments_generic(p)
+    args = p.parse_args(sys.argv[2:])
+
+    # Load todo list, add an entry, then save the results.
+    tl = td.fileio.load_todo_list(fname=args.file)
+    updated = tl.update_todo(
+      args.id, text=args.text, priority=args.priority, tags=args.tags)
+    # Save Todo list to file.
+    td.fileio.save_todo_list(tl, fname=args.file)
+    td.display.display_todo(updated)
+
   def show(self):
     p = argparse.ArgumentParser(
       prog = PROGRAM + ' show',

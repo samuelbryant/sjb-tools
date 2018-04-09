@@ -235,6 +235,30 @@ class TodoList:
     self._recompute_object_maps()
     return(removed)
 
+  def update_todo(self, id, text=None, priority=None, tags=None):
+    """Updates todo item given by id and returns result.
+
+    Only arguments that are not None will be updated. If no todo is found at
+    that id, an Error is raised. The meta objects are updated to reflect the
+    new contents of the todo item.
+
+    Returns:
+      Todo: The newly updated todo object.
+
+    Raises:
+      InvalidIDError: If no todo has a matching ID.
+    """
+    todo = self.get_todo(id)
+
+    if text is not None or priority is not None or tags is not None:
+      todo.text = _default_if_none(text, todo.text)
+      todo.priority = _default_if_none(priority, todo.priority)
+      todo.tags = _default_if_none(tags, todo.tags)
+      self._mark_modified()
+      self._recompute_object_maps()
+
+    return(todo)
+
   def _update_object_maps(self, todo):
     """Updates meta object maps like tag_set to reflect contents of todo.
 
