@@ -90,7 +90,7 @@ class Program(object):
       if not cont:
         exit(0)
 
-    tl.add_todo(todo)
+    tl.add_item(todo)
     td.fileio.save_todo_list(tl, fname=args.file)
 
     td.display.display_todo(todo)
@@ -106,7 +106,7 @@ class Program(object):
     tl = td.fileio.load_todo_list(fname=args.file)
 
     tag_set = tl.tag_set
-    todos = tl.todos
+    todos = tl.items
     num_urgent, num_closed, num_open = 0, 0, 0
     for todo in todos:
       if todo.finished:
@@ -155,7 +155,7 @@ class Program(object):
 
     # Load todo list, add an entry, then save the results.
     tl = td.fileio.load_todo_list(fname=args.file)
-    updated = tl.update_todo(
+    updated = tl.update_item(
       args.oid, text=args.text, priority=args.priority, tags=args.tags)
     # Save Todo list to file.
     td.fileio.save_todo_list(tl, fname=args.file)
@@ -189,9 +189,10 @@ class Program(object):
     args = parser.parse_args(sys.argv[2:])
 
     tl = td.fileio.load_todo_list(fname=args.file)
-    todos = tl.get_todos(
-      priority=args.priority, tags=args.tags, finished=args.completed)
-    td.display.display_todos(todos)
+    matcher = td.classes.TodoMatcher(
+      tags=args.tags, priority=args.priority, finished=args.completed)
+    items = tl.query_items(matcher)
+    td.display.display_todos(items)
 
   def complete(self):
     """Implements the 'complete' command."""
@@ -209,7 +210,7 @@ class Program(object):
     tl = td.fileio.load_todo_list(fname=args.file)
 
     # If not in force mode, ask user before proceeding.
-    todo = tl.get_todo(args.oid)
+    todo = tl.get_item(args.oid)
     if not args.force:
       question = 'The todo item given by id '+str(args.oid)+' is:\n' + \
         td.display.repr_todo(todo) + \
@@ -218,7 +219,7 @@ class Program(object):
       if not cont:
         exit(0)
 
-    completed = tl.complete_todo(args.oid)
+    completed = tl.complete_item(args.oid)
     td.fileio.save_todo_list(tl, fname=args.file)
 
     td.display.display_todo(completed)
@@ -240,7 +241,7 @@ class Program(object):
     tl = td.fileio.load_todo_list(fname=args.file)
 
     # If not in force mode, ask user before proceeding.
-    todo = tl.get_todo(args.oid)
+    todo = tl.get_item(args.oid)
     if not args.force:
       question = \
         'The todo item given by oid '+str(args.oid)+' is:\n' + \
@@ -250,7 +251,7 @@ class Program(object):
       if not cont:
         exit(0)
 
-    tl.remove_todo(args.oid)
+    tl.remove_item(args.oid)
     td.fileio.save_todo_list(tl, fname=args.file)
 
 

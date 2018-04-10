@@ -4,8 +4,11 @@
 SRC_DIR="./src"
 SRC_TEST_DIR="./test"
 
+# Code that should be same between projects
+COMMON_CODE="./src/common"
+
 # All of sjb project suites
-OTHER_PROJECTS=("../sjb_cheatsheet" "../sjb_calendar")
+ALL_PROJECTS=("../sjb_cheatsheet" "../sjb_calendar" "../sjb_todo")
 
 # Lint directory
 LINT_DIR="./lint"
@@ -32,13 +35,21 @@ if [[ "$?" -ne "0" ]]; then
 fi
 # Make sure project lint config matches other project configs
 for project in ${OTHER_PROJECTS[@]}; do
-	diff "$LINT_CONFIG" "$project/$LINT_CONFIG"
+	diff "$LINT_CONFIG" "$project/$LINT_CONFIG" 1> /dev/null
 	if [[ "$?" -ne "0" ]]; then
   		failure "Lint config out of sync with other projects"
 	fi
 done
 
 
+## Compare common code across projects
+echo "Checking that common python libraries are in sync..."
+for project in ${OTHER_PROJECTS[@]}; do
+  diff "$COMMON_CODE" "$project/$COMMON_CODE" 1> /dev/null
+  if [[ "$?" -ne "0" ]]; then
+      failure "Common code out of sync between files"
+  fi
+done
 
 echo "Everything seems okay"
 exit 0

@@ -31,7 +31,7 @@ def _encode_todo_list(todo_list):
   return {
     'todo_list': {
       'modified_date': todo_list.modified_date,
-      'todos': [_encode_todo(todo) for todo in todo_list.todos]
+      'todos': [_encode_todo(todo) for todo in todo_list.items]
     }
   }
 
@@ -48,7 +48,7 @@ def save_todo_list(todo_list, fname=None):
   """
   ob_js = _encode_todo_list(todo_list)
 
-  fname = fname or todo_list.src_fname or _get_default_todo_file()
+  fname = fname or todo_list.source_filename or _get_default_todo_file()
   json_file = open(fname, "w")
   json_file.write(json.dumps(ob_js, indent=2))
 
@@ -66,18 +66,19 @@ def load_todo_list(fname=None):
   # Attempt to open
   if not os.path.isfile(fname):
     warnings.warn('No todo list file found', UserWarning)
-    return td.classes.TodoList(src_fname=fname)
+    return td.classes.TodoList(source_fname=fname)
 
   json_file = open(fname)
   obj = json.load(json_file)['todo_list']
   modified_date = obj['modified_date'] if 'modified_date' in obj else None
 
   # Create new blank todo list
-  todo_list = td.classes.TodoList(modified_date=modified_date, src_fname=fname)
+  todo_list = td.classes.TodoList(
+    modified_date=modified_date, source_fname=fname)
 
   # Add todos to todo list
   for todo_json in obj['todos']:
     todo = _decode_todo(todo_json)
-    todo_list.add_todo(todo, initial_load=True)
+    todo_list.add_item(todo, initial_load=True)
 
   return todo_list

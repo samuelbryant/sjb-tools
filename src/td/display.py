@@ -44,8 +44,7 @@ def _repr_priority(priority):
   elif priority is td.classes.PriorityEnum.LONG_TERM.value:
     return 'L'
   else:
-    raise td.classes.ProgrammingError(
-      'display._repr_priority', 'Illegal priority argument: '+str(priority))
+    raise Exception('should never happen')
 
 def repr_todo(todo):
   """Returns a string reprentation of a todo item.
