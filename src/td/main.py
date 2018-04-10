@@ -14,6 +14,7 @@ sjb_todo command [<args>]
 Where command can be:
   add      Add a new todo item to the todo list
   complete Marks a todo item as completed
+  info    Shows meta info about cheatsheet
   remove   Removes a todo item entirely from the cheatsheet
   update   Updates some fields from a todo item in todo list.
   show     Shows the todos from the todo list
@@ -76,6 +77,35 @@ class Program(object):
     todo = td.classes.Todo(args.text, priority=args.priority, tags=args.tags)
     tl.add_todo(todo)
     td.fileio.save_todo_list(tl, fname=args.file)
+
+  def info(self):
+    """Implements the 'info' command."""
+    parser = argparse.ArgumentParser(
+      prog=PROGRAM + ' info',
+      description='Shows meta-information about the todo list')
+    _add_arguments_generic(parser)
+    args = parser.parse_args(sys.argv[2:])
+
+    tl = td.fileio.load_todo_list(fname=args.file)
+
+    tag_set = tl.tag_set
+    todos = tl.todos
+    num_urgent, num_closed, num_open = 0, 0, 0
+    for todo in todos:
+      if todo.finished:
+        num_closed += 1
+      else:
+        num_open += 1
+      if todo.priority == td.classes.PriorityEnum.URGENT:
+        num_urgent += 1
+
+    print('Todo list information:')
+    print('  %-25s %s' % ('Number of todos', len(todos)))
+    print('  %-25s %s' % ('Number of open', num_open))
+    print('  %-25s %s' % ('Number of closed', num_closed))
+    print('  %-25s %s' % ('Number of urgent', num_urgent))
+    print('  %-25s %s' % ('Number tags', len(tag_set)))
+    print('  %-25s %s' % ('Tag list', ', '.join(tag_set)))
 
   def update(self):
     """Implements the 'update' command."""
