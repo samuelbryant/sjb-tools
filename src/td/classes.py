@@ -173,6 +173,17 @@ class TodoList(object):
     return(
       [todo for todo in self.todos if todo.matches(priority, tags, finished)])
 
+  def get_new_tags(self, tags):
+    """Computes set of tags that are not in database.
+
+    Arguments:
+      tags: set(str) of tags to check if present in tag set.
+
+    Returns:
+      Set: of all tags that are new to database.
+    """
+    return tags - self.tag_set
+
   def add_todo(self, todo, initial_load=False):
     """Adds a todo to this todo list.
 

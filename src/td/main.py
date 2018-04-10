@@ -69,14 +69,31 @@ class Program(object):
       '--longterm', dest='priority', action='store_const',
       const=td.classes.PriorityEnum.LONG_TERM.value,
       help='Sets this todo item as a long term todo')
+    parser.add_argument(
+      '--f', dest='force', action='store_const', const=1, default=0,
+      help='Force: doesnt ask before adding an entry with new tags')
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
     # Load todo list, add an entry, then save the results
     tl = td.fileio.load_todo_list(fname=args.file)
     todo = td.classes.Todo(args.text, priority=args.priority, tags=args.tags)
+
+    # Check if any tag is new and prompts user before continuing.
+    new_tags = tl.get_new_tags(args.tags)
+    if new_tags and not args.force:
+      question = (
+        'The following tags are not present in the database: ' + \
+        ', '.join(new_tags) + \
+        '\nAre you sure you want to add this todo entry? ')
+      cont = td.display.prompt_yes_no(question, default=True)
+      if not cont:
+        exit(0)
+
     tl.add_todo(todo)
     td.fileio.save_todo_list(tl, fname=args.file)
+
+    td.display.display_todo(todo)
 
   def info(self):
     """Implements the 'info' command."""
