@@ -41,7 +41,11 @@ def _get_default_todo_file():
   return os.environ['HOME']+'/.local/share/sjb_todo/todo.json'
 
 def save_todo_list(todo_list, fname=None):
-  """Saves a todo list to a json file."""
+  """Saves a todo list to a json file.
+
+  Arguments:
+    fname: str an optional file name to read the todo list from.
+  """
   ob_js = _encode_todo_list(todo_list)
 
   fname = fname or todo_list.src_fname or _get_default_todo_file()
