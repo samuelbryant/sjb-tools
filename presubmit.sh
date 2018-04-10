@@ -2,9 +2,10 @@
 
 # Source code directory
 SRC_DIR="./src"
+SRC_TEST_DIR="./test"
 
-# Directory of sjb_cheatsheet to compare against
-CHEATSHEET_PROJECT="../sjb_cheatsheet"
+# All of sjb project suites
+OTHER_PROJECTS=("../sjb_cheatsheet" "../sjb_calendar")
 
 # Lint directory
 LINT_DIR="./lint"
@@ -29,11 +30,13 @@ diff "$LINT_ERRORS" "$LINT_BENCHMARK"
 if [[ "$?" -ne "0" ]]; then
   failure "Project lint did not match benchmark"
 fi
-# Make sure project lint config matches other project config
-diff "$LINT_CONFIG" "$CHEATSHEET_PROJECT/$LINT_CONFIG"
-if [[ "$?" -ne "0" ]]; then
-  failure "Lint config out of sync with other projects"
-fi
+# Make sure project lint config matches other project configs
+for project in ${OTHER_PROJECTS[@]}; do
+	diff "$LINT_CONFIG" "$project/$LINT_CONFIG"
+	if [[ "$?" -ne "0" ]]; then
+  		failure "Lint config out of sync with other projects"
+	fi
+done
 
 
 

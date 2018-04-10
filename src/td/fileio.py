@@ -37,8 +37,8 @@ def _encode_todo_list(todo_list):
 
 def _get_default_todo_file():
   if 'XDG_DATA_HOME' in os.environ:
-    return os.environ['XDG_DATA_HOME']+'/'+'sjb_todo/todo.json'
-  return os.environ['HOME']+'/.local/share/sjb_todo/todo.json'
+    return os.environ['XDG_DATA_HOME']+'/'+'sjb/todo/todo.json'
+  return os.environ['HOME']+'/.local/share/sjb/todo/todo.json'
 
 def save_todo_list(todo_list, fname=None):
   """Saves a todo list to a json file.
