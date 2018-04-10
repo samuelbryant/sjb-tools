@@ -1,6 +1,8 @@
 ************* Module classes
-W:105, 0: TODO: More thorough date validation. (also below) (fixme)
-W:189, 0: TODO: Not needed yet, but may be needed if maps are completion aware. (fixme)
+W:108, 0: TODO: More thorough date validation. (also below) (fixme)
+W:192, 0: TODO: Not needed yet, but may be needed if maps are completion aware. (fixme)
+************* Module misc
+W:  2, 0: TODO: Eventually this should be made more robust. Code that deals with (fixme)
 ************* Module base
 W:  6, 0: TODO: In general, manually copying a file between two github directories is (fixme)
 W: 99, 0: TODO: Timestamp when this list was last modified.""" (fixme)

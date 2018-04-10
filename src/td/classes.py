@@ -48,7 +48,10 @@ class Todo(common.base.Item):
     super().__init__(oid)
     # Values that should be set at construction time
     self.text = text
-    if priority is not None: self.priority = priority
+    if priority is not None:
+      self.priority = priority
+    else:
+      self.priority = PriorityEnum.DEFAULT.value
     self.tags = tags if priority is not None else set()
 
     # Values that should only be set when reading from file
@@ -92,7 +95,7 @@ class Todo(common.base.Item):
       raise common.base.ValidationError('Bad todo text: '+str(self.text))
     if not isinstance(self.tags, set):
       raise common.base.ValidationError('Bad tags: '+str(self.tags))
-    if not self.priority in [e.value for e in PriorityEnum]:
+    if self.priority not in [e.value for e in PriorityEnum]:
       raise common.base.ValidationError('Bad priority: '+str(self.priority))
 
     # If it has an ID, it should have other values as well.

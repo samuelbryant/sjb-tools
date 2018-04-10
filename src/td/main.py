@@ -2,6 +2,7 @@
 """Module responsible for implementing the command line front end."""
 import sys
 import argparse
+import common.misc
 import td.classes
 import td.fileio
 import td.display
@@ -86,7 +87,7 @@ class Program(object):
         'The following tags are not present in the database: ' + \
         ', '.join(new_tags) + \
         '\nAre you sure you want to add this todo entry? ')
-      cont = td.display.prompt_yes_no(question, default=True)
+      cont = common.misc.prompt_yes_no(question, default=True)
       if not cont:
         exit(0)
 
@@ -215,7 +216,7 @@ class Program(object):
       question = 'The todo item given by id '+str(args.oid)+' is:\n' + \
         td.display.repr_todo(todo) + \
         '\nAre you sure you want to mark it as completed? '
-      cont = td.display.prompt_yes_no(question, default=False)
+      cont = common.misc.prompt_yes_no(question, default=False)
       if not cont:
         exit(0)
 
@@ -247,7 +248,7 @@ class Program(object):
         'The todo item given by oid '+str(args.oid)+' is:\n' + \
         td.display.repr_todo(todo) + \
         '\nAre you sure you want to delete it? '
-      cont = td.display.prompt_yes_no(question, default=False)
+      cont = common.misc.prompt_yes_no(question, default=False)
       if not cont:
         exit(0)
 
