@@ -1,4 +1,4 @@
 # sjb_todo
-A simple command line program for creating, maintaining, and displaying a "to-do list"
+A simple CRUD command line program for working with 'todo lists'
 
 This project is licensed under the MIT license.

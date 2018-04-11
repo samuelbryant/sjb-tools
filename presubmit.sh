@@ -2,11 +2,10 @@
 set -u
 
 # Source code directory
-SRC_DIR="./src"
-SRC_TEST_DIR="./test"
+SRC_DIR="src"
 
 # Code that should be same between projects
-COMMON_CODE="./src/common"
+COMMON_CODE="./src/sjb/common"
 
 # All of sjb project suites
 ALL_PROJECTS=("../sjb_cheatsheet" "../sjb_calendar" "../sjb_todo")
@@ -27,10 +26,10 @@ failure() {
 
 ## Lint project
 echo "Checking lint status..."
-rm "$LINT_ERRORS"
-find "$SRC_DIR" -name *.py | xargs pylint --rcfile="$LINT_CONFIG" >> "$LINT_ERRORS"
+pylint --rcfile="$LINT_CONFIG" "$SRC_DIR" > "$LINT_ERRORS"
+#find "$SRC_DIR" -name *.py | xargs pylint --ignore=experimental --rcfile="$LINT_CONFIG" >> "$LINT_ERRORS"
 # Compare lint errors to benchmark file
-diff "$LINT_ERRORS" "$LINT_BENCHMARK"
+diff "$LINT_ERRORS" "$LINT_BENCHMARK" > /dev/null
 if [[ "$?" -ne "0" ]]; then
   failure "Project lint did not match benchmark"
 fi

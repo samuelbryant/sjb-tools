@@ -1,9 +1,9 @@
-************* Module classes
+************* Module sjb.td.classes
 W:108, 0: TODO: More thorough date validation. (also below) (fixme)
-W:192, 0: TODO: Not needed yet, but may be needed if maps are completion aware. (fixme)
-************* Module misc
+W:193, 0: TODO: Not needed yet, but may be needed if maps are completion aware. (fixme)
+************* Module sjb.common.misc
 W:  2, 0: TODO: Eventually this should be made more robust. Code that deals with (fixme)
-************* Module base
+************* Module sjb.common.base
 W:  6, 0: TODO: In general, manually copying a file between two github directories is (fixme)
 W: 99, 0: TODO: Timestamp when this list was last modified.""" (fixme)
 W:104, 0: TODO: list of Item objects in this ItemList.""" (fixme)

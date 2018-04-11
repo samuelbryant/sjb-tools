@@ -2,7 +2,7 @@
 import os
 import json
 import warnings
-import td.classes
+import sjb.td.classes
 
 
 def _encode_todo(todo):
@@ -18,7 +18,7 @@ def _encode_todo(todo):
   }
 
 def _decode_todo(json_object):
-  return td.classes.Todo(
+  return sjb.td.classes.Todo(
     text=json_object['text'],
     tags=set(json_object['tags']),
     priority=json_object['priority'],
@@ -66,14 +66,14 @@ def load_todo_list(fname=None):
   # Attempt to open
   if not os.path.isfile(fname):
     warnings.warn('No todo list file found', UserWarning)
-    return td.classes.TodoList(source_fname=fname)
+    return sjb.td.classes.TodoList(source_fname=fname)
 
   json_file = open(fname)
   obj = json.load(json_file)['todo_list']
   modified_date = obj['modified_date'] if 'modified_date' in obj else None
 
   # Create new blank todo list
-  todo_list = td.classes.TodoList(
+  todo_list = sjb.td.classes.TodoList(
     modified_date=modified_date, source_fname=fname)
 
   # Add todos to todo list

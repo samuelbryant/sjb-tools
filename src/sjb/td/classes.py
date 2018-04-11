@@ -2,7 +2,7 @@
 import time
 import copy
 import enum
-import common.base
+import sjb.common.base
 
 
 class PriorityEnum(enum.Enum):
@@ -12,7 +12,7 @@ class PriorityEnum(enum.Enum):
   LONG_TERM = 3
 
 
-class TodoMatcher(common.base.ItemMatcher):
+class TodoMatcher(sjb.common.base.ItemMatcher):
   """Class that matches todo items using some set of conditions."""
 
   def __init__(self, tags=None, priority=None, finished=None):
@@ -39,7 +39,7 @@ class TodoMatcher(common.base.ItemMatcher):
     return True
 
 
-class Todo(common.base.Item):
+class Todo(sjb.common.base.Item):
   """Simple class representing a todo item."""
 
   def __init__(
@@ -88,47 +88,48 @@ class Todo(common.base.Item):
         should all be None.
 
     Raises:
-      common.base.ValidationError: If validation fails
+      sjb.common.base.ValidationError: If validation fails
     """
     super().validate()
     if not self.text or not isinstance(self.text, str):
-      raise common.base.ValidationError('Bad todo text: '+str(self.text))
+      raise sjb.common.base.ValidationError('Bad todo text: '+str(self.text))
     if not isinstance(self.tags, set):
-      raise common.base.ValidationError('Bad tags: '+str(self.tags))
+      raise sjb.common.base.ValidationError('Bad tags: '+str(self.tags))
     if self.priority not in [e.value for e in PriorityEnum]:
-      raise common.base.ValidationError('Bad priority: '+str(self.priority))
+      raise sjb.common.base.ValidationError('Bad priority: '+str(self.priority))
 
     # If it has an ID, it should have other values as well.
     if self.oid is not None:
       if not isinstance(self.oid, int):
-        raise common.base.ValidationError('Non int oid: '+str(self.oid))
+        raise sjb.common.base.ValidationError('Non int oid: '+str(self.oid))
       if not isinstance(self.finished, bool):
-        raise common.base.ValidationError(
+        raise sjb.common.base.ValidationError(
           'Non bool finished state: '+str(self.finished))
       # TODO: More thorough date validation. (also below)
       if not isinstance(self.created_date, float):
-        raise common.base.ValidationError(
+        raise sjb.common.base.ValidationError(
           'Non float created_date: '+str(self.created_date))
       # Finished items must have finished dates.
       if self.finished and not isinstance(self.finished_date, float):
-        raise common.base.ValidationError('Todo finished but no finished_date')
+        raise sjb.common.base.ValidationError(
+          'Todo finished but no finished_date')
       # Non-finished items must not have finished dates.
       if not self.finished and self.finished_date is not None:
-        raise common.base.ValidationError(
+        raise sjb.common.base.ValidationError(
           'Non finished todo has finished_date')
     if self.oid is None:
       if self.finished is not None:
-        raise common.base.ValidationError(
+        raise sjb.common.base.ValidationError(
           'No oid set, but has not none finished: '+str(self.finished))
       if self.created_date is not None:
-        raise common.base.ValidationError(
+        raise sjb.common.base.ValidationError(
           'No oid set, but has created_date: '+str(self.created_date))
       if self.finished_date is not None:
-        raise common.base.ValidationError(
+        raise sjb.common.base.ValidationError(
           'No oid set, but has finished_date: '+str(self.finished_date))
 
 
-class TodoList(common.base.ItemList):
+class TodoList(sjb.common.base.ItemList):
   """Class that represents a list of todo entries.
 
   It is typically read from a file at the start of a session and written to a
@@ -178,12 +179,12 @@ class TodoList(common.base.ItemList):
       Todo: The completed todo object.
 
     Raises:
-      common.base.InvalidIDError: If no todo has a matching oid.
-      common.base.IllegalStateError: If the todo is already completed.
+      sjb.common.base.InvalidIDError: If no todo has a matching oid.
+      sjb.common.base.IllegalStateError: If the todo is already completed.
     """
     item = self.get_item(oid)
     if item.finished:
-      raise common.base.IllegalStateError(
+      raise sjb.common.base.IllegalStateError(
         'TodoList.complete_todo', 'specified todo was already completed')
 
     item.finished = True
@@ -200,7 +201,7 @@ class TodoList(common.base.ItemList):
       Todo: The removed Todo object.
 
     Raises:
-      common.base.InvalidIDError: If no item has a matching oid.
+      sjb.common.base.InvalidIDError: If no item has a matching oid.
     """
     removed = super().remove_item(oid)
     self._recompute_object_maps()
@@ -217,7 +218,7 @@ class TodoList(common.base.ItemList):
       Todo: The newly updated todo object.
 
     Raises:
-      common.base.InvalidIDError: If no item has a matching oid.
+      sjb.common.base.InvalidIDError: If no item has a matching oid.
     """
     item = self.get_item(oid)
     original_item = copy.deepcopy(item)

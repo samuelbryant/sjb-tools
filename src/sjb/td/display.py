@@ -1,17 +1,17 @@
 """Module responsible for representing todo items and writing to terminal."""
-import common.misc
-import td.classes
+import sjb.common.misc
+import sjb.td.classes
 
 
 def _repr_tags(tags):
   return '#' + ', #'.join(tags) if tags else ''
 
 def _repr_priority(priority):
-  if priority is td.classes.PriorityEnum.DEFAULT.value:
+  if priority is sjb.td.classes.PriorityEnum.DEFAULT.value:
     return ' '
-  elif  priority is td.classes.PriorityEnum.URGENT.value:
+  elif  priority is sjb.td.classes.PriorityEnum.URGENT.value:
     return '!'
-  elif priority is td.classes.PriorityEnum.LONG_TERM.value:
+  elif priority is sjb.td.classes.PriorityEnum.LONG_TERM.value:
     return 'L'
   else:
     raise Exception('should never happen')
@@ -27,7 +27,7 @@ def repr_todo(todo):
   Returns:
     str: String representation of a todo item.
   """
-  return common.misc.indent_paragraph(
+  return sjb.common.misc.indent_paragraph(
     '%-3d %1s %s %s' % (
       todo.oid, _repr_priority(todo.priority), todo.text,
       _repr_tags(todo.tags)), 6)

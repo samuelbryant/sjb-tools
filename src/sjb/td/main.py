@@ -2,10 +2,10 @@
 """Module responsible for implementing the command line front end."""
 import sys
 import argparse
-import common.misc
-import td.classes
-import td.fileio
-import td.display
+import sjb.common.misc
+import sjb.td.classes
+import sjb.td.fileio
+import sjb.td.display
 
 
 PROGRAM = 'sjb_todo'
@@ -64,11 +64,11 @@ class Program(object):
       help='Comma separated list of tags for this todo item')
     parser.add_argument(
       '--urgent', dest='priority', action='store_const',
-      const=td.classes.PriorityEnum.URGENT.value,
+      const=sjb.td.classes.PriorityEnum.URGENT.value,
       help='Sets this todo item as an urgent todo')
     parser.add_argument(
       '--longterm', dest='priority', action='store_const',
-      const=td.classes.PriorityEnum.LONG_TERM.value,
+      const=sjb.td.classes.PriorityEnum.LONG_TERM.value,
       help='Sets this todo item as a long term todo')
     parser.add_argument(
       '--f', dest='force', action='store_const', const=1, default=0,
@@ -77,8 +77,9 @@ class Program(object):
     args = parser.parse_args(sys.argv[2:])
 
     # Load todo list, add an entry, then save the results
-    tl = td.fileio.load_todo_list(fname=args.file)
-    todo = td.classes.Todo(args.text, priority=args.priority, tags=args.tags)
+    tl = sjb.td.fileio.load_todo_list(fname=args.file)
+    todo = sjb.td.classes.Todo(
+      args.text, priority=args.priority, tags=args.tags)
 
     # Check if any tag is new and prompts user before continuing.
     new_tags = tl.get_new_tags(args.tags)
@@ -87,14 +88,14 @@ class Program(object):
         'The following tags are not present in the database: ' + \
         ', '.join(new_tags) + \
         '\nAre you sure you want to add this todo entry? ')
-      cont = common.misc.prompt_yes_no(question, default=True)
+      cont = sjb.common.misc.prompt_yes_no(question, default=True)
       if not cont:
         exit(0)
 
     tl.add_item(todo)
-    td.fileio.save_todo_list(tl, fname=args.file)
+    sjb.td.fileio.save_todo_list(tl, fname=args.file)
 
-    td.display.display_todo(todo)
+    sjb.td.display.display_todo(todo)
 
   def info(self):
     """Implements the 'info' command."""
@@ -104,7 +105,7 @@ class Program(object):
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
-    tl = td.fileio.load_todo_list(fname=args.file)
+    tl = sjb.td.fileio.load_todo_list(fname=args.file)
 
     tag_set = tl.tag_set
     todos = tl.items
@@ -114,7 +115,7 @@ class Program(object):
         num_closed += 1
       else:
         num_open += 1
-      if todo.priority == td.classes.PriorityEnum.URGENT:
+      if todo.priority == sjb.td.classes.PriorityEnum.URGENT:
         num_urgent += 1
 
     print('Todo list information:')
@@ -141,26 +142,26 @@ class Program(object):
       help='Comma separated list of tags for this todo item')
     parser.add_argument(
       '--urgent', dest='priority', action='store_const',
-      const=td.classes.PriorityEnum.URGENT.value,
+      const=sjb.td.classes.PriorityEnum.URGENT.value,
       help='Sets this todo item as an urgent todo')
     parser.add_argument(
       '--default', dest='priority', action='store_const',
-      const=td.classes.PriorityEnum.DEFAULT.value,
+      const=sjb.td.classes.PriorityEnum.DEFAULT.value,
       help='Sets this todo items priority to default')
     parser.add_argument(
       '--longterm', dest='priority', action='store_const',
-      const=td.classes.PriorityEnum.LONG_TERM.value,
+      const=sjb.td.classes.PriorityEnum.LONG_TERM.value,
       help='Sets this todo item as a long term todo')
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
     # Load todo list, add an entry, then save the results.
-    tl = td.fileio.load_todo_list(fname=args.file)
+    tl = sjb.td.fileio.load_todo_list(fname=args.file)
     updated = tl.update_item(
       args.oid, text=args.text, priority=args.priority, tags=args.tags)
     # Save Todo list to file.
-    td.fileio.save_todo_list(tl, fname=args.file)
-    td.display.display_todo(updated)
+    sjb.td.fileio.save_todo_list(tl, fname=args.file)
+    sjb.td.display.display_todo(updated)
 
   def show(self):
     """Implements the 'show' command."""
@@ -169,15 +170,15 @@ class Program(object):
       description='Show the todo list or a subsection of it')
     parser.add_argument(
       '--urgent', dest='priority', action='store_const',
-      const=td.classes.PriorityEnum.URGENT.value,
+      const=sjb.td.classes.PriorityEnum.URGENT.value,
       help='Only show urgent todos')
     parser.add_argument(
       '--longterm', dest='priority', action='store_const',
-      const=td.classes.PriorityEnum.LONG_TERM.value,
+      const=sjb.td.classes.PriorityEnum.LONG_TERM.value,
       help='Only show todos with priority "long term"')
     parser.add_argument(
       '--default', dest='priority', action='store_const',
-      const=td.classes.PriorityEnum.DEFAULT.value,
+      const=sjb.td.classes.PriorityEnum.DEFAULT.value,
       help='Only show todos with priority "default"')
     parser.add_argument(
       '--completed', dest='completed', action='store_const', const=True,
@@ -189,11 +190,11 @@ class Program(object):
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
-    tl = td.fileio.load_todo_list(fname=args.file)
-    matcher = td.classes.TodoMatcher(
+    tl = sjb.td.fileio.load_todo_list(fname=args.file)
+    matcher = sjb.td.classes.TodoMatcher(
       tags=args.tags, priority=args.priority, finished=args.completed)
     items = tl.query_items(matcher)
-    td.display.display_todos(items)
+    sjb.td.display.display_todos(items)
 
   def complete(self):
     """Implements the 'complete' command."""
@@ -208,22 +209,22 @@ class Program(object):
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
-    tl = td.fileio.load_todo_list(fname=args.file)
+    tl = sjb.td.fileio.load_todo_list(fname=args.file)
 
     # If not in force mode, ask user before proceeding.
     todo = tl.get_item(args.oid)
     if not args.force:
       question = 'The todo item given by id '+str(args.oid)+' is:\n' + \
-        td.display.repr_todo(todo) + \
+        sjb.td.display.repr_todo(todo) + \
         '\nAre you sure you want to mark it as completed? '
-      cont = common.misc.prompt_yes_no(question, default=False)
+      cont = sjb.common.misc.prompt_yes_no(question, default=False)
       if not cont:
         exit(0)
 
     completed = tl.complete_item(args.oid)
-    td.fileio.save_todo_list(tl, fname=args.file)
+    sjb.td.fileio.save_todo_list(tl, fname=args.file)
 
-    td.display.display_todo(completed)
+    sjb.td.display.display_todo(completed)
 
   def remove(self):
     """Implements the 'remove' command."""
@@ -239,21 +240,21 @@ class Program(object):
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
-    tl = td.fileio.load_todo_list(fname=args.file)
+    tl = sjb.td.fileio.load_todo_list(fname=args.file)
 
     # If not in force mode, ask user before proceeding.
     todo = tl.get_item(args.oid)
     if not args.force:
       question = \
         'The todo item given by oid '+str(args.oid)+' is:\n' + \
-        td.display.repr_todo(todo) + \
+        sjb.td.display.repr_todo(todo) + \
         '\nAre you sure you want to delete it? '
-      cont = common.misc.prompt_yes_no(question, default=False)
+      cont = sjb.common.misc.prompt_yes_no(question, default=False)
       if not cont:
         exit(0)
 
     tl.remove_item(args.oid)
-    td.fileio.save_todo_list(tl, fname=args.file)
+    sjb.td.fileio.save_todo_list(tl, fname=args.file)
 
 
 if __name__ == '__main__':
