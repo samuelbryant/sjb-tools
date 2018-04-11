@@ -1,4 +1,5 @@
 #!/bin/bash
+set -u
 
 # Source code directory
 SRC_DIR="./src"
@@ -34,7 +35,7 @@ if [[ "$?" -ne "0" ]]; then
   failure "Project lint did not match benchmark"
 fi
 # Make sure project lint config matches other project configs
-for project in ${OTHER_PROJECTS[@]}; do
+for project in ${ALL_PROJECTS[@]}; do
 	diff "$LINT_CONFIG" "$project/$LINT_CONFIG" 1> /dev/null
 	if [[ "$?" -ne "0" ]]; then
   		failure "Lint config out of sync with other projects"
@@ -44,7 +45,7 @@ done
 
 ## Compare common code across projects
 echo "Checking that common python libraries are in sync..."
-for project in ${OTHER_PROJECTS[@]}; do
+for project in ${ALL_PROJECTS[@]}; do
   diff "$COMMON_CODE" "$project/$COMMON_CODE" 1> /dev/null
   if [[ "$?" -ne "0" ]]; then
       failure "Common code out of sync between files"
