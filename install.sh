@@ -10,7 +10,7 @@ COMMON_LIB_NAME="common"
 
 # Frontend settings
 TARGET_FRONTEND_SCRIPT="/usr/local/bin/sjb-todo"
-LOCAL_FRONTEND_SCRIPT="./bin/sjb-todo.py"
+LOCAL_FRONTEND_SCRIPT="./bin/sjb-todo"
 
 # Make sure we are not running as sudo user:
 if [ "$EUID" -eq 0 ]; then

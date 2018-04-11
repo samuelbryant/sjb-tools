@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 """Module responsible for implementing the command line front end."""
 import sys
 import argparse
@@ -8,9 +7,9 @@ import sjb.td.fileio
 import sjb.td.display
 
 
-PROGRAM = 'sjb_todo'
+PROGRAM = 'sjb-todo'
 USAGE = '''\
-sjb_todo command [<args>]
+sjb-todo command [<args>]
 
 Where command can be:
   add      Add a new todo item to the todo list
@@ -257,5 +256,6 @@ class Program(object):
     sjb.td.fileio.save_todo_list(tl, fname=args.file)
 
 
-if __name__ == '__main__':
+def main(test=False):
+  """Main entrypoint for this application. Called from the frontend script."""
   Program()
