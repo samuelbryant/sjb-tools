@@ -52,7 +52,7 @@ class Todo(sjb.common.base.Item):
       self.priority = priority
     else:
       self.priority = PriorityEnum.DEFAULT.value
-    self.tags = tags if priority is not None else set()
+    self.tags = tags if tags is not None else set()
 
     # Values that should only be set when reading from file
     self.finished = finished
