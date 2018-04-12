@@ -15,7 +15,9 @@ DEV_ENV_NAME="venv"
 # Create virtual environment.
 python3.6 -m venv "$DEV_ENV_NAME"
 source "./$DEV_ENV_NAME/bin/activate"
-rm "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb"
+if [ -e "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb" ]; then
+  rm "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb"
+fi
 ln -s "$PWD/src/sjb" "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb"
 
 # Put testing binary into bin
