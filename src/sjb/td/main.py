@@ -14,7 +14,7 @@ sjb-todo command [<args>]
 Where command can be:
   add      Add a new todo item to the todo list
   complete Marks a todo item as completed
-  info    Shows meta info about cheatsheet
+  info     Shows meta info about cheatsheet
   remove   Removes a todo item entirely from the cheatsheet
   update   Updates some fields from a todo item in todo list.
   show     Shows the todos from the todo list
@@ -27,9 +27,16 @@ def _set_arg(string):
 
 def _add_arguments_generic(parser):
   """Adds argparse arguments that apply universally to all commands."""
-  parser.add_argument(
-    '--file', type=str,
-    help='Manually specify a todo file to work with')
+
+  # Arguments specifying the list file to work with
+  list_group = parser.add_mutually_exclusive_group()
+  list_group.add_argument(
+    '--list', type=str,
+    help='The short name of the list file to read and write from. This is the local file name without an extension. The list file is assumed to be in the default data directory for this application.')
+  list_group.add_argument(
+    '--listpath', type=str,
+    help='The full path name of the list file to read and write from')
+  
 
 
 class Program(object):
@@ -60,6 +67,7 @@ class Program(object):
       'text', type=str, help='The text of this todo entry')
     parser.add_argument(
       '--tags', type=_set_arg,
+      default=set(),
       help='Comma separated list of tags for this todo item')
     parser.add_argument(
       '--urgent', dest='priority', action='store_const',
@@ -70,13 +78,13 @@ class Program(object):
       const=sjb.td.classes.PriorityEnum.LONG_TERM.value,
       help='Sets this todo item as a long term todo')
     parser.add_argument(
-      '--f', dest='force', action='store_const', const=1, default=0,
+      '--force', dest='force', action='store_const', const=1, default=0,
       help='Force: doesnt ask before adding an entry with new tags')
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
     # Load todo list, add an entry, then save the results
-    tl = sjb.td.fileio.load_todo_list(fname=args.file)
+    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
     todo = sjb.td.classes.Todo(
       args.text, priority=args.priority, tags=args.tags)
 
@@ -92,7 +100,7 @@ class Program(object):
         exit(0)
 
     tl.add_item(todo)
-    sjb.td.fileio.save_todo_list(tl, fname=args.file)
+    sjb.td.fileio.save_todo_list(tl, list=args.list, listpath=args.listpath)
 
     sjb.td.display.display_todo(todo)
 
@@ -104,7 +112,7 @@ class Program(object):
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
-    tl = sjb.td.fileio.load_todo_list(fname=args.file)
+    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
 
     tag_set = tl.tag_set
     todos = tl.items
@@ -155,11 +163,11 @@ class Program(object):
     args = parser.parse_args(sys.argv[2:])
 
     # Load todo list, add an entry, then save the results.
-    tl = sjb.td.fileio.load_todo_list(fname=args.file)
+    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
     updated = tl.update_item(
       args.oid, text=args.text, priority=args.priority, tags=args.tags)
     # Save Todo list to file.
-    sjb.td.fileio.save_todo_list(tl, fname=args.file)
+    sjb.td.fileio.save_todo_list(tl, list=args.list, listpath=args.listpath)
     sjb.td.display.display_todo(updated)
 
   def show(self):
@@ -189,7 +197,7 @@ class Program(object):
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
-    tl = sjb.td.fileio.load_todo_list(fname=args.file)
+    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
     matcher = sjb.td.classes.TodoMatcher(
       tags=args.tags, priority=args.priority, finished=args.completed)
     items = tl.query_items(matcher)
@@ -208,7 +216,7 @@ class Program(object):
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
-    tl = sjb.td.fileio.load_todo_list(fname=args.file)
+    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
 
     # If not in force mode, ask user before proceeding.
     todo = tl.get_item(args.oid)
@@ -221,7 +229,7 @@ class Program(object):
         exit(0)
 
     completed = tl.complete_item(args.oid)
-    sjb.td.fileio.save_todo_list(tl, fname=args.file)
+    sjb.td.fileio.save_todo_list(tl, list=args.list, listpath=args.listpath)
 
     sjb.td.display.display_todo(completed)
 
@@ -234,12 +242,12 @@ class Program(object):
     parser.add_argument(
       'oid', type=int, help='ID of the todo you wish to delete')
     parser.add_argument(
-      '--f', dest='force', action='store_const', const=1, default=0,
+      '--force', dest='force', action='store_const', const=1, default=0,
       help='Force: dont ask before completing the removal')
     _add_arguments_generic(parser)
     args = parser.parse_args(sys.argv[2:])
 
-    tl = sjb.td.fileio.load_todo_list(fname=args.file)
+    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
 
     # If not in force mode, ask user before proceeding.
     todo = tl.get_item(args.oid)
@@ -253,7 +261,7 @@ class Program(object):
         exit(0)
 
     tl.remove_item(args.oid)
-    sjb.td.fileio.save_todo_list(tl, fname=args.file)
+    sjb.td.fileio.save_todo_list(tl, list=args.list, listpath=args.listpath)
 
 
 def main(test=False):

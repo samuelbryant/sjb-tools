@@ -5,6 +5,26 @@ import warnings
 import sjb.td.classes
 
 
+DEFAULT_LIST_FILE='todo'
+
+def _get_user_data_dir():
+  """Gets the default dir where applications can store data for this user."""
+  if 'XDG_DATA_HOME' in os.environ:
+    return os.environ['XDG_DATA_HOME']
+  return os.path.join(os.environ['HOME'], '.local', 'share')
+
+def _get_app_data_dir():
+  """Gets the default dir for this application's data for this user."""
+  return os.path.join(_get_user_data_dir(), 'sjb', 'todo')
+
+def _get_default_list_file(list=None):
+  """Gets the full pathname of the todo file named list.
+
+  Note: list should not have an extension.
+  """
+  list = list or DEFAULT_LIST_FILE
+  return os.path.join(_get_app_data_dir(), list + '.json')
+
 def _encode_todo(todo):
   todo.validate()
   return {
@@ -35,33 +55,59 @@ def _encode_todo_list(todo_list):
     }
   }
 
-def _get_default_todo_file():
-  if 'XDG_DATA_HOME' in os.environ:
-    return os.environ['XDG_DATA_HOME']+'/'+'sjb/todo/todo.json'
-  return os.environ['HOME']+'/.local/share/sjb/todo/todo.json'
-
-def save_todo_list(todo_list, fname=None):
+def save_todo_list(todo_list, list=None, listpath=None):
   """Saves a todo list to a json file.
 
   Arguments:
-    fname: str an optional file name to read the todo list from.
-  """
-  ob_js = _encode_todo_list(todo_list)
+    list: str An optional local list name to save the todo list as. The 
+      resulting file is saved in the default application directory with the
+      local file name 'list.json'. This argument is mututally exclusive with 
+      listpath.
+    listpath: str An optional full path name to save the todo list to.
+      This argument is mututally exclusive with listpath.
 
-  fname = fname or todo_list.source_filename or _get_default_todo_file()
+  Raises:
+    Exception: If both list and listpath are given.
+  """
+  if list and listpath:
+    raise Exception(
+      'Cannot set both list and listpath args (this should never happen')
+  
+  # First check list/listpath arguments, then try the file that the todo list 
+  # was read from. If none of those exist, use the default list file.
+  # TODO: reconsider this logic. Is this really the best behavior?
+  if list:
+    fname = _get_default_list_file(list=list)
+  else:
+    fname = listpath or todo_list.source_filename or _get_default_list_file()
+
+
+  ob_js = _encode_todo_list(todo_list)
   json_file = open(fname, "w")
   json_file.write(json.dumps(ob_js, indent=2))
 
-def load_todo_list(fname=None):
+def load_todo_list(list=None, listpath=None):
   """Loads a todo list from a json file.
 
   Arguments:
-    fname: str an optional file name to read the todo list from.
+    list: str An optional local list name to read the todo list from. This 
+      looks for a file in the default application directory with the local 
+      file name 'list.json'. This argument is mututally exclusive with 
+      listpath.
+    listpath: str An optional full path name to read the todo list from. 
+      This argument is mututally exclusive with listpath.
 
   Returns:
     TodoList: object with contents given by the loaded file.
+
+  Raises:
+    Exception: If both list and listpath are given.
   """
-  fname = fname or _get_default_todo_file()
+  if list is not None and listpath is not None:
+    raise Exception(
+      'Cannot set both list and listpath args (this should never happen.)')
+  
+  fname = listpath or _get_default_list_file(list=list)
 
   # Attempt to open
   if not os.path.isfile(fname):
