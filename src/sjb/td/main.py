@@ -15,8 +15,9 @@ Where command can be:
   add      Add a new todo item to the todo list
   complete Marks a todo item as completed
   info     Shows meta info about cheatsheet
+  lists    Lists all of the todo lists stored in the data directory
   remove   Removes a todo item entirely from the cheatsheet
-  update   Updates some fields from a todo item in todo list.
+  update   Updates some fields from a todo item in todo list
   show     Shows the todos from the todo list
 '''
 
@@ -132,6 +133,17 @@ class Program(object):
     print('  %-25s %s' % ('Number of urgent', num_urgent))
     print('  %-25s %s' % ('Number tags', len(tag_set)))
     print('  %-25s %s' % ('Tag list', ', '.join(tag_set)))
+
+  def lists(self):
+    """Implements the 'lists' command."""
+    parser = argparse.ArgumentParser(
+      prog=PROGRAM + ' lists',
+      description='Lists all of the todo lists stored in the data directory')
+
+    args = parser.parse_args(sys.argv[2:])
+
+    lists = sjb.td.fileio.get_all_list_files()
+    print('Todo Lists: ' + ', '.join(lists))
 
   def update(self):
     """Implements the 'update' command."""
