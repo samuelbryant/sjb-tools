@@ -5,7 +5,7 @@ from __future__ import (absolute_import, division,
 from builtins import *
 
 __author__ = 'Sam Bryant'
-__version__ = '0.1.1.3'
+__version__ = '??'
 
 import argparse
 import collections
