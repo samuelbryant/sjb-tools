@@ -32,7 +32,7 @@ setup(
     packages=['sjb','sjb.td','sjb.common'],
     entry_points={
         'console_scripts': [
-            'sjb-todo-test=sjb.td.main:main',
+            'sjb-todo=sjb.td.main:main',
         ],
     },
     license='MIT License'
