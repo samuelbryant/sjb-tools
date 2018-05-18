@@ -18,16 +18,22 @@ if sys.version_info[0] != 3:
 setup(
     name=program,
     author=__author__,
+    author_email='sbryant1014@gmail.com',
     version=__version__,
     description=description,
     install_requires=[
         'future>=0.16.0',
         'configobj >= 5.0.6'
     ],
+    python_requires='>=3',
     long_description=long_description,
     url='https://github.com/sicklybeans/sjb_todo',
     package_dir={'': 'lib'},
     packages=['sjb','sjb.td','sjb.common'],
-    scripts=['bin/sjb-todo'],
+    entry_points={
+        'console_scripts': [
+            'sjb-todo-test=sjb.td.main:main',
+        ],
+    },
     license='MIT License'
 )
