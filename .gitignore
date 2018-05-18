@@ -12,6 +12,7 @@ env/
 develop-eggs/
 downloads/
 eggs/
+build/
 .eggs/
 parts/
 sdist/

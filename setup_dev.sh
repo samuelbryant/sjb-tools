@@ -18,7 +18,7 @@ source "./$DEV_ENV_NAME/bin/activate"
 if [ -e "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb" ]; then
   rm "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb"
 fi
-ln -s "$PWD/src/sjb" "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb"
+ln -s "$PWD/lib/sjb" "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb"
 
 # Put testing binary into bin
 cp "./bin/$FRONTEND_NAME" "$DEV_ENV_NAME/bin/$FRONTEND_NAME"

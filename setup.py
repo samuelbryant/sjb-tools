@@ -6,20 +6,18 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md')) as f:
   long_description = f.read()
 
-
-
+# Single source important information
+exec(open('lib/sjb/constants.py').read())
 
 setup(
-    name='sjb-todo',
-    author='Sam Bryant',
-    version='0.1.1.4',
-    description='A simple CLI program to create, maintain and edit todo lists',
+    name=program,
+    author=__author__,
+    version=__version__,
+    description=description,
     long_description=long_description,
-    #long_description_content_type='text/markdown',
     url='https://github.com/sicklybeans/sjb_todo',
     package_dir={'': 'lib'},
     packages=['sjb','sjb.td','sjb.common'],
     scripts=['bin/sjb-todo'],
-    ## packages=['sjb',],
     license='MIT License'
 )
