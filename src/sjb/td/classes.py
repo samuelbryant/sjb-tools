@@ -172,24 +172,38 @@ class TodoList(sjb.common.base.ItemList):
 
     self._update_object_maps(item)
 
-  def complete_item(self, oid):
+  def complete_item(self, oid, set_complete=True):
     """Marks the todo with the specified oid as completed.
+
+    Args:
+      oid: The id of the item to mark as completed.
+      set_completed: Optinal completion state to set item to. If false, will
+        attempt to mark a completed item as not completed.
 
     Returns:
       Todo: The completed todo object.
 
     Raises:
       sjb.common.base.InvalidIDError: If no todo has a matching oid.
-      sjb.common.base.IllegalStateError: If the todo is already completed.
+      sjb.common.base.IllegalStateError: If the todo is already completed or
+        if set_complete is False and the item is not complted.
     """
     item = self.get_item(oid)
-    if item.finished:
+
+    if set_complete and item.finished:
       raise sjb.common.base.IllegalStateError(
         'TodoList.complete_todo', 'specified todo was already completed')
+    elif not set_complete and not item.finished:
+      raise sjb.common.base.IllegalStateError(
+        'TodoList.complete_todo', 'specified todo was not already completed')
+    if set_complete:
+      item.finished = True
+      item.finished_date = time.time()
+      self._mark_modified()
+    else:
+      item.finished = False
+      item.finished_date = None
 
-    item.finished = True
-    item.finished_date = time.time()
-    self._mark_modified()
     ## TODO: Not needed yet, but may be needed if maps are completion aware.
     # self._recompute_object_maps()
     return item
