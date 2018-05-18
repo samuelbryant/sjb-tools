@@ -7,8 +7,8 @@ import sjb.common.base
 
 class PriorityEnum(enum.Enum):
   """Enum representing the priority of a todo item."""
-  DEFAULT = 1
-  URGENT = 2
+  URGENT = 1
+  DEFAULT = 2
   LONG_TERM = 3
 
 
