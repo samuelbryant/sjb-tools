@@ -22,7 +22,7 @@ def _get_default_list_file(list=None):
   """Gets the full pathname of the todo file named list.
 
   Args:
-    list: a short name giving the local list file name, e.g. 'chores'. This 
+    list: a short name giving the local list file name, e.g. 'chores'. This
       should not contain a file extension.
   """
   list = list or _DEFAULT_LIST_FILE
@@ -32,7 +32,7 @@ def get_all_list_files():
   """Returns a list of all the todo file lists stored in the data directory.
 
   Returns:
-    List of the local file names (without the extensions) for all of the todo 
+    List of the local file names (without the extensions) for all of the todo
       lists stored in the data directory.
   """
   dir = _get_app_data_dir()
@@ -42,7 +42,7 @@ def get_all_list_files():
     if not os.path.isfile(os.path.join(dir, f)):
       continue
     # Check that it has correct extension.
-    if not f.endswith(_LIST_FILE_EXTENSION): 
+    if not f.endswith(_LIST_FILE_EXTENSION):
       continue
     matching.append(f[0:(len(f)-len(_LIST_FILE_EXTENSION))])
   return matching
@@ -51,7 +51,7 @@ def _encode_todo(todo):
   todo.validate()
   return {
     'oid': todo.oid,
-    'tags': list(todo.tags),
+    'tags': sorted(list(todo.tags)),
     'priority': todo.priority,
     'text': todo.text,
     'finished': todo.finished,
@@ -81,9 +81,9 @@ def save_todo_list(todo_list, list=None, listpath=None):
   """Saves a todo list to a json file.
 
   Arguments:
-    list: str An optional local list name to save the todo list as. The 
+    list: str An optional local list name to save the todo list as. The
       resulting file is saved in the default application directory with the
-      local file name 'list.json'. This argument is mututally exclusive with 
+      local file name 'list.json'. This argument is mututally exclusive with
       listpath.
     listpath: str An optional full path name to save the todo list to.
       This argument is mututally exclusive with listpath.
@@ -94,8 +94,8 @@ def save_todo_list(todo_list, list=None, listpath=None):
   if list and listpath:
     raise Exception(
       'Cannot set both list and listpath args (this should never happen')
-  
-  # First check list/listpath arguments, then try the file that the todo list 
+
+  # First check list/listpath arguments, then try the file that the todo list
   # was read from. If none of those exist, use the default list file.
   # TODO: reconsider this logic. Is this really the best behavior?
   if list:
@@ -112,11 +112,11 @@ def load_todo_list(list=None, listpath=None):
   """Loads a todo list from a json file.
 
   Arguments:
-    list: str An optional local list name to read the todo list from. This 
-      looks for a file in the default application directory with the local 
-      file name 'list.json'. This argument is mututally exclusive with 
+    list: str An optional local list name to read the todo list from. This
+      looks for a file in the default application directory with the local
+      file name 'list.json'. This argument is mututally exclusive with
       listpath.
-    listpath: str An optional full path name to read the todo list from. 
+    listpath: str An optional full path name to read the todo list from.
       This argument is mututally exclusive with listpath.
 
   Returns:
@@ -128,7 +128,7 @@ def load_todo_list(list=None, listpath=None):
   if list is not None and listpath is not None:
     raise Exception(
       'Cannot set both list and listpath args (this should never happen.)')
-  
+
   fname = listpath or _get_default_list_file(list=list)
 
   # Attempt to open
