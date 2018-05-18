@@ -121,7 +121,7 @@ fi
 
 # Check if common library is already installed and matches this library.
 if [ -e "$target_common_lib" ]; then
-  diff -r "$local_common_lib" "$target_common_lib" 1>/dev/null 2>/dev/null
+  diff "$local_common_lib" "$target_common_lib" 1>/dev/null 2>/dev/null
   if [ "$?" -ne "0" ]; then
     #wrnmsg "common lib mismatch: '${local_common_lib}' vs '${target_common_lib}'"
     wrnmsg "the target common library is already installed but its contents are different from the common library you are trying to install. If you overwrite it, it is possible it will break another $SUITE_LIB_NAME application."

@@ -1,8 +1,11 @@
 #!/usr/bin/python3.6
 """Module responsible for implementing the command line front end."""
+from __future__ import (absolute_import, division,
+                        print_function, unicode_literals)
+from builtins import *
 
 __author__ = 'Sam Bryant'
-__version__ = '0.1.1.2'
+__version__ = '0.1.1.3'
 
 import argparse
 import collections

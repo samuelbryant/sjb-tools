@@ -2,6 +2,10 @@
 # TODO: Eventually this should be made more robust. Code that deals with
 different things should be put into different modules.
 """
+from __future__ import (absolute_import, division,
+                        print_function, unicode_literals)
+from builtins import *
+
 import os
 import sys
 import textwrap

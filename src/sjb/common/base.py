@@ -10,6 +10,10 @@ now to avoid a lot of code repetition.
 
 @sambryant
 """
+from __future__ import (absolute_import, division,
+                        print_function, unicode_literals)
+from builtins import *
+
 import abc
 import time
 
