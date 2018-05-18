@@ -18,9 +18,9 @@ USER_FRONTEND_TARGET="$HOME/bin/${FRONTEND_NAME}"
 
 # Local sources
 local_frontend="./bin/${FRONTEND_NAME}"
-local_suite_lib="./src/$SUITE_LIB_NAME"
-local_app_lib="./src/$SUITE_LIB_NAME/$APP_LIB_NAME"
-local_common_lib="./src/$SUITE_LIB_NAME/$COMMON_LIB_NAME"
+local_suite_lib="./lib/$SUITE_LIB_NAME"
+local_app_lib="./lib/$SUITE_LIB_NAME/$APP_LIB_NAME"
+local_common_lib="./lib/$SUITE_LIB_NAME/$COMMON_LIB_NAME"
 
 RED='\033[0;41m'
 NC='\033[0m' # No Color
