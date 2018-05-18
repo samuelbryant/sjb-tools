@@ -34,7 +34,7 @@ FORCE = 0
 def _set_arg(string):
   return set(string.split(','))
 
-def _add_args_force(parser, verb, default=PROMPT):
+def _add_arg_force(parser, verb, default=PROMPT):
   g = parser.add_mutually_exclusive_group()
   g.add_argument(
     '-f', '--force', dest='prompt', action='store_const', const=FORCE,
@@ -57,7 +57,6 @@ def _add_arg_priority(
     choices=[e.value for e in sjb.td.classes.PriorityEnum])
 
 def _add_arg_oid(parser, help='the ID of the target todo'):
-  """Generic argument for selecting a specific todo ID."""
   parser.add_argument('oid', metavar='id', type=int, help=help)
 
 def _add_arg_list(parser):
@@ -84,14 +83,13 @@ class Program(object):
     parser = argparse.ArgumentParser(
       prog=PROGRAM,
       formatter_class=_SubcommandHelpFormatter,
-      description='a simple CLI program to create, maintain and edit todo lists',
+      description='A simple CLI program to create, maintain and edit todo lists',
       epilog='Use %(prog)s '+CMD_METAVAR+' -h to get help on individual commands')
     parser.add_argument(
       '-v', '--version', action='version', version='%(prog)s ' + __version__)
 
     # Sub command parser
-    cmds = parser.add_subparsers(
-      title='Commands: can be', metavar=CMD_METAVAR)
+    cmds = parser.add_subparsers(title='Commands can be', metavar=CMD_METAVAR)
     cmds.required = True
 
     # Set up subcommand arguments
@@ -117,7 +115,7 @@ class Program(object):
     _add_arg_priority(
       cmd, 'sets the priority level of this todo (%s)' % (', '.join(
         ['%d=%s' % (e.value, e.name) for e in PriorityEnum])))
-    _add_args_force(cmd, verb='adding new tags or list files', default=PROMPT)
+    _add_arg_force(cmd, verb='adding new tags or list files', default=PROMPT)
     _add_arg_list(cmd)
     cmd.add_argument('text', type=str, help='the text of this todo item')
 
@@ -131,13 +129,13 @@ class Program(object):
       default=True,
       help='when set, will mark completed items as not completed')
     _add_arg_oid(cmd, help='ID of the todo you wish to mark as completed')
-    _add_args_force(cmd, verb='making changes', default=FORCE)
+    _add_arg_force(cmd, verb='making changes', default=FORCE)
     _add_arg_list(cmd)
 
   def _set_args_info(self, cmds):
     cmd_info = cmds.add_parser(
       'info', help=CMD_HELP['info'],
-      description='The info command shows meta information about the todo list like which tags exist and which tags have the most number of todo items.')
+      description='The info command shows meta information about the todo list like which tags exist and how many todos have each tag.')
     cmd_info.set_defaults(run=self.info)
     _add_arg_list(cmd_info)
 
@@ -150,10 +148,10 @@ class Program(object):
   def _set_args_remove(self, cmds):
     cmd = cmds.add_parser(
       'remove', help=CMD_HELP['remove'],
-      description='The todo command removes a todo item from the todo list')
+      description='The remove command removes a todo item from the todo list')
     cmd.set_defaults(run=self.remove)
-    _add_arg_oid(cmd, help='ID of the todo you wish to delete')
-    _add_args_force(cmd, verb='removing the todo', default=PROMPT)
+    _add_arg_oid(cmd, help='ID of the item you wish to delete')
+    _add_arg_force(cmd, verb='removing the todo', default=PROMPT)
     _add_arg_list(cmd)
 
   def _set_args_show(self, cmds):
@@ -174,12 +172,12 @@ class Program(object):
       'update', help=CMD_HELP['update'],
       description='The update command can overwrite existing todo entries with new values. Any attribute not explicitly specified will not be changed.')
     cmd.set_defaults(run=self.update)
-    cmd.add_argument(
-      'oid', type=int, help='ID of the entry you wish to update')
+    _add_arg_oid(cmd, help='ID of the item you wish to update')
     cmd.add_argument('--text', type=str, metavar='text', help='updated text for this todo item')
     _add_arg_tags(
       cmd, 'updated comma separated list of tags for this todo item')
     _add_arg_priority(cmd, 'updated priority for this todo item', default=None)
+    _add_arg_force(cmd, verb='updating the item', default=FORCE)
     _add_arg_list(cmd)
 
   def add(self, args):
@@ -271,6 +269,18 @@ class Program(object):
   def update(self, args):
     # Load todo list, add an entry, then save the results.
     tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
+
+    # Prompt user before continuing
+    item = tl.get_item(args.oid)
+    if args.prompt is not FORCE:
+      question = (
+        'The item given by oid '+str(args.oid)+' is:\n' + \
+        sjb.td.display.repr_todo(item) + \
+        '\nAre you sure you want to continue? ')
+      cont = sjb.common.misc.prompt_yes_no(question, default=True)
+      if not cont:
+        exit(0)
+
     updated = tl.update_item(
       args.oid, text=args.text, priority=args.priority, tags=args.tags)
     # Save Todo list to file.
