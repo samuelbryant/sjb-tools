@@ -2,31 +2,25 @@
 import os
 import json
 import warnings
+import sjb.common.config
 import sjb.td.classes
 
-
+_SUITE = 'sjb'
+_APP = 'todo'
 _DEFAULT_LIST_FILE = 'todo'
 _LIST_FILE_EXTENSION = '.json'
-
-def _get_user_data_dir():
-  """Gets the default dir where applications can store data for this user."""
-  if 'XDG_DATA_HOME' in os.environ:
-    return os.environ['XDG_DATA_HOME']
-  return os.path.join(os.environ['HOME'], '.local', 'share')
-
-def _get_app_data_dir():
-  """Gets the default dir for this application's data for this user."""
-  return os.path.join(_get_user_data_dir(), 'sjb', 'todo')
 
 def _get_default_list_file(list=None):
   """Gets the full pathname of the todo file named list.
 
   Args:
-    list: a short name giving the local list file name, e.g. 'chores'. This
+    list: str a short name giving the local list file name, e.g. 'chores'. This
       should not contain a file extension.
   """
   list = list or _DEFAULT_LIST_FILE
-  return os.path.join(_get_app_data_dir(), list + _LIST_FILE_EXTENSION)
+  return os.path.join(
+    sjb.common.config.get_user_app_data_dir(_APP, suite_name=_SUITE),
+    list + _LIST_FILE_EXTENSION)
 
 def get_all_list_files():
   """Returns a list of all the todo file lists stored in the data directory.
@@ -35,7 +29,7 @@ def get_all_list_files():
     List of the local file names (without the extensions) for all of the todo
       lists stored in the data directory.
   """
-  dir = _get_app_data_dir()
+  dir = sjb.common.config.get_user_app_data_dir(_APP, suite_name=_SUITE)
   files = os.listdir(dir)
   matching = []
   for f in files:
@@ -133,6 +127,7 @@ def load_todo_list(list=None, listpath=None):
 
   # Attempt to open
   if not os.path.isfile(fname):
+    # TODO: Improve this
     warnings.warn('No todo list file found', UserWarning)
     return sjb.td.classes.TodoList(source_fname=fname)
 

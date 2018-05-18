@@ -2,7 +2,7 @@
 """Module responsible for implementing the command line front end."""
 
 __author__ = 'Sam Bryant'
-__version__ = '0.1.1'
+__version__ = '0.1.1.2'
 
 import argparse
 import collections
