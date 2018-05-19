@@ -18,6 +18,44 @@ def is_test_env():
   return ENV_TEST_FLAG in os.environ and os.environ[ENV_TEST_FLAG] is "1"
 
 
+def ensure_directory(name):
+  """Creates directory with given name if it doesnt already exist.def
+
+  Raises:
+    FileExistsError: if one of the required files already exists but it is of
+      the wrong type (e.g. its a file instead of a directory)
+    PermissionError: if we lack the permissions to create the directory.
+  """
+  if os.path.isdir(name):
+    return
+  elif os.path.exists(name):
+    raise FileExistsError(
+      'Existing file name conflicts with needed directory at "%s"' % name)
+  try:
+    os.makedirs(name)
+  except PermissionError:
+    raise PermissionError(
+      'Insufficient privileges to create directory at "%s"' % name)
+  except Exception:
+    raise Exception('Unknown error when creating directory "%s"' % name)
+
+
+def initialize_environment(app_name, suite_name=None):
+  """Checks that necessary user dirs exist and creates them if not.
+
+  Raises:
+    FileExistsError: if one of the required files already exists but it is of
+      the wrong type (e.g. its a file instead of a directory).
+    PermissionError: if program lacks permissions to create a needed directory.
+    Exception: any other issue in setting up environment.
+  """
+  data_dir = get_user_app_data_dir(app_name, suite_name=suite_name)
+  config_dir = get_user_app_config_dir(app_name, suite_name=suite_name)
+
+  ensure_directory(data_dir)
+  ensure_directory(config_dir)
+
+
 def get_user_data_dir():
   """Gets the user-specific dir where apps may store their data files.
 

@@ -98,6 +98,9 @@ class Program(object):
       sys.stderr.write('\nMissing the required argument: command\n')
       sys.exit(2)
 
+    # Initialize directory structure
+    sjb.td.fileio.initialize_environment()
+
     # Call command
     args = parser.parse_args(sys.argv[1:])
     args.run(args)

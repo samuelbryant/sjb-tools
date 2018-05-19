@@ -11,6 +11,19 @@ _APP = 'cheatsheet'
 _DEFAULT_LIST_FILE='cheatsheet'
 _LIST_FILE_EXTENSION = '.json'
 
+
+def initialize_environment():
+  """Checks that necessary user dirs exist and creates them if not.
+
+  Raises:
+    FileExistsError: if one of the required files already exists but it is of
+      the wrong type (e.g. its a file instead of a directory).
+    PermissionError: if program lacks permissions to create a needed directory.
+    Exception: any other issue in setting up environment.
+  """
+  sjb.common.config.initialize_environment(_APP, suite_name=_SUITE)
+
+
 def _get_default_list_file(list=None):
   """Gets the full pathname of the cheatsheet file named list.
 
