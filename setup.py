@@ -35,5 +35,12 @@ setup(
             'sjb-todo=sjb.td.main:main',
         ],
     },
+    classifiers=[
+        'Development Status :: 2 - Pre-Alpha',
+        'Environment :: Console',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3',
+        'Topic :: Office/Business'
+    ],
     license='MIT License'
 )
