@@ -22,7 +22,7 @@ setup(
     version=__version__,
     description=description,
     install_requires=[
-        'future>=0.16.0',
+        'future >= 0.16.0',
         'configobj >= 5.0.6'
     ],
     python_requires='>=3',
