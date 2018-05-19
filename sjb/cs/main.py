@@ -41,43 +41,10 @@ FORCE = 0
 def _set_arg(string):
   return set(string.split(','))
 
-
 def _tags_arg(string):
   """Pulls out primary tag (first tag) from the others"""
   tags = string.split(',')
   return (tags[0], set(tags[1:]))
-
-def _add_arg_oid(parser, help='the ID of the target item'):
-  parser.add_argument('oid', metavar='id', type=int, help=help)
-
-def _add_arg_force(parser, verb, default=PROMPT):
-  g = parser.add_mutually_exclusive_group()
-  g.add_argument(
-    '-f', '--force', dest='prompt', action='store_const', const=FORCE,
-    default=default,
-    help=('never prompts user before ' + verb + (
-      ' (default)' if default is FORCE else '')))
-  g.add_argument(
-    '-i', '--prompt', dest='prompt', action='store_const', const=PROMPT,
-    default=default,
-    help=('asks user before ' + verb + (
-      ' (default)' if default is PROMPT else '')))
-
-def _add_arg_style(parser, default=None):
-  parser.add_argument(
-    '--style', type=int,
-    choices=sjb.cs.display.FORMAT_CHOICES, default=default,
-    help='Specifies which format style is used when displaying entries.')
-
-def _add_arg_list(parser):
-  # Arguments specifying the list file to work with
-  list_group = parser.add_mutually_exclusive_group()
-  list_group.add_argument(
-    '-l', dest='list', type=str, metavar='name',
-    help='the short name of the cheatsheet file to read and write from. This is the local file name without an extension. The cheatsheet file is assumed to be in the default data directory for this application.')
-  list_group.add_argument(
-    '--listpath', metavar='file', type=str,
-    help='the full path name of the cheatsheet file to read and write from')
 
 
 class Program(object):
@@ -98,7 +65,7 @@ class Program(object):
 
     # Set up subcommand arguments
     for cmd in CMDS:
-      getattr(self, '_set_args_%s' % cmd)(cmds)
+      getattr(self, '%s_set_args' % cmd)(cmds)
 
     # When no arguments are present, just show help message
     if len(sys.argv) <= 1:
@@ -107,13 +74,13 @@ class Program(object):
       sys.exit(2)
 
     # Initialize directory structure
-    sjb.td.fileio.initialize_environment()
+    sjb.cs.fileio.initialize_environment()
 
     # Call command
     args = parser.parse_args(sys.argv[1:])
     args.run(args)
 
-  def _set_args_add(self, cmds):
+  def add_set_args(self, cmds):
     cmd = cmds.add_parser(
       'add', help=CMDS['add'][0], description=CMDS['add'][1])
     cmd.set_defaults(run=self.add)
@@ -154,7 +121,7 @@ class Program(object):
     # Print the results.
     sjb.cs.display.display_entry(entry, format_style=args.style)
 
-  def _set_args_info(self, cmds):
+  def info_set_args(self, cmds):
     cmd = cmds.add_parser(
       'info', help=CMDS['info'][0], description=CMDS['info'][1])
     cmd.set_defaults(run=self.info)
@@ -179,7 +146,7 @@ class Program(object):
     for key, count in sorted_primary:
       print('  %-25s %d' % (key, count))
 
-  def _set_args_lists(self, cmds):
+  def lists_set_args(self, cmds):
     cmd = cmds.add_parser(
       'lists', help=CMDS['lists'][0], description=CMDS['lists'][1])
     cmd.set_defaults(run=self.lists)
@@ -188,7 +155,7 @@ class Program(object):
     lists = sjb.cs.fileio.get_all_list_files()
     print('Cheatsheets: ' + ', '.join(lists))
 
-  def _set_args_show(self, cmds):
+  def show_set_args(self, cmds):
     cmd = cmds.add_parser(
       'show', help=CMDS['show'][0], description=CMDS['show'][1])
     cmd.set_defaults(run=self.show)
@@ -226,7 +193,7 @@ class Program(object):
     else:
       print('No entries found')
 
-  def _set_args_remove(self, cmds):
+  def remove_set_args(self, cmds):
     cmd = cmds.add_parser(
       'remove', help=CMDS['remove'][0], description=CMDS['remove'][1])
     cmd.set_defaults(run=self.remove)
@@ -258,7 +225,7 @@ class Program(object):
       print('Removed entry:')
       sjb.cs.display.display_entry(removed, format_style=args.style)
 
-  def _set_args_update(self, cmds):
+  def update_set_args(self, cmds):
     cmd = cmds.add_parser(
       'update', help=CMDS['update'][0], description=CMDS['update'][1])
     cmd.set_defaults(run=self.update)
@@ -301,6 +268,39 @@ class Program(object):
 
     # Print the results.
     sjb.cs.display.display_entry(updated, format_style=args.style)
+
+
+def _add_arg_oid(parser, help='the ID of the target item'):
+  parser.add_argument('oid', metavar='id', type=int, help=help)
+
+def _add_arg_force(parser, verb, default=PROMPT):
+  g = parser.add_mutually_exclusive_group()
+  g.add_argument(
+    '-f', '--force', dest='prompt', action='store_const', const=FORCE,
+    default=default,
+    help=('never prompts user before ' + verb + (
+      ' (default)' if default is FORCE else '')))
+  g.add_argument(
+    '-i', '--prompt', dest='prompt', action='store_const', const=PROMPT,
+    default=default,
+    help=('asks user before ' + verb + (
+      ' (default)' if default is PROMPT else '')))
+
+def _add_arg_style(parser, default=None):
+  parser.add_argument(
+    '--style', type=int,
+    choices=sjb.cs.display.FORMAT_CHOICES, default=default,
+    help='Specifies which format style is used when displaying entries.')
+
+def _add_arg_list(parser):
+  # Arguments specifying the list file to work with
+  list_group = parser.add_mutually_exclusive_group()
+  list_group.add_argument(
+    '-l', dest='list', type=str, metavar='name',
+    help='the short name of the cheatsheet file to read and write from. This is the local file name without an extension. The cheatsheet file is assumed to be in the default data directory for this application.')
+  list_group.add_argument(
+    '--listpath', metavar='file', type=str,
+    help='the full path name of the cheatsheet file to read and write from')
 
 
 class _SubcommandHelpFormatter(argparse.RawDescriptionHelpFormatter):
