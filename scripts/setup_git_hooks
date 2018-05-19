@@ -1,0 +1,16 @@
+#!/bin/bash
+# Sets up git hooks required to develop on this project.
+
+# Go to project directory
+cd "$(dirname "$0")/.."
+
+rm -f ".git/hooks/pre-commit"
+ln -s '../../scripts/pre-commit.hook' '.git/hooks/pre-commit'
+
+if [[ "$?" -eq "0" ]]; then
+  echo "Git hooks setup sucessfully"
+  exit 0
+else
+  echo "Error while setting up git hooks" > /dev/stderr
+  exit 1
+fi

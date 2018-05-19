@@ -10,6 +10,7 @@ DEV_ENV_NAME="venv"
 THIS_SCRIPT="scripts/setup_dev.sh"
 
 # Use while loop so we can break out without exiting a sourced script.
+flag_success="0"
 while [[ "1" == "1" ]]; do
   # Check that script is sourced.
   if [[ ! $0 =~ /bash$ ]] && [[ ! $0 =~ /sh$ ]] && [[ ! $0 =~ /zsh$ ]]; then
@@ -31,6 +32,19 @@ while [[ "1" == "1" ]]; do
   python setup.py install
   if [[ "$?" -ne "0" ]]; then break; fi
 
-  echo "Dev environment setup was successful. To leave type 'deactivate'"
+  # Setup git development hooks.
+  echo "Setting up git hooks"
+  ./scripts/setup_git_hooks
+  if [[ "$?" -ne "0" ]]; then break; fi
+
+  flag_success="1"
   break
 done
+
+if [[ "$flag_success" -eq "1" ]]; then
+  echo "Dev environment setup was successful. To leave type 'deactivate'"
+  true # set $? to 0
+else
+  echo "Something went wrong while setting up the dev environment" > /dev/stderr
+  false # set $? to 1
+fi
