@@ -1,11 +1,10 @@
 #!/usr/bin/env python3.6
-from setuptools import setup
 import os
 import sys
-from os import path
+from setuptools import setup
 
-here = path.abspath(path.dirname(__file__))
-with open(path.join(here, 'README.md')) as f:
+here = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(here, 'README.md')) as f:
   long_description = f.read()
 
 # Single source important information
@@ -22,7 +21,6 @@ setup(
     version=__version__,
     description=description,
     install_requires=[
-        'future >= 0.16.0',
         'configobj >= 5.0.6'
     ],
     python_requires='>=3',

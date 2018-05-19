@@ -1,8 +1,4 @@
 """Module responsible for implementing the command line front end."""
-from __future__ import (absolute_import, division,
-                        print_function, unicode_literals)
-from builtins import *
-
 import argparse
 import collections
 import operator
@@ -95,7 +91,7 @@ class Program(object):
       epilog='Use %(prog)s '+CMD_METAVAR+' -h to get help on individual commands')
     parser.add_argument(
       '-v', '--version', action='version', version='%(prog)s ' + sjb.constants.__version__)
-  
+
     # Sub commands
     cmds = parser.add_subparsers(title='Commands can be', metavar=CMD_METAVAR)
     cmds.required = True

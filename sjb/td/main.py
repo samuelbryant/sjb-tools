@@ -1,9 +1,4 @@
-#!/usr/bin/python3.6
 """Module responsible for implementing the command line front end."""
-from __future__ import (absolute_import, division,
-                        print_function, unicode_literals)
-from builtins import *
-
 import argparse
 import collections
 import sys

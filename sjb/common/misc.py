@@ -2,16 +2,14 @@
 # TODO: Eventually this should be made more robust. Code that deals with
 different things should be put into different modules.
 """
-from __future__ import (absolute_import, division,
-                        print_function, unicode_literals)
-from builtins import *
-
 import os
 import sys
 import textwrap
 
+
 def _get_num_cols():
   return int(os.popen('stty size', 'r').read().split()[1])
+
 
 def indent_paragraph(paragraph, indent_size):
   """Indents a paragraph except the first line."""
@@ -24,6 +22,7 @@ def indent_paragraph(paragraph, indent_size):
 
   prefix = '\n' + (' ' * indent_size)
   return prefix.join(indented)
+
 
 def prompt_yes_no(question, default=None):
   """Asks a yes/no question and returns either True or False."""

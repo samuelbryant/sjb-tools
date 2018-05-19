@@ -1,11 +1,7 @@
 """Module containing all core class definitions for this program."""
-from __future__ import (absolute_import, division,
-                        print_function, unicode_literals)
-from builtins import *
-
-import time
 import copy
 import enum
+import time
 import sjb.common.base
 
 

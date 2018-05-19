@@ -1,19 +1,4 @@
-"""Base classes file used in cheatsheet and todo.
-
-NOTE: It is very important that this file is kept in sync across the two github
-projects. For this reason, this file should not be changed much.
-
-# TODO: In general, manually copying a file between two github directories is
-not great practice. However, since one of the core goals of this software
-suite is maximal decoupling between the pieces, this is the best solution for
-now to avoid a lot of code repetition.
-
-@sambryant
-"""
-from __future__ import (absolute_import, division,
-                        print_function, unicode_literals)
-from builtins import *
-
+"""Base classes file used in cheatsheet and todo."""
 import abc
 import time
 
