@@ -28,10 +28,11 @@ setup(
     python_requires='>=3',
     long_description=long_description,
     url='https://github.com/sicklybeans/sjb-tools',
-    packages=['sjb','sjb.td','sjb.common'],
+    packages=['sjb', 'sjb.common', 'sjb.cs', 'sjb.td'],
     entry_points={
         'console_scripts': [
             'sjb-todo=sjb.td.main:main',
+            'sjb-cheatsheet=sjb.cs.main:main'
         ],
     },
     classifiers=[

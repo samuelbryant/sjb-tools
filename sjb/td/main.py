@@ -15,7 +15,8 @@ import sjb.td.fileio
 import sjb.td.display
 from sjb.td.classes import PriorityEnum
 
-
+PROGRAM = 'sjb-todo'
+DESCRIPTION = 'A simple CLI program to create, maintain and edit todo lists'
 CMD_METAVAR = 'command'
 CMD_HELP = collections.OrderedDict([
   ('add', 'Add a new todo item to the todo list'),
@@ -81,9 +82,9 @@ class Program(object):
 
   def __init__(self):
     parser = argparse.ArgumentParser(
-      prog=sjb.constants.program,
+      prog=PROGRAM,
       formatter_class=_SubcommandHelpFormatter,
-      description=sjb.constants.description,
+      description=DESCRIPTION,
       epilog='Use %(prog)s '+CMD_METAVAR+' -h to get help on individual commands')
     parser.add_argument(
       '-v', '--version', action='version', version='%(prog)s ' + sjb.constants.__version__)
