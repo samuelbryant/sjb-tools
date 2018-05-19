@@ -11,6 +11,9 @@ echo "This script must be sourced"
 
 DEV_ENV_NAME="venv"
 
+# Go to project directory
+cd "$(dirname "$0")/.."
+
 python3.6 -m venv "$DEV_ENV_NAME"
 source "./$DEV_ENV_NAME/bin/activate"
 python setup.py install
