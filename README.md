@@ -3,14 +3,14 @@ A set of simple command line productivity tools.
 
 This project is licensed under the MIT license.
 
-Currently there are two tools: a todo list (sjb-todo) and a cheatsheet 
-(sjb-cheatsheet). Each of these programs allows the user to create, read, 
-update, and delete (CRUD) new entries from the command line. These are 
-designed to be simple and transparent replacements for common producitivity 
+Currently there are two tools: a todo list (sjb-todo) and a cheatsheet
+(sjb-cheatsheet). Each of these programs allows the user to create, read,
+update, and delete (CRUD) new entries from the command line. These are
+designed to be simple and transparent replacements for common producitivity
 tools (like Apple's reminders).
 
-Currently there is only a command line interface that interacts with local 
-data. Eventually I plan to have these talk to other services and will maybe 
+Currently there is only a command line interface that interacts with local
+data. Eventually I plan to have these talk to other services and will maybe
 build a command line.
 
 
@@ -25,15 +25,30 @@ See `sjb-cheatsheet --help` and `sjb-todo --help` for usage. This file is not
 kept up to date.
 
 # Developing
-A "proper" development environment has not been created yet. However, there is 
-a crude script which creates s virtual environment. From the main project 
-directory:
-~~~~
-$ . setup_dev.sh
-$ . venv/bin/activate
-$ pip install sjb-tools
-~~~~
-You have to rerun the last line every time you change the source code in order 
-for it to take effect.
+I have not adopted a proper development environment framework yet. However, I
+have setup a few very useful scripts.
 
-Warning: the development environment still uses the same data files as the real environment. This will eventually be fixed.
+To setup the development environment, `cd` into the project directory and type:
+~~~~
+$ . scripts/setup_dev.sh
+~~~~
+All this does is create the development environment. It does **not** activate that environment. To activate the development environment, type:
+~~~~
+$ dev-env-on
+~~~~
+To install the program into the test environment, test:
+~~~~
+$ python setup.py install
+~~~~
+Finally, to exit the development environment, type:
+~~~~
+$ dev-env-off
+~~~~
+
+Note: you **must** rerun `python setup.py install` every time you make changes
+to the source code.
+
+These scripts are basically just a wrapper around a python `virtualenv` that
+set some environment variables to let the program know it is running in test.
+
+If you want to make changes or contribute to the source code, contact me.

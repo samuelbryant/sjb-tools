@@ -1,9 +1,21 @@
-"""Module responsible for reading data/configs from files in standard way.
+"""Module responsible for handling system configuration.
 
-This follows he freedesktop XDG base directory specifications:
+This includes:
+  1) determining if we are running in a test environment.
+  2) determining the proper directory to read/write data files to.
+  3) determining the proper directory to read/write config files to.
+
+This follows the freedesktop XDG base directory specifications:
 https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
 """
 import os
+
+ENV_TEST_FLAG = 'SJB_TOOLS_TEST'
+
+
+def is_test_env():
+  """Returns true if program is being run from the test environment."""
+  return ENV_TEST_FLAG in os.environ and os.environ[ENV_TEST_FLAG] is "1"
 
 
 def get_user_data_dir():
@@ -17,6 +29,8 @@ def get_user_data_dir():
   Raises:
     Exception: If neither XDG_DATA_HOME or HOME are set in environment vars.
   """
+  if is_test_env() and 'TEST_XDG_DATA_HOME' in os.environ:
+    return os.environ['TEST_XDG_DATA_HOME']
   if 'XDG_DATA_HOME' in os.environ:
     return os.environ['XDG_DATA_HOME']
   elif 'HOME' in os.environ:
@@ -36,6 +50,8 @@ def get_user_config_dir():
   Raises:
     Exception: If neither XDG_CONFIG_HOME or HOME are set in environment vars.
   """
+  if is_test_env() and 'TEST_XDG_CONFIG_HOME' in os.environ:
+    return os.environ['TEST_XDG_CONFIG_HOME']
   if 'XDG_CONFIG_HOME' in os.environ:
     return os.environ['XDG_CONFIG_HOME']
   elif 'HOME' in os.environ:
