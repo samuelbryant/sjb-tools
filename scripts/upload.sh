@@ -4,7 +4,7 @@
 cd "$(dirname "$0")/.."
 
 # Get the version
-version=$(cat sjb/constants.py | grep 'version' | sed -E 's/__version__ ?= ?'"'"'(.*)'"'"'/\1/g')
+version=$(./scripts/get_version.sh)
 
 echo "The version tag is '$version'"
 echo "git describe gives '$(git describe)'"
@@ -14,5 +14,12 @@ if [[ ! $resp =~ ^[yY](e|es)?$ ]]; then
   exit 0
 fi
 
-echo "deploying version $version to pypi"
-python3 setup.py sdist upload
+if [[ "$1" -eq "-n" ]]; then
+  echo "Deploying version $version to pypi (dry run)"
+  echo "python3 setup.py sdist upload --dry-run"
+  #python3 setup.py sdist upload --dry-run
+else
+  echo "Deploying version $version to pypi"
+  echo "python3 setup.py sdist upload"
+  python3 setup.py sdist upload
+fi
