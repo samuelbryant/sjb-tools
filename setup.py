@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md')) as f:
   long_description = f.read()
 
 # Single source important information
-exec(open('lib/sjb/constants.py').read())
+exec(open('sjb/constants.py').read())
 
 if sys.version_info[0] != 3:
     print('This script requires Python 3')
@@ -27,8 +27,7 @@ setup(
     ],
     python_requires='>=3',
     long_description=long_description,
-    url='https://github.com/sicklybeans/sjb_todo',
-    package_dir={'': 'lib'},
+    url='https://github.com/sicklybeans/sjb-tools',
     packages=['sjb','sjb.td','sjb.common'],
     entry_points={
         'console_scripts': [

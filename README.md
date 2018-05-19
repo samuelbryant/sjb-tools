@@ -1,34 +1,39 @@
-# sjb_todo
-A simple CRUD command line program for working with 'todo lists'
+# sjb-tools
+A set of simple command line productivity tools.
 
 This project is licensed under the MIT license.
 
+Currently there are two tools: a todo list (sjb-todo) and a cheatsheet 
+(sjb-cheatsheet). Each of these programs allows the user to create, read, 
+update, and delete (CRUD) new entries from the command line. These are 
+designed to be simple and transparent replacements for common producitivity 
+tools (like Apple's reminders).
+
+Currently there is only a command line interface that interacts with local 
+data. Eventually I plan to have these talk to other services and will maybe 
+build a command line.
+
+
 # Installation
-This program is in pre-alpha and is not using any deployment tools so I make zero guarantees about installation.
-
-However, I have written a crude script that should more or less work provided the user has `python3.6` installed in a linux environment and has all of the required python dependencies. Since these dependencies are subject to change, and this is my first time writing a deployed python app, I have not bothered to record them or incorporate them into the install script. In the future I hope to fix this.
-
-## Instructions
+Assuming you have python3.X and `pip3` installed on your system:
 ~~~~
-$ cd <this directory>
-$ ./install.sh
-$ mkdir -p ~/.local/share/sjb/todo
+# pip install sjb-tools
 ~~~~
-where `<this directory>` is the directory containing this README file. Also it's important that you run `./install.sh` as a regular user (dont use sudo).
+
+# Usage
+See `sjb-cheatsheet --help` and `sjb-todo --help` for usage. This file is not
+kept up to date.
 
 # Developing
-There is a script `setup_dev.sh` which sets up a virtual environment. This causes `sjb-todo` to execute the local code in `src` instead of the code installed on the system.
-
-To enter the development environment:
-~~~
-$ cd <this directory>
+A "proper" development environment has not been created yet. However, there is 
+a crude script which creates s virtual environment. From the main project 
+directory:
+~~~~
 $ . setup_dev.sh
-~~~
-where `<this directory>` is the directory containing this README file.
-
-To leave the development environment just type:
+$ . venv/bin/activate
+$ pip install sjb-tools
 ~~~~
-$ deactivate
-~~~~
+You have to rerun the last line every time you change the source code in order 
+for it to take effect.
 
 Warning: the development environment still uses the same data files as the real environment. This will eventually be fixed.

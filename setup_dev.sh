@@ -9,16 +9,8 @@
 
 echo "This script must be sourced"
 
-FRONTEND_NAME="sjb-todo"
 DEV_ENV_NAME="venv"
 
-# Create virtual environment.
 python3.6 -m venv "$DEV_ENV_NAME"
 source "./$DEV_ENV_NAME/bin/activate"
-if [ -e "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb" ]; then
-  rm "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb"
-fi
-ln -s "$PWD/lib/sjb" "$PWD/$DEV_ENV_NAME/lib/python3.6/site-packages/sjb"
-
-# Put testing binary into bin
-cp "./bin/$FRONTEND_NAME" "$DEV_ENV_NAME/bin/$FRONTEND_NAME"
+python setup.py install
