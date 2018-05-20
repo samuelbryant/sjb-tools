@@ -5,7 +5,6 @@ import time
 
 class Item(abc.ABC):
   """Abstract class representing an item stored in a list."""
-  __metaclass__ = abc.ABCMeta
 
   def __init__(self, oid=None):
     self._oid = oid
@@ -39,10 +38,17 @@ class Item(abc.ABC):
     """
     return
 
+  @abc.abstractmethod
+  def to_dict(self):
+    """Converts data to a dict suitable for writing to a file as json.
+
+    Returns:
+      dict: stable dict of values suitable to be written as JSON.
+    """
+    return
 
 class ItemMatcher(abc.ABC):
   """Abstract class representing a boolean condition for matching an Item."""
-  __metaclass__ = abc.ABCMeta
 
   @abc.abstractmethod
   def matches(self, item):
@@ -56,7 +62,6 @@ class ItemMatcher(abc.ABC):
 
 class ItemList(abc.ABC):
   """Abstract class representing a collection of Item objects."""
-  __metaclass__ = abc.ABCMeta
 
   def __init__(self, version=None, modified_date=None, source_fname=None):
     self._version = version
@@ -192,6 +197,14 @@ class ItemList(abc.ABC):
     self._oid_set.remove(removed.oid)
     return removed
 
+  @abc.abstractmethod
+  def to_dict(self):
+    """Converts data to a dict suitable for writing to a file as json.
+
+    Returns:
+      dict: stable dict of values suitable to be written as JSON.
+    """
+    return
 
 class Error(Exception):
   """Base class for exceptions for this program."""

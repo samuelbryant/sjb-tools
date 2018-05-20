@@ -55,24 +55,6 @@ def get_all_list_files():
     matching.append(f[0:(len(f)-len(_LIST_FILE_EXTENSION))])
   return matching
 
-def _encode_entry(entry):
-  entry.validate()
-  return {
-    'oid': entry.oid,
-    'primary': entry.primary,
-    'tags': sorted(list(entry.tags)),
-    'clue': entry.clue,
-    'answer': entry.answer
-  }
-
-def _decode_entry(json_object):
-  return(sjb.cs.classes.Entry(
-    clue=json_object['clue'],
-    answer=json_object['answer'],
-    primary=json_object['primary'],
-    tags=set(json_object['tags']),
-    oid=json_object['oid']))
-
 def save_cheatsheet(cs, list=None, listpath=None):
   """Saves a cheatsheet list to a json file.
 
@@ -99,19 +81,13 @@ def save_cheatsheet(cs, list=None, listpath=None):
   else:
     fname = listpath or cs.source_filename or _get_default_list_file()
 
+  # TODO: Temporary replacement of poor validation-in-encoding code
+  for item in cs.items:
+    item.validate()
 
-  top_json = {
-    'cheatsheet': {
-      'version': cs.version,
-      'modified_date': cs.modified_date,
-      'entries': [_encode_entry(e) for e in cs.items]
-    }
-  }
-
-  fname = fname or cs.source_filename or _get_default_list_file()
-  json_file = open(fname, "w")
-
-  json_file.write(json.dumps(top_json, indent=2))
+  json_file = open(fname, 'w')
+  json_file.write(json.dumps(cs.to_dict(), indent=2))
+  json_file.close()
 
 def load_cheatsheet(list=None, listpath=None):
   """Loads a cheat sheet from a json file.
@@ -143,14 +119,6 @@ def load_cheatsheet(list=None, listpath=None):
     return sjb.cs.classes.CheatSheet(source_fname=fname)
 
   json_file = open(fname)
-  ob = json.load(json_file)['cheatsheet']
-  modified_date = ob['modified_date'] if 'modified_date' in ob else None
-
-
-  cs = sjb.cs.classes.CheatSheet(
-    source_fname=fname, modified_date=modified_date)
-  for entry_json in ob['entries']:
-    entry = _decode_entry(entry_json)
-    cs.add_item(entry, initial_load=True)
-
-  return cs
+  json_dict = json.load(json_file)
+  json_file.close()
+  return sjb.cs.classes.CheatSheet.from_dict(json_dict, fname)

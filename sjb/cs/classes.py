@@ -92,6 +92,37 @@ class Entry(sjb.common.base.Item):
     if self.oid is not None and not isinstance(self.oid, int):
       raise sjb.common.base.ValidationError('Bad oid: '+str(self.oid))
 
+  def to_dict(self):
+    """Converts data to a dict suitable for writing to a file as json.
+
+    Returns:
+      dict: stable dict of values suitable to be written as JSON.
+    """
+    return {
+      'oid': self.oid,
+      'primary': self.primary,
+      'tags': sorted(list(self.tags)),
+      'clue': self.clue,
+      'answer': self.answer
+    }
+
+  @staticmethod
+  def from_dict(json_dict):
+    """Constructs Entry from dict (which was loaded from a JSON file).
+
+    Args:
+      json_dict: Dict containing the necessary fields for an Entry object.
+
+    Returns:
+      Entry: Entry object represented by the dict.
+   """
+    e = Entry(
+      clue=json_dict['clue'],
+      answer=json_dict['answer'],
+      primary=json_dict['primary'],
+      tags=set(json_dict['tags']),
+      oid=json_dict['oid'])
+    return e
 
 class CheatSheet(sjb.common.base.ItemList):
   """Class that represents an entire cheat sheet.
@@ -212,3 +243,44 @@ class CheatSheet(sjb.common.base.ItemList):
 
     for item in self._items:
       self._update_object_maps(item)
+
+  def to_dict(self):
+    """Converts data to a dict suitable for writing to a file as json.
+
+    Returns:
+      dict: stable dict of values suitable to be written as JSON.
+    """
+    return {
+      'cheatsheet': {
+        'version': self.version,
+        'modified_date': self.modified_date,
+        'entries': [e.to_dict() for e in self.items]
+      }
+    }
+
+  @staticmethod
+  def from_dict(json_dict, source_filename):
+    """Constructs CheatSheet from dict (which was loaded from a JSON file).
+
+    Args:
+      json_dict: Dict containing the necessary fields for a CheatSheet.
+      source_filename: Name of file that json_dict was read from. This file is
+        not opened by this method, it is just passed as a field to the
+        CheatSheet object.
+
+    Returns:
+      CheatSheet: Object represented by the dict.
+    """
+    json_dict = json_dict['cheatsheet']
+    modified_date = json_dict.get('modified_date', None)
+    version = json_dict.get('version', None)
+    l = CheatSheet(
+      version=version, modified_date=modified_date,
+      source_fname=source_filename)
+
+    # Add entries to cheat sheet
+    for item_json in json_dict['entries']:
+      item = Entry.from_dict(item_json)
+      l.add_item(item, initial_load=True)
+
+    return l

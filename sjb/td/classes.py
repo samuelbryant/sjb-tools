@@ -42,9 +42,7 @@ class TodoMatcher(sjb.common.base.ItemMatcher):
 class Todo(sjb.common.base.Item):
   """Simple class representing a todo item."""
 
-  def __init__(
-      self, text, priority=None, tags=None, finished=None, created_date=None,
-      finished_date=None, oid=None):
+  def __init__(self, text, priority=None, tags=None, finished=None, created_date=None, finished_date=None, oid=None):
     super().__init__(oid)
     # Values that should be set at construction time
     self.text = text
@@ -128,6 +126,41 @@ class Todo(sjb.common.base.Item):
         raise sjb.common.base.ValidationError(
           'No oid set, but has finished_date: '+str(self.finished_date))
 
+  def to_dict(self):
+    """Converts data to a dict suitable for writing to a file as json.
+
+    Returns:
+      dict: stable dict of values suitable to be written as JSON.
+    """
+    return {
+      'oid': self.oid,
+      'tags': sorted(list(self.tags)),
+      'priority': self.priority,
+      'text': self.text,
+      'finished': self.finished,
+      'created_date': self.created_date,
+      'finished_date': self.finished_date,
+    }
+
+  @staticmethod
+  def from_dict(json_dict):
+    """Constructs Todo from dict (which was loaded from a JSON file).
+
+    Args:
+      json_dict: Dict containing the necessary fields for a Todo object.
+
+    Returns:
+      Todo: Todo object represented by the dict.
+   """
+    t = Todo(
+      text=json_dict['text'],
+      tags=set(json_dict['tags']),
+      priority=json_dict['priority'],
+      finished=json_dict['finished'],
+      created_date=json_dict['created_date'],
+      finished_date=json_dict['finished_date'],
+      oid=json_dict['oid'])
+    return t
 
 class TodoList(sjb.common.base.ItemList):
   """Class that represents a list of todo entries.
@@ -272,3 +305,44 @@ class TodoList(sjb.common.base.ItemList):
     self._tag_set = set()
     for item in self.items:
       self._update_object_maps(item)
+
+  def to_dict(self):
+    """Converts data to a dict suitable for writing to a file as json.
+
+    Returns:
+      dict: stable dict of values suitable to be written as JSON.
+    """
+    return {
+      'todo_list': {
+        'version': self.version,
+        'modified_date': self.modified_date,
+        'todos': [e.to_dict() for e in self.items]
+      }
+    }
+
+  @staticmethod
+  def from_dict(json_dict, source_filename):
+    """Constructs TodoList from dict (which was loaded from a JSON file).
+
+    Args:
+      json_dict: Dict containing the necessary fields for a TodoList.
+      source_filename: Name of file that json_dict was read from. This file is
+        not opened by this method, it is just passed as a field to the
+        TodoList object.
+
+    Returns:
+      TodoList: Object represented by the dict.
+    """
+    json_dict = json_dict['todo_list']
+    modified_date = json_dict.get('modified_date', None)
+    version = json_dict.get('version', None)
+    l = TodoList(
+      modified_date=modified_date, version=version,
+      source_fname=source_filename)
+
+    # Add todos to todo list
+    for item_json in json_dict['todos']:
+      item = Todo.from_dict(item_json)
+      l.add_item(item, initial_load=True)
+
+    return l

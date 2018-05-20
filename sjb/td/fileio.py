@@ -54,36 +54,6 @@ def get_all_list_files():
     matching.append(f[0:(len(f)-len(_LIST_FILE_EXTENSION))])
   return matching
 
-def _encode_todo(todo):
-  todo.validate()
-  return {
-    'oid': todo.oid,
-    'tags': sorted(list(todo.tags)),
-    'priority': todo.priority,
-    'text': todo.text,
-    'finished': todo.finished,
-    'created_date': todo.created_date,
-    'finished_date': todo.finished_date,
-  }
-
-def _decode_todo(json_object):
-  return sjb.td.classes.Todo(
-    text=json_object['text'],
-    tags=set(json_object['tags']),
-    priority=json_object['priority'],
-    finished=json_object['finished'],
-    created_date=json_object['created_date'],
-    finished_date=json_object['finished_date'],
-    oid=json_object['oid'])
-
-def _encode_todo_list(todo_list):
-  return {
-    'todo_list': {
-      'modified_date': todo_list.modified_date,
-      'todos': [_encode_todo(todo) for todo in todo_list.items]
-    }
-  }
-
 def save_todo_list(todo_list, list=None, listpath=None):
   """Saves a todo list to a json file.
 
@@ -110,10 +80,13 @@ def save_todo_list(todo_list, list=None, listpath=None):
   else:
     fname = listpath or todo_list.source_filename or _get_default_list_file()
 
+  # TODO: Temporary replacement of poor validation-in-encoding code
+  for item in todo_list.items:
+    item.validate()
 
-  ob_js = _encode_todo_list(todo_list)
-  json_file = open(fname, "w")
-  json_file.write(json.dumps(ob_js, indent=2))
+  json_file = open(fname, 'w')
+  json_file.write(json.dumps(todo_list.to_dict(), indent=2))
+  json_file.close()
 
 def load_todo_list(list=None, listpath=None):
   """Loads a todo list from a json file.
@@ -138,23 +111,13 @@ def load_todo_list(list=None, listpath=None):
 
   fname = listpath or _get_default_list_file(list=list)
 
-  # Attempt to open
+  # If file doesn't exist, return a new blank cheat sheet.
   if not os.path.isfile(fname):
     # TODO: Improve this
     warnings.warn('No todo list file found', UserWarning)
     return sjb.td.classes.TodoList(source_fname=fname)
 
   json_file = open(fname)
-  obj = json.load(json_file)['todo_list']
-  modified_date = obj['modified_date'] if 'modified_date' in obj else None
-
-  # Create new blank todo list
-  todo_list = sjb.td.classes.TodoList(
-    modified_date=modified_date, source_fname=fname)
-
-  # Add todos to todo list
-  for todo_json in obj['todos']:
-    todo = _decode_todo(todo_json)
-    todo_list.add_item(todo, initial_load=True)
-
-  return todo_list
+  json_dict = json.load(json_file)
+  json_file.close()
+  return sjb.td.classes.TodoList.from_dict(json_dict, fname)
