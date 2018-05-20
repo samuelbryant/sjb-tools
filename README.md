@@ -44,6 +44,9 @@ Finally, to exit the development environment, type:
 ~~~~
 $ dev-env-off
 ~~~~
+**Note** You have to re-run `python setup.py install` every time you make
+changes to the source code.
+
 These scripts are basically just a wrapper around a python `virtualenv` that
 set some environment variables to let the program know it is running in test.
 
