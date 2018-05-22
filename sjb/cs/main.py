@@ -95,6 +95,66 @@ class Program(object):
       'answer', type=str,
       help='the full explanation of this entry. Can be as long as required')
 
+  def info_set_args(self, cmds):
+    cmd = cmds.add_parser(
+      'info', help=CMDS['info'][0], description=CMDS['info'][1])
+    cmd.set_defaults(run=self.info)
+    _add_arg_list(cmd)
+
+  def lists_set_args(self, cmds):
+    cmd = cmds.add_parser(
+      'lists', help=CMDS['lists'][0], description=CMDS['lists'][1])
+    cmd.set_defaults(run=self.lists)
+
+  def remove_set_args(self, cmds):
+    cmd = cmds.add_parser(
+      'remove', help=CMDS['remove'][0], description=CMDS['remove'][1])
+    cmd.set_defaults(run=self.remove)
+    _add_arg_oid(cmd, help='ID of the item you wish to delete')
+    _add_arg_force(cmd, verb='removing the cheatsheet item', default=PROMPT)
+    _add_arg_list(cmd)
+    _add_arg_style(cmd)
+
+  def show_set_args(self, cmds):
+    cmd = cmds.add_parser(
+      'show', help=CMDS['show'][0], description=CMDS['show'][1])
+    cmd.set_defaults(run=self.show)
+    cmd.add_argument(
+      '--tags', type=_set_arg,
+      help='only show entries which match this comma separated list of tags')
+
+    g = cmd.add_mutually_exclusive_group()
+    g.add_argument(
+      '--or', dest='andor', action='store_const',
+      const=sjb.cs.classes.SEARCH_OR,
+      default=sjb.cs.classes.SEARCH_OR,
+      help='show entries which match ANY of the given conditions')
+    g.add_argument(
+      '--and', dest='andor', action='store_const',
+      const=sjb.cs.classes.SEARCH_AND,
+      default=sjb.cs.classes.SEARCH_OR,
+      help='only show entries which match ALL of the given conditions')
+    _add_arg_list(cmd)
+    _add_arg_style(cmd)
+
+  def update_set_args(self, cmds):
+    cmd = cmds.add_parser(
+      'update', help=CMDS['update'][0], description=CMDS['update'][1])
+    cmd.set_defaults(run=self.update)
+    _add_arg_oid(cmd, help='ID of the item you wish to update')
+    cmd.add_argument(
+      '--tags', metavar='tags', type=_tags_arg,
+      help='comma separated list of tags. The first tag is the "primary" tag')
+    cmd.add_argument(
+      '--clue', metavar='clue', type=str,
+      help='the short string by which to identify this cheatsheet entry')
+    cmd.add_argument(
+      '--answer', metavar='answer', type=str,
+      help='the full explanation of this entry. Can be as long as required')
+    _add_arg_force(cmd, verb='updating the item', default=FORCE)
+    _add_arg_list(cmd)
+    _add_arg_style(cmd)
+
   def add(self, args):
     s = sjb.cs.storage.Storage(listname=args.list)
 
@@ -132,12 +192,6 @@ class Program(object):
     # Print the results.
     sjb.cs.display.display_entry(entry, format_style=args.style)
 
-  def info_set_args(self, cmds):
-    cmd = cmds.add_parser(
-      'info', help=CMDS['info'][0], description=CMDS['info'][1])
-    cmd.set_defaults(run=self.info)
-    _add_arg_list(cmd)
-
   def info(self, args):
     s = sjb.cs.storage.Storage(listname=args.list)
     cs = s.load_list()
@@ -158,61 +212,9 @@ class Program(object):
     for key, count in sorted_primary:
       print('  %-25s %d' % (key, count))
 
-  def lists_set_args(self, cmds):
-    cmd = cmds.add_parser(
-      'lists', help=CMDS['lists'][0], description=CMDS['lists'][1])
-    cmd.set_defaults(run=self.lists)
-
   def lists(self, args):
     lists = sjb.cs.storage.Storage.get_all_list_files()
     print('Cheatsheets: ' + ', '.join(lists))
-
-  def show_set_args(self, cmds):
-    cmd = cmds.add_parser(
-      'show', help=CMDS['show'][0], description=CMDS['show'][1])
-    cmd.set_defaults(run=self.show)
-    cmd.add_argument(
-      '--tags', type=_set_arg,
-      help='only show entries which match this comma separated list of tags')
-
-    g = cmd.add_mutually_exclusive_group()
-    g.add_argument(
-      '--or', dest='andor', action='store_const',
-      const=sjb.cs.classes.SEARCH_OR,
-      default=sjb.cs.classes.SEARCH_OR,
-      help='show entries which match ANY of the given conditions')
-    g.add_argument(
-      '--and', dest='andor', action='store_const',
-      const=sjb.cs.classes.SEARCH_AND,
-      default=sjb.cs.classes.SEARCH_OR,
-      help='only show entries which match ALL of the given conditions')
-    _add_arg_list(cmd)
-    _add_arg_style(cmd)
-
-  def show(self, args):
-    # Special handling. If no format style is given and the user gave some
-    # filter, then we display the simple style. e.g. if I type show 'bash', I
-    # dont want to see 'bash' in every entry.
-    if not args.style and args.tags:
-      args.style = sjb.cs.display.FORMAT_STYLE_SIMPLE
-
-    s = sjb.cs.storage.Storage(listname=args.list)
-    cs = s.load_list()
-    matcher = sjb.cs.classes.EntryMatcherTags(args.tags, args.andor)
-    entries = cs.query_items(matcher)
-    if entries:
-      sjb.cs.display.display_entries(entries, format_style=args.style)
-    else:
-      print('No entries found')
-
-  def remove_set_args(self, cmds):
-    cmd = cmds.add_parser(
-      'remove', help=CMDS['remove'][0], description=CMDS['remove'][1])
-    cmd.set_defaults(run=self.remove)
-    _add_arg_oid(cmd, help='ID of the item you wish to delete')
-    _add_arg_force(cmd, verb='removing the cheatsheet item', default=PROMPT)
-    _add_arg_list(cmd)
-    _add_arg_style(cmd)
 
   def remove(self, args):
     s = sjb.cs.storage.Storage(listname=args.list)
@@ -237,23 +239,21 @@ class Program(object):
       print('Removed entry:')
       sjb.cs.display.display_entry(removed, format_style=args.style)
 
-  def update_set_args(self, cmds):
-    cmd = cmds.add_parser(
-      'update', help=CMDS['update'][0], description=CMDS['update'][1])
-    cmd.set_defaults(run=self.update)
-    _add_arg_oid(cmd, help='ID of the item you wish to update')
-    cmd.add_argument(
-      '--tags', metavar='tags', type=_tags_arg,
-      help='comma separated list of tags. The first tag is the "primary" tag')
-    cmd.add_argument(
-      '--clue', metavar='clue', type=str,
-      help='the short string by which to identify this cheatsheet entry')
-    cmd.add_argument(
-      '--answer', metavar='answer', type=str,
-      help='the full explanation of this entry. Can be as long as required')
-    _add_arg_force(cmd, verb='updating the item', default=FORCE)
-    _add_arg_list(cmd)
-    _add_arg_style(cmd)
+  def show(self, args):
+    # Special handling. If no format style is given and the user gave some
+    # filter, then we display the simple style. e.g. if I type show 'bash', I
+    # dont want to see 'bash' in every entry.
+    if not args.style and args.tags:
+      args.style = sjb.cs.display.FORMAT_STYLE_SIMPLE
+
+    s = sjb.cs.storage.Storage(listname=args.list)
+    cs = s.load_list()
+    matcher = sjb.cs.classes.EntryMatcherTags(args.tags, args.andor)
+    entries = cs.query_items(matcher)
+    if entries:
+      sjb.cs.display.display_entries(entries, format_style=args.style)
+    else:
+      print('No entries found')
 
   def update(self, args):
     s = sjb.cs.storage.Storage(listname=args.list)

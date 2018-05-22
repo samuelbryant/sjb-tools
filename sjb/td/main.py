@@ -74,6 +74,67 @@ class Program(object):
     _add_arg_list(cmd)
     cmd.add_argument('text', type=str, help='the text of this todo item')
 
+  def complete_set_args(self, cmds):
+    cmd = cmds.add_parser(
+      'complete', help=CMD_HELP['complete'],
+      description='The complete command marks the specified todo item as completed. This also sets the completion date to be the current time. You can also mark a completed item as not-completed with the --undo flag.')
+    cmd.set_defaults(run=self.complete)
+    cmd.add_argument(
+      '--undo', dest='set_complete', action='store_const', const=False,
+      default=True,
+      help='when set, will mark completed items as not completed')
+    _add_arg_oid(cmd, help='ID of the todo you wish to mark as completed')
+    _add_arg_force(cmd, verb='making changes', default=FORCE)
+    _add_arg_list(cmd)
+
+  def info_set_args(self, cmds):
+    cmd_info = cmds.add_parser(
+      'info', help=CMD_HELP['info'],
+      description='The info command shows meta information about the todo list like which tags exist and how many todos have each tag.')
+    cmd_info.set_defaults(run=self.info)
+    _add_arg_list(cmd_info)
+
+  def lists_set_args(self, cmds):
+    cmd = cmds.add_parser(
+      'lists', help=CMD_HELP['lists'],
+      description='The lists command displays the short name of all of the todo list files in the program data directory. These correspond to the allowed values for the -l argument.')
+    cmd.set_defaults(run=self.lists)
+
+  def remove_set_args(self, cmds):
+    cmd = cmds.add_parser(
+      'remove', help=CMD_HELP['remove'],
+      description='The remove command removes a todo item from the todo list')
+    cmd.set_defaults(run=self.remove)
+    _add_arg_oid(cmd, help='ID of the item you wish to delete')
+    _add_arg_force(cmd, verb='removing the todo', default=PROMPT)
+    _add_arg_list(cmd)
+
+  def show_set_args(self, cmds):
+    cmd = cmds.add_parser(
+      'show', help=CMD_HELP['show'],
+      description='The show command can be used to display all of the entries in a given todo list or just a subset of them. It has arguments to filter by completion status and tags.')
+    cmd.set_defaults(run=self.show)
+    _add_arg_priority(
+      cmd, 'only show items with this priority', default=None)
+    cmd.add_argument(
+      '--completed', dest='completed', action='store_const', const=True,
+      default=False, help='will only show completed items. Default is to only show uncompleted items')
+    _add_arg_tags(cmd, help='only show todos with all of the given tags')
+    _add_arg_list(cmd)
+
+  def update_set_args(self, cmds):
+    cmd = cmds.add_parser(
+      'update', help=CMD_HELP['update'],
+      description='The update command can overwrite existing todo entries with new values. Any attribute not explicitly specified will not be changed.')
+    cmd.set_defaults(run=self.update)
+    _add_arg_oid(cmd, help='ID of the item you wish to update')
+    cmd.add_argument('--text', type=str, metavar='text', help='updated text for this todo item')
+    _add_arg_tags(
+      cmd, 'updated comma separated list of tags for this todo item')
+    _add_arg_priority(cmd, 'updated priority for this todo item', default=None)
+    _add_arg_force(cmd, verb='updating the item', default=FORCE)
+    _add_arg_list(cmd)
+
   def add(self, args):
     s = sjb.td.storage.Storage(listname=args.list)
 
@@ -111,19 +172,6 @@ class Program(object):
     s.save_list(tl)
     sjb.td.display.display_todo(todo)
 
-  def complete_set_args(self, cmds):
-    cmd = cmds.add_parser(
-      'complete', help=CMD_HELP['complete'],
-      description='The complete command marks the specified todo item as completed. This also sets the completion date to be the current time. You can also mark a completed item as not-completed with the --undo flag.')
-    cmd.set_defaults(run=self.complete)
-    cmd.add_argument(
-      '--undo', dest='set_complete', action='store_const', const=False,
-      default=True,
-      help='when set, will mark completed items as not completed')
-    _add_arg_oid(cmd, help='ID of the todo you wish to mark as completed')
-    _add_arg_force(cmd, verb='making changes', default=FORCE)
-    _add_arg_list(cmd)
-
   def complete(self, args):
     s = sjb.td.storage.Storage(listname=args.list)
     tl = s.load_list()
@@ -141,13 +189,6 @@ class Program(object):
     updated = tl.complete_item(args.oid, set_complete=args.set_complete)
     s.save_list(tl)
     sjb.td.display.display_todo(updated)
-
-  def info_set_args(self, cmds):
-    cmd_info = cmds.add_parser(
-      'info', help=CMD_HELP['info'],
-      description='The info command shows meta information about the todo list like which tags exist and how many todos have each tag.')
-    cmd_info.set_defaults(run=self.info)
-    _add_arg_list(cmd_info)
 
   def info(self, args):
     s = sjb.td.storage.Storage(listname=args.list)
@@ -172,24 +213,9 @@ class Program(object):
     print('  %-25s %s' % ('Number tags', len(tag_set)))
     print('  %-25s %s' % ('Tag list', ', '.join(tag_set)))
 
-  def lists_set_args(self, cmds):
-    cmd = cmds.add_parser(
-      'lists', help=CMD_HELP['lists'],
-      description='The lists command displays the short name of all of the todo list files in the program data directory. These correspond to the allowed values for the -l argument.')
-    cmd.set_defaults(run=self.lists)
-
   def lists(self, args):
     lists = sjb.td.storage.Storage.get_all_list_files()
     print('Todo Lists: ' + ', '.join(lists))
-
-  def remove_set_args(self, cmds):
-    cmd = cmds.add_parser(
-      'remove', help=CMD_HELP['remove'],
-      description='The remove command removes a todo item from the todo list')
-    cmd.set_defaults(run=self.remove)
-    _add_arg_oid(cmd, help='ID of the item you wish to delete')
-    _add_arg_force(cmd, verb='removing the todo', default=PROMPT)
-    _add_arg_list(cmd)
 
   def remove(self, args):
     s = sjb.td.storage.Storage(listname=args.list)
@@ -208,19 +234,6 @@ class Program(object):
     tl.remove_item(args.oid)
     s.save_list(tl)
 
-  def show_set_args(self, cmds):
-    cmd = cmds.add_parser(
-      'show', help=CMD_HELP['show'],
-      description='The show command can be used to display all of the entries in a given todo list or just a subset of them. It has arguments to filter by completion status and tags.')
-    cmd.set_defaults(run=self.show)
-    _add_arg_priority(
-      cmd, 'only show items with this priority', default=None)
-    cmd.add_argument(
-      '--completed', dest='completed', action='store_const', const=True,
-      default=False, help='will only show completed items. Default is to only show uncompleted items')
-    _add_arg_tags(cmd, help='only show todos with all of the given tags')
-    _add_arg_list(cmd)
-
   def show(self, args):
     s = sjb.td.storage.Storage(listname=args.list)
     tl = s.load_list()
@@ -228,19 +241,6 @@ class Program(object):
       tags=args.tags, priority=args.priority, finished=args.completed)
     items = tl.query_items(matcher)
     sjb.td.display.display_todos(items)
-
-  def update_set_args(self, cmds):
-    cmd = cmds.add_parser(
-      'update', help=CMD_HELP['update'],
-      description='The update command can overwrite existing todo entries with new values. Any attribute not explicitly specified will not be changed.')
-    cmd.set_defaults(run=self.update)
-    _add_arg_oid(cmd, help='ID of the item you wish to update')
-    cmd.add_argument('--text', type=str, metavar='text', help='updated text for this todo item')
-    _add_arg_tags(
-      cmd, 'updated comma separated list of tags for this todo item')
-    _add_arg_priority(cmd, 'updated priority for this todo item', default=None)
-    _add_arg_force(cmd, verb='updating the item', default=FORCE)
-    _add_arg_list(cmd)
 
   def update(self, args):
     s = sjb.td.storage.Storage(listname=args.list)
