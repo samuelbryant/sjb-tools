@@ -6,7 +6,7 @@ import sys
 import sjb.constants
 import sjb.cs.classes
 import sjb.cs.display
-import sjb.cs.fileio
+import sjb.cs.storage
 import sjb.common.misc
 
 PROGRAM = 'sjb-cheatsheet'
@@ -74,7 +74,7 @@ class Program(object):
       sys.exit(2)
 
     # Initialize directory structure
-    sjb.cs.fileio.initialize_environment()
+    sjb.cs.storage.initialize_environment()
 
     # Call command
     args = parser.parse_args(sys.argv[1:])
@@ -100,7 +100,7 @@ class Program(object):
 
   def add(self, args):
     # Load cheatsheet, add an entry, then save the results
-    cs = sjb.cs.fileio.load_cheatsheet(list=args.list, listpath=args.listpath)
+    cs = sjb.cs.storage.load_cheatsheet(list=args.list, listpath=args.listpath)
     entry = sjb.cs.classes.Entry(
       args.clue, args.answer, primary=args.tags[0], tags=args.tags[1])
 
@@ -116,7 +116,7 @@ class Program(object):
         exit(0)
 
     cs.add_item(entry)
-    sjb.cs.fileio.save_cheatsheet(cs, list=args.list, listpath=args.listpath)
+    sjb.cs.storage.save_cheatsheet(cs, list=args.list, listpath=args.listpath)
 
     # Print the results.
     sjb.cs.display.display_entry(entry, format_style=args.style)
@@ -128,7 +128,7 @@ class Program(object):
     _add_arg_list(cmd)
 
   def info(self, args):
-    cs = sjb.cs.fileio.load_cheatsheet(list=args.list, listpath=args.listpath)
+    cs = sjb.cs.storage.load_cheatsheet(list=args.list, listpath=args.listpath)
 
     primary_map = cs.primary_map
     tag_set = cs.tag_set
@@ -152,7 +152,7 @@ class Program(object):
     cmd.set_defaults(run=self.lists)
 
   def lists(self, args):
-    lists = sjb.cs.fileio.get_all_list_files()
+    lists = sjb.cs.storage.get_all_list_files()
     print('Cheatsheets: ' + ', '.join(lists))
 
   def show_set_args(self, cmds):
@@ -185,7 +185,7 @@ class Program(object):
       args.style = sjb.cs.display.FORMAT_STYLE_SIMPLE
 
     # Load cheat sheet, find matching entries, and print
-    cs = sjb.cs.fileio.load_cheatsheet(list=args.list, listpath=args.listpath)
+    cs = sjb.cs.storage.load_cheatsheet(list=args.list, listpath=args.listpath)
     matcher = sjb.cs.classes.EntryMatcherTags(args.tags, args.andor)
     entries = cs.query_items(matcher)
     if entries:
@@ -204,7 +204,7 @@ class Program(object):
 
   def remove(self, args):
     # Load cheat sheet
-    cs = sjb.cs.fileio.load_cheatsheet(list=args.list, listpath=args.listpath)
+    cs = sjb.cs.storage.load_cheatsheet(list=args.list, listpath=args.listpath)
 
     # If not in force mode, ask user before proceeding.
     entry = cs.get_item(args.oid)
@@ -218,7 +218,7 @@ class Program(object):
         exit(0)
 
     removed = cs.remove_item(args.oid)
-    sjb.cs.fileio.save_cheatsheet(cs, list=args.list, listpath=args.listpath)
+    sjb.cs.storage.save_cheatsheet(cs, list=args.list, listpath=args.listpath)
 
     # Print the results only on force mode (otherwise user just saw item).
     if args.prompt is not FORCE:
@@ -245,7 +245,7 @@ class Program(object):
 
   def update(self, args):
     # Load cheat sheet
-    cs = sjb.cs.fileio.load_cheatsheet(list=args.list, listpath=args.listpath)
+    cs = sjb.cs.storage.load_cheatsheet(list=args.list, listpath=args.listpath)
 
     # Prompt user before continuing
     item = cs.get_item(args.oid)
@@ -264,7 +264,7 @@ class Program(object):
       primary=args.tags[0] if args.tags else None,
       tags=args.tags[1] if args.tags else None)
     # Save CheatSheet object to file.
-    sjb.cs.fileio.save_cheatsheet(cs, list=args.list, listpath=args.listpath)
+    sjb.cs.storage.save_cheatsheet(cs, list=args.list, listpath=args.listpath)
 
     # Print the results.
     sjb.cs.display.display_entry(updated, format_style=args.style)

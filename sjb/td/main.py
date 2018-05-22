@@ -6,7 +6,7 @@ import os
 import sjb.constants
 import sjb.common.misc
 import sjb.td.classes
-import sjb.td.fileio
+import sjb.td.storage
 import sjb.td.display
 from sjb.td.classes import PriorityEnum
 
@@ -58,7 +58,7 @@ class Program(object):
       sys.exit(2)
 
     # Initialize directory structure
-    sjb.td.fileio.initialize_environment()
+    sjb.td.storage.initialize_environment()
 
     # Call command
     args = parser.parse_args(sys.argv[1:])
@@ -79,7 +79,7 @@ class Program(object):
 
   def add(self, args):
     # Load todo list, add an entry, then save the results
-    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
+    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
     todo = sjb.td.classes.Todo(
       args.text, priority=args.priority, tags=args.tags)
 
@@ -97,7 +97,7 @@ class Program(object):
         exit(0)
 
     tl.add_item(todo)
-    sjb.td.fileio.save_todo_list(tl, list=args.list, listpath=args.listpath)
+    sjb.td.storage.save_todo_list(tl, list=args.list, listpath=args.listpath)
 
     sjb.td.display.display_todo(todo)
 
@@ -115,7 +115,7 @@ class Program(object):
     _add_arg_list(cmd)
 
   def complete(self, args):
-    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
+    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
 
     # If not in force mode, ask user before proceeding.
     todo = tl.get_item(args.oid)
@@ -129,7 +129,7 @@ class Program(object):
         exit(0)
 
     updated = tl.complete_item(args.oid, set_complete=args.set_complete)
-    sjb.td.fileio.save_todo_list(tl, list=args.list, listpath=args.listpath)
+    sjb.td.storage.save_todo_list(tl, list=args.list, listpath=args.listpath)
 
     sjb.td.display.display_todo(updated)
 
@@ -141,7 +141,7 @@ class Program(object):
     _add_arg_list(cmd_info)
 
   def info(self, args):
-    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
+    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
 
     tag_set = tl.tag_set
     todos = tl.items
@@ -169,7 +169,7 @@ class Program(object):
     cmd.set_defaults(run=self.lists)
 
   def lists(self, args):
-    lists = sjb.td.fileio.get_all_list_files()
+    lists = sjb.td.storage.get_all_list_files()
     print('Todo Lists: ' + ', '.join(lists))
 
   def remove_set_args(self, cmds):
@@ -182,7 +182,7 @@ class Program(object):
     _add_arg_list(cmd)
 
   def remove(self, args):
-    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
+    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
 
     # If not in force mode, ask user before proceeding.
     todo = tl.get_item(args.oid)
@@ -196,7 +196,7 @@ class Program(object):
         exit(0)
 
     tl.remove_item(args.oid)
-    sjb.td.fileio.save_todo_list(tl, list=args.list, listpath=args.listpath)
+    sjb.td.storage.save_todo_list(tl, list=args.list, listpath=args.listpath)
 
   def show_set_args(self, cmds):
     cmd = cmds.add_parser(
@@ -212,7 +212,7 @@ class Program(object):
     _add_arg_list(cmd)
 
   def show(self, args):
-    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
+    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
     matcher = sjb.td.classes.TodoMatcher(
       tags=args.tags, priority=args.priority, finished=args.completed)
     items = tl.query_items(matcher)
@@ -233,7 +233,7 @@ class Program(object):
 
   def update(self, args):
     # Load todo list, add an entry, then save the results.
-    tl = sjb.td.fileio.load_todo_list(list=args.list, listpath=args.listpath)
+    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
 
     # Prompt user before continuing
     item = tl.get_item(args.oid)
@@ -249,7 +249,7 @@ class Program(object):
     updated = tl.update_item(
       args.oid, text=args.text, priority=args.priority, tags=args.tags)
     # Save Todo list to file.
-    sjb.td.fileio.save_todo_list(tl, list=args.list, listpath=args.listpath)
+    sjb.td.storage.save_todo_list(tl, list=args.list, listpath=args.listpath)
     sjb.td.display.display_todo(updated)
 
 
