@@ -50,15 +50,18 @@ class Storage(object):
     return matching
 
   def save_list(self, cs_list):
+    """Saves the list to the file pointed at by this object.
+
+    Raises:
+      sjb.td.classes.ValidationError: If some element of the list is invalid.
+    """
     fname = self._get_list_file()
 
     # create parent directory as needed
     if not os.path.isdir(os.path.dirname(fname)):
       os.makedirs(os.path.dirname(fname))
 
-    # TODO: Temporary replacement of poor validation-in-encoding code
-    for item in cs_list.items:
-      item.validate()
+    cs_list.validate()
 
     json_file = open(fname, 'w')
     json_file.write(json.dumps(cs_list.to_dict(), indent=2))
@@ -73,6 +76,7 @@ class Storage(object):
       CheatSheet object with contents given by the loaded file.
 
     Raises:
+      ValidationError: If some element of the list is invalid.
       NoListFileError: If the file does not exist.
       IOError: If a file-like object exists but is wrong type (i.e. a dir).
     """
@@ -86,4 +90,6 @@ class Storage(object):
     json_file = open(fname, 'r')
     json_dict = json.load(json_file)
     json_file.close()
-    return sjb.cs.classes.CheatSheet.from_dict(json_dict, fname)
+    cs = sjb.cs.classes.CheatSheet.from_dict(json_dict, fname)
+    cs.validate()
+    return cs

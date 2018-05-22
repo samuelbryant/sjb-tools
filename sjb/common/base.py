@@ -28,7 +28,7 @@ class Item(abc.ABC):
     return self.oid == other.oid
 
   @abc.abstractmethod
-  def validate(self):
+  def _validate(self):
     """Method that checks validity of item state before writing to database.
 
     Returns: nothing.
@@ -39,7 +39,7 @@ class Item(abc.ABC):
     return
 
   @abc.abstractmethod
-  def to_dict(self):
+  def _to_dict(self):
     """Converts data to a dict suitable for writing to a file as json.
 
     Returns:
@@ -205,6 +205,18 @@ class ItemList(abc.ABC):
       dict: stable dict of values suitable to be written as JSON.
     """
     return
+
+  def validate(self):
+    """Method that checks validity of list state before writing to database.
+
+    Returns: nothing.
+
+    Raises:
+      ValidationError: If validation fails.
+    """
+    for item in self.items:
+      item._validate()
+
 
 class Error(Exception):
   """Base class for exceptions for this program."""

@@ -57,9 +57,6 @@ class Todo(sjb.common.base.Item):
     self.created_date = created_date
     self.finished_date = finished_date
 
-    # Validate todo: maybe should not be called from constructor.
-    self.validate()
-
   def __eq__(self, other):
     """Returns true if self and other have identical fields."""
     if not super().__eq__(other): return False
@@ -71,7 +68,7 @@ class Todo(sjb.common.base.Item):
     if self.finished_date != other.finished_date: return False
     return True
 
-  def validate(self):
+  def _validate(self):
     """Validates that the values of this item are sensible.
 
     This method should be called twice: The first time at the end of the
@@ -88,7 +85,7 @@ class Todo(sjb.common.base.Item):
     Raises:
       sjb.common.base.ValidationError: If validation fails
     """
-    super().validate()
+    super()._validate()
     if not self.text or not isinstance(self.text, str):
       raise sjb.common.base.ValidationError('Bad todo text: '+str(self.text))
     if not isinstance(self.tags, set):
@@ -126,7 +123,7 @@ class Todo(sjb.common.base.Item):
         raise sjb.common.base.ValidationError(
           'No oid set, but has finished_date: '+str(self.finished_date))
 
-  def to_dict(self):
+  def _to_dict(self):
     """Converts data to a dict suitable for writing to a file as json.
 
     Returns:

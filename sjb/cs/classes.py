@@ -56,9 +56,6 @@ class Entry(sjb.common.base.Item):
     self.primary = primary
     self.tags = tags if tags is not None else set()
 
-    # Validation
-    self.validate()
-
   def __eq__(self, other):
     """Returns true if self and other have identical fields."""
     if not super().__eq__(other): return False
@@ -68,7 +65,7 @@ class Entry(sjb.common.base.Item):
     if self.answer != other.answer: return False
     return True
 
-  def validate(self):
+  def _validate(self):
     """Validates that the values of this item are sensible.
 
     This method should be called twice: The first time at the end of the
@@ -79,7 +76,7 @@ class Entry(sjb.common.base.Item):
     Raises:
       sjb.common.base.ValidationError: If validation fails
     """
-    super().validate()
+    super()._validate()
     if not self.clue or not isinstance(self.clue, str):
       raise sjb.common.base.ValidationError('Bad entry clue: '+str(self.clue))
     if not self.primary or not isinstance(self.primary, str):
