@@ -15,7 +15,7 @@ ENV_TEST_FLAG = 'SJB_TOOLS_TEST'
 
 def is_test_env():
   """Returns true if program is being run from the test environment."""
-  return ENV_TEST_FLAG in os.environ and os.environ[ENV_TEST_FLAG] is "1"
+  return ENV_TEST_FLAG in os.environ and os.environ[ENV_TEST_FLAG] is '1'
 
 
 def ensure_directory(name):

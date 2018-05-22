@@ -89,7 +89,7 @@ class Entry(sjb.common.base.Item):
     if self.oid is not None and not isinstance(self.oid, int):
       raise sjb.common.base.ValidationError('Bad oid: '+str(self.oid))
 
-  def to_dict(self):
+  def _to_dict(self):
     """Converts data to a dict suitable for writing to a file as json.
 
     Returns:
@@ -251,7 +251,7 @@ class CheatSheet(sjb.common.base.ItemList):
       'cheatsheet': {
         'version': self.version,
         'modified_date': self.modified_date,
-        'entries': [e.to_dict() for e in self.items]
+        'entries': [e._to_dict() for e in self.items]
       }
     }
 

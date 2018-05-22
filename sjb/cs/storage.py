@@ -10,6 +10,8 @@ _SUITE = 'sjb'
 _APP = 'cheatsheet'
 _DEFAULT_LIST_FILE='cheatsheet'
 _LIST_FILE_EXTENSION = '.json'
+_BACKUP_EXTENSION = '.backup'
+
 
 class NoListFileError(Exception):
   """Raised when user tries to load a non-existent list."""
@@ -60,6 +62,8 @@ class Storage(object):
     # create parent directory as needed
     if not os.path.isdir(os.path.dirname(fname)):
       os.makedirs(os.path.dirname(fname))
+
+    sjb.common.misc.backup_file(fname, _BACKUP_EXTENSION)
 
     cs_list.validate()
 

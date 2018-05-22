@@ -3,6 +3,7 @@
 different things should be put into different modules.
 """
 import os
+import shutil
 import sys
 import textwrap
 
@@ -38,3 +39,8 @@ def prompt_yes_no(question, default=None):
       return valid[choice]
     else:
       sys.stdout.write("Invalid reponse\n")
+
+
+def backup_file(fname, extension):
+  if os.path.isfile(fname):
+    shutil.copyfile(fname, '%s%s' % (fname, extension))

@@ -313,7 +313,7 @@ class TodoList(sjb.common.base.ItemList):
       'todo_list': {
         'version': self.version,
         'modified_date': self.modified_date,
-        'todos': [e.to_dict() for e in self.items]
+        'todos': [e._to_dict() for e in self.items]
       }
     }
 
