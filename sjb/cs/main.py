@@ -73,9 +73,6 @@ class Program(object):
       sys.stderr.write('\nMissing the required argument: command\n')
       sys.exit(2)
 
-    # Initialize directory structure
-    sjb.cs.storage.initialize_environment()
-
     # Call command
     args = parser.parse_args(sys.argv[1:])
     args.run(args)
@@ -99,14 +96,28 @@ class Program(object):
       help='the full explanation of this entry. Can be as long as required')
 
   def add(self, args):
-    # Load cheatsheet, add an entry, then save the results
-    cs = sjb.cs.storage.load_cheatsheet(list=args.list, listpath=args.listpath)
+    s = sjb.cs.storage.Storage(listname=args.list)
+
+    skip_tag_prompt = args.prompt == FORCE
+
+    # if the list doesnt already exist, prompt user to create a new one
+    try:
+      cs = s.load_list()
+    except sjb.cs.storage.NoListFileError:
+      cont = (args.prompt == FORCE) or sjb.common.misc.prompt_yes_no(
+        'No cheatsheet list found with name "%s". Would you like to create a new list? ' % args.list, default=True)
+      if not cont:
+        exit(0)
+      cs = sjb.cs.classes.CheatSheet()
+      # automatically skip tag prompt since it is now silly
+      skip_tag_prompt = True
+
     entry = sjb.cs.classes.Entry(
       args.clue, args.answer, primary=args.tags[0], tags=args.tags[1])
 
-    # Check if any tag or the primary is new and prompt user before continuing.
+    # check if any tag or the primary is new and prompt user before continuing
     new_elts = cs.get_new_tags(args.tags[0], args.tags[1])
-    if new_elts and args.prompt is not FORCE:
+    if new_elts and not skip_tag_prompt:
       question = (
         'The following tags are not present in the database: ' + \
         ', '.join(new_elts) + \
@@ -116,7 +127,7 @@ class Program(object):
         exit(0)
 
     cs.add_item(entry)
-    sjb.cs.storage.save_cheatsheet(cs, list=args.list, listpath=args.listpath)
+    s.save_list(cs)
 
     # Print the results.
     sjb.cs.display.display_entry(entry, format_style=args.style)
@@ -128,7 +139,8 @@ class Program(object):
     _add_arg_list(cmd)
 
   def info(self, args):
-    cs = sjb.cs.storage.load_cheatsheet(list=args.list, listpath=args.listpath)
+    s = sjb.cs.storage.Storage(listname=args.list)
+    cs = s.load_list()
 
     primary_map = cs.primary_map
     tag_set = cs.tag_set
@@ -152,7 +164,7 @@ class Program(object):
     cmd.set_defaults(run=self.lists)
 
   def lists(self, args):
-    lists = sjb.cs.storage.get_all_list_files()
+    lists = sjb.cs.storage.Storage.get_all_list_files()
     print('Cheatsheets: ' + ', '.join(lists))
 
   def show_set_args(self, cmds):
@@ -184,8 +196,8 @@ class Program(object):
     if not args.style and args.tags:
       args.style = sjb.cs.display.FORMAT_STYLE_SIMPLE
 
-    # Load cheat sheet, find matching entries, and print
-    cs = sjb.cs.storage.load_cheatsheet(list=args.list, listpath=args.listpath)
+    s = sjb.cs.storage.Storage(listname=args.list)
+    cs = s.load_list()
     matcher = sjb.cs.classes.EntryMatcherTags(args.tags, args.andor)
     entries = cs.query_items(matcher)
     if entries:
@@ -203,8 +215,8 @@ class Program(object):
     _add_arg_style(cmd)
 
   def remove(self, args):
-    # Load cheat sheet
-    cs = sjb.cs.storage.load_cheatsheet(list=args.list, listpath=args.listpath)
+    s = sjb.cs.storage.Storage(listname=args.list)
+    cs = s.load_list()
 
     # If not in force mode, ask user before proceeding.
     entry = cs.get_item(args.oid)
@@ -218,7 +230,7 @@ class Program(object):
         exit(0)
 
     removed = cs.remove_item(args.oid)
-    sjb.cs.storage.save_cheatsheet(cs, list=args.list, listpath=args.listpath)
+    s.save_list(cs)
 
     # Print the results only on force mode (otherwise user just saw item).
     if args.prompt is not FORCE:
@@ -244,10 +256,9 @@ class Program(object):
     _add_arg_style(cmd)
 
   def update(self, args):
-    # Load cheat sheet
-    cs = sjb.cs.storage.load_cheatsheet(list=args.list, listpath=args.listpath)
+    s = sjb.cs.storage.Storage(listname=args.list)
+    cs = s.load_list()
 
-    # Prompt user before continuing
     item = cs.get_item(args.oid)
     if args.prompt is not FORCE:
       question = (
@@ -258,15 +269,12 @@ class Program(object):
       if not cont:
         exit(0)
 
-    # Update entry in local CheatSheet object.
     updated = cs.update_item(
       args.oid, clue=args.clue, answer=args.answer,
       primary=args.tags[0] if args.tags else None,
       tags=args.tags[1] if args.tags else None)
-    # Save CheatSheet object to file.
-    sjb.cs.storage.save_cheatsheet(cs, list=args.list, listpath=args.listpath)
+    s.save_list(cs)
 
-    # Print the results.
     sjb.cs.display.display_entry(updated, format_style=args.style)
 
 
@@ -293,15 +301,9 @@ def _add_arg_style(parser, default=None):
     help='Specifies which format style is used when displaying entries.')
 
 def _add_arg_list(parser):
-  # Arguments specifying the list file to work with
-  list_group = parser.add_mutually_exclusive_group()
-  list_group.add_argument(
+  parser.add_argument(
     '-l', dest='list', type=str, metavar='name',
     help='the short name of the cheatsheet file to read and write from. This is the local file name without an extension. The cheatsheet file is assumed to be in the default data directory for this application.')
-  list_group.add_argument(
-    '--listpath', metavar='file', type=str,
-    help='the full path name of the cheatsheet file to read and write from')
-
 
 class _SubcommandHelpFormatter(argparse.RawDescriptionHelpFormatter):
   """Hacky fix that removes double line on commands."""

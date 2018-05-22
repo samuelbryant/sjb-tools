@@ -57,9 +57,6 @@ class Program(object):
       sys.stderr.write('\nMissing the required argument: command\n')
       sys.exit(2)
 
-    # Initialize directory structure
-    sjb.td.storage.initialize_environment()
-
     # Call command
     args = parser.parse_args(sys.argv[1:])
     args.run(args)
@@ -78,15 +75,29 @@ class Program(object):
     cmd.add_argument('text', type=str, help='the text of this todo item')
 
   def add(self, args):
-    # Load todo list, add an entry, then save the results
-    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
+    s = sjb.td.storage.Storage(listname=args.list)
+
+    skip_tag_prompt = args.prompt == FORCE
+
+    # if the list doesnt already exist, prompt user to create a new one
+    try:
+      tl = s.load_list()
+    except sjb.td.storage.NoListFileError:
+      cont = (args.prompt == FORCE) or sjb.common.misc.prompt_yes_no(
+        'No list file found with name "%s". Would you like to create a new list? ' % args.list, default=True)
+      if not cont:
+        exit(0)
+      tl = sjb.td.classes.TodoList()
+      # automatically skip tag prompt since it is now silly
+      skip_tag_prompt = True
+
     todo = sjb.td.classes.Todo(
       args.text, priority=args.priority, tags=args.tags)
 
-    # Check if any tag is new and prompts user before continuing.
+    # check if any tag is new and prompts user before continuing
     args.tags = args.tags or set()
     new_tags = tl.get_new_tags(args.tags)
-    if new_tags and args.prompt is not FORCE:
+    if new_tags and not skip_tag_prompt:
       print('hello')
       question = (
         'The following tags are not present in the database: ' + \
@@ -97,8 +108,7 @@ class Program(object):
         exit(0)
 
     tl.add_item(todo)
-    sjb.td.storage.save_todo_list(tl, list=args.list, listpath=args.listpath)
-
+    s.save_list(tl)
     sjb.td.display.display_todo(todo)
 
   def complete_set_args(self, cmds):
@@ -115,8 +125,8 @@ class Program(object):
     _add_arg_list(cmd)
 
   def complete(self, args):
-    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
-
+    s = sjb.td.storage.Storage(listname=args.list)
+    tl = s.load_list()
     # If not in force mode, ask user before proceeding.
     todo = tl.get_item(args.oid)
     if args.prompt is not FORCE:
@@ -129,8 +139,7 @@ class Program(object):
         exit(0)
 
     updated = tl.complete_item(args.oid, set_complete=args.set_complete)
-    sjb.td.storage.save_todo_list(tl, list=args.list, listpath=args.listpath)
-
+    s.save_list(tl)
     sjb.td.display.display_todo(updated)
 
   def info_set_args(self, cmds):
@@ -141,7 +150,8 @@ class Program(object):
     _add_arg_list(cmd_info)
 
   def info(self, args):
-    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
+    s = sjb.td.storage.Storage(listname=args.list)
+    tl = s.load_list()
 
     tag_set = tl.tag_set
     todos = tl.items
@@ -169,7 +179,7 @@ class Program(object):
     cmd.set_defaults(run=self.lists)
 
   def lists(self, args):
-    lists = sjb.td.storage.get_all_list_files()
+    lists = sjb.td.storage.Storage.get_all_list_files()
     print('Todo Lists: ' + ', '.join(lists))
 
   def remove_set_args(self, cmds):
@@ -182,8 +192,8 @@ class Program(object):
     _add_arg_list(cmd)
 
   def remove(self, args):
-    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
-
+    s = sjb.td.storage.Storage(listname=args.list)
+    tl = s.load_list()
     # If not in force mode, ask user before proceeding.
     todo = tl.get_item(args.oid)
     if args.prompt is not FORCE:
@@ -196,7 +206,7 @@ class Program(object):
         exit(0)
 
     tl.remove_item(args.oid)
-    sjb.td.storage.save_todo_list(tl, list=args.list, listpath=args.listpath)
+    s.save_list(tl)
 
   def show_set_args(self, cmds):
     cmd = cmds.add_parser(
@@ -212,7 +222,8 @@ class Program(object):
     _add_arg_list(cmd)
 
   def show(self, args):
-    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
+    s = sjb.td.storage.Storage(listname=args.list)
+    tl = s.load_list()
     matcher = sjb.td.classes.TodoMatcher(
       tags=args.tags, priority=args.priority, finished=args.completed)
     items = tl.query_items(matcher)
@@ -232,11 +243,10 @@ class Program(object):
     _add_arg_list(cmd)
 
   def update(self, args):
-    # Load todo list, add an entry, then save the results.
-    tl = sjb.td.storage.load_todo_list(list=args.list, listpath=args.listpath)
-
-    # Prompt user before continuing
+    s = sjb.td.storage.Storage(listname=args.list)
+    tl = s.load_list()
     item = tl.get_item(args.oid)
+
     if args.prompt is not FORCE:
       question = (
         'The item given by oid '+str(args.oid)+' is:\n' + \
@@ -248,8 +258,7 @@ class Program(object):
 
     updated = tl.update_item(
       args.oid, text=args.text, priority=args.priority, tags=args.tags)
-    # Save Todo list to file.
-    sjb.td.storage.save_todo_list(tl, list=args.list, listpath=args.listpath)
+    s.save_list(tl)
     sjb.td.display.display_todo(updated)
 
 
@@ -280,14 +289,9 @@ def _add_arg_oid(parser, help='the ID of the target todo'):
   parser.add_argument('oid', metavar='id', type=int, help=help)
 
 def _add_arg_list(parser):
-  # Arguments specifying the list file to work with
-  list_group = parser.add_mutually_exclusive_group()
-  list_group.add_argument(
+  parser.add_argument(
     '-l', dest='list', metavar='name', type=str,
     help='the short name of the list file to read and write from. This is the local file name without an extension. The list file is assumed to be in the default data directory for this application.')
-  list_group.add_argument(
-    '--listpath', metavar='file', type=str,
-    help='the full path name of the list file to read and write from')
 
 
 class _SubcommandHelpFormatter(argparse.RawDescriptionHelpFormatter):
