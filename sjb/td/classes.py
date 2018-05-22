@@ -167,9 +167,8 @@ class TodoList(sjb.common.base.ItemList):
   querying subsets of the full list.
   """
 
-  def __init__(self, version=None, modified_date=None, source_fname=None):
-    super().__init__(
-      version=version, modified_date=modified_date, source_fname=source_fname)
+  def __init__(self, version=None, modified_date=None):
+    super().__init__(version=version, modified_date=modified_date)
 
     # Maps holding cheat sheet meta data.
     self._tag_set = set()
@@ -318,14 +317,11 @@ class TodoList(sjb.common.base.ItemList):
     }
 
   @staticmethod
-  def from_dict(json_dict, source_filename):
+  def from_dict(json_dict):
     """Constructs TodoList from dict (which was loaded from a JSON file).
 
     Args:
       json_dict: Dict containing the necessary fields for a TodoList.
-      source_filename: Name of file that json_dict was read from. This file is
-        not opened by this method, it is just passed as a field to the
-        TodoList object.
 
     Returns:
       TodoList: Object represented by the dict.
@@ -333,9 +329,7 @@ class TodoList(sjb.common.base.ItemList):
     json_dict = json_dict['todo_list']
     modified_date = json_dict.get('modified_date', None)
     version = json_dict.get('version', None)
-    l = TodoList(
-      modified_date=modified_date, version=version,
-      source_fname=source_filename)
+    l = TodoList(modified_date=modified_date, version=version)
 
     # Add todos to todo list
     for item_json in json_dict['todos']:

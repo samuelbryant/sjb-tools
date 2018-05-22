@@ -94,6 +94,6 @@ class Storage(object):
     json_file = open(fname, 'r')
     json_dict = json.load(json_file)
     json_file.close()
-    cs = sjb.cs.classes.CheatSheet.from_dict(json_dict, fname)
+    cs = sjb.cs.classes.CheatSheet.from_dict(json_dict)
     cs.validate()
     return cs

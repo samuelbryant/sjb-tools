@@ -93,6 +93,6 @@ class Storage(object):
     json_file = open(fname, 'r')
     json_dict = json.load(json_file)
     json_file.close()
-    lst = sjb.td.classes.TodoList.from_dict(json_dict, fname)
+    lst = sjb.td.classes.TodoList.from_dict(json_dict)
     lst.validate()
     return lst

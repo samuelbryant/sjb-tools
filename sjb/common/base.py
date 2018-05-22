@@ -63,9 +63,8 @@ class ItemMatcher(abc.ABC):
 class ItemList(abc.ABC):
   """Abstract class representing a collection of Item objects."""
 
-  def __init__(self, version=None, modified_date=None, source_fname=None):
+  def __init__(self, version=None, modified_date=None):
     self._version = version
-    self._source_filename = source_fname
     self._modified = False
     self._modified_date = modified_date
 
@@ -77,11 +76,6 @@ class ItemList(abc.ABC):
   def version(self):
     """str: The application version this item list uses."""
     return self._version
-
-  @property
-  def source_filename(self):
-    """str: The file that this item list was read from."""
-    return self._source_filename
 
   @property
   def modified(self):
@@ -226,7 +220,7 @@ class Error(Exception):
 class IllegalStateError(Error):
   """Error used to signal something is wrong, but its not clear why."""
   def __init__(self, method, msg):
-    super(IllegalStateError, Error).__init__()
+    Error.__init__(self)
     self.message = '%s in method %s\n\tMSG: %s' % \
       ('IllegalStateError', method, msg)
 
@@ -234,7 +228,7 @@ class IllegalStateError(Error):
 class ValidationError(Error):
   """Error raised when item or list validation fails."""
   def __init__(self, msg):
-    super(ValidationError, Error).__init__()
+    Error.__init__(self)
     self.message = '%s: %s' % ('ValidationError', msg)
 
 
@@ -242,6 +236,6 @@ class InvalidIDError(Error):
   """Error raised when a specified item oid does not exist."""
 
   def __init__(self, method, msg):
-    super(InvalidIDError, Error).__init__()
+    Error.__init__(self)
     self.message = '%s in method %s\n\tMSG: %s' % (
       'InvalidIDError', method, msg)
