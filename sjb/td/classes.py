@@ -50,10 +50,10 @@ class Todo(sjb.common.base.Item):
       self.priority = priority
     else:
       self.priority = PriorityEnum.DEFAULT.value
-    self.tags = tags if tags is not None else set()
+    self.tags = set(tags) if tags is not None else set()
 
     # Values that should only be set when reading from file
-    self.finished = finished
+    self.finished = finished if finished is not None else False
     self.created_date = created_date
     self.finished_date = finished_date
 
@@ -276,16 +276,9 @@ class TodoList(sjb.common.base.ItemList):
 
     return item
 
-  def get_new_tags(self, tags):
-    """Computes set of tags that are not in database.
-
-    Arguments:
-      tags: set(str) of tags to check if present in tag set.
-
-    Returns:
-      Set: of all tags that are new to database.
-    """
-    return tags - self._tag_set
+  def get_tags(self):
+    """Returns set of all tags in the database."""
+    return copy.copy(self._tag_set)
 
   def _update_object_maps(self, item):
     """Updates meta objects to reflect the contents of item."""

@@ -19,8 +19,7 @@ class Item(abc.ABC):
     if self._oid is None:
       self._oid = value
     else:
-      raise IllegalStateError(
-        'Item.oid', 'Cannot set oid once set (val was '+str(self._oid)+')')
+      raise ReadOnlyError()
 
   @abc.abstractmethod
   def __eq__(self, other):
@@ -92,6 +91,9 @@ class ItemList(abc.ABC):
     """# TODO: list of Item objects in this ItemList."""
     return self._items
 
+  def size(self):
+    return len(self._items)
+
   def _mark_modified(self, timestamp=None):
     """Marks this list as modified at the given timestamp.
 
@@ -158,9 +160,9 @@ class ItemList(abc.ABC):
       # Check that id is not already used.
       if item.oid in self._oid_set:
         raise IllegalStateError('ItemList.add_item', 'Duplicate item ID')
-      self._oid_set.add(item.oid)
       self._last_item_id = max(item.oid, self._last_item_id)
 
+    self._oid_set.add(item.oid)
     self._items.append(item)
 
   def query_items(self, item_matcher):
@@ -214,6 +216,11 @@ class ItemList(abc.ABC):
 
 class Error(Exception):
   """Base class for exceptions for this program."""
+  pass
+
+
+class ReadOnlyError(Error):
+  """Raised when attempts to change a read only property."""
   pass
 
 

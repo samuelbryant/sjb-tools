@@ -54,7 +54,7 @@ class Entry(sjb.common.base.Item):
     self.clue = clue
     self.answer = answer
     self.primary = primary
-    self.tags = tags if tags is not None else set()
+    self.tags = set(tags) if tags is not None else set()
 
   def __eq__(self, other):
     """Returns true if self and other have identical fields."""
