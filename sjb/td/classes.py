@@ -92,36 +92,25 @@ class Todo(sjb.common.base.Item):
       raise sjb.common.base.ValidationError('Bad tags: '+str(self.tags))
     if self.priority not in [e.value for e in PriorityEnum]:
       raise sjb.common.base.ValidationError('Bad priority: '+str(self.priority))
+    for tag in self.tags:
+      if not tag or not isinstance(tag, str):
+        raise sjb.common.base.ValidationError('Bad tag: '+str(tag))
 
-    # If it has an ID, it should have other values as well.
-    if self.oid is not None:
-      if not isinstance(self.oid, int):
-        raise sjb.common.base.ValidationError('Non int oid: '+str(self.oid))
-      if not isinstance(self.finished, bool):
-        raise sjb.common.base.ValidationError(
-          'Non bool finished state: '+str(self.finished))
-      # TODO: More thorough date validation. (also below)
-      if not isinstance(self.created_date, float):
-        raise sjb.common.base.ValidationError(
-          'Non float created_date: '+str(self.created_date))
-      # Finished items must have finished dates.
-      if self.finished and not isinstance(self.finished_date, float):
-        raise sjb.common.base.ValidationError(
-          'Todo finished but no finished_date')
-      # Non-finished items must not have finished dates.
-      if not self.finished and self.finished_date is not None:
-        raise sjb.common.base.ValidationError(
-          'Non finished todo has finished_date')
-    if self.oid is None:
-      if self.finished is not None:
-        raise sjb.common.base.ValidationError(
-          'No oid set, but has not none finished: '+str(self.finished))
-      if self.created_date is not None:
-        raise sjb.common.base.ValidationError(
-          'No oid set, but has created_date: '+str(self.created_date))
-      if self.finished_date is not None:
-        raise sjb.common.base.ValidationError(
-          'No oid set, but has finished_date: '+str(self.finished_date))
+    if not isinstance(self.finished, bool):
+      raise sjb.common.base.ValidationError(
+        'Non bool finished state: '+str(self.finished))
+    # TODO: More thorough date validation. (also below)
+    if not isinstance(self.created_date, float):
+      raise sjb.common.base.ValidationError(
+        'Non float created_date: '+str(self.created_date))
+    # Finished items must have finished dates.
+    if self.finished and not isinstance(self.finished_date, float):
+      raise sjb.common.base.ValidationError(
+        'Todo finished but no finished_date')
+    # Non-finished items must not have finished dates.
+    if not self.finished and self.finished_date is not None:
+      raise sjb.common.base.ValidationError(
+        'Non finished todo has finished_date')
 
   def _to_dict(self):
     """Converts data to a dict suitable for writing to a file as json.
@@ -188,18 +177,31 @@ class TodoList(sjb.common.base.ItemList):
       initial_load: Indicates that this todo object is loaded from a todo and
         thus is not a new addition to the todo list.
 
+    Returns:
+      Todo: the newly added Todo object.
+
     Raises:
-      cheatsheet.base_classes.IllegalStateError: If initial_load is False but
-        item has an oid OR if initial_load is True but item lacks an oid.
+      sjb.common.base.IllegalStateError: If initial_load is False, but the
+        item has any of the fields: 'created_date', 'finished', or 'oid' set.
+      sjb.common.base.IllegalStateError: If initial_load is True, but the item
+        does not have the 'oid' field set
     """
     super().add_item(item, initial_load=initial_load)
 
     # set creation date and finished state for new items.
     if not initial_load:
+      if item.created_date != None:
+        raise sjb.common.base.IllegalStateError(
+          'TodoList.add_item', 'new item cant have created date')
+      if item.finished:
+        raise sjb.common.base.IllegalStateError(
+          'TodoList.add_item', 'new item cannot be finished already')
+
       item.created_date = time.time()
       item.finished = False
 
     self._update_object_maps(item)
+    return item
 
   def complete_item(self, oid, set_complete=True):
     """Marks the todo with the specified oid as completed.
@@ -275,10 +277,6 @@ class TodoList(sjb.common.base.ItemList):
       self._recompute_object_maps()
 
     return item
-
-  def get_tags(self):
-    """Returns set of all tags in the database."""
-    return copy.copy(self._tag_set)
 
   def _update_object_maps(self, item):
     """Updates meta objects to reflect the contents of item."""

@@ -3,6 +3,40 @@ import abc
 import time
 
 
+class Error(Exception):
+  """Base class for exceptions for this program."""
+  pass
+
+
+class ReadOnlyError(Error):
+  """Raised when attempts to change a read only property."""
+  pass
+
+
+class IllegalStateError(Error):
+  """Error used to signal something is wrong, but its not clear why."""
+  def __init__(self, method, msg):
+    Error.__init__(self)
+    self.message = '%s in method %s\n\tMSG: %s' % \
+      ('IllegalStateError', method, msg)
+
+
+class ValidationError(Error):
+  """Error raised when item or list validation fails."""
+  def __init__(self, msg):
+    Error.__init__(self)
+    self.message = '%s: %s' % ('ValidationError', msg)
+
+
+class InvalidIDError(Error):
+  """Error raised when a specified item oid does not exist."""
+
+  def __init__(self, method, msg):
+    Error.__init__(self)
+    self.message = '%s in method %s\n\tMSG: %s' % (
+      'InvalidIDError', method, msg)
+
+
 class Item(abc.ABC):
   """Abstract class representing an item stored in a list."""
 
@@ -35,6 +69,8 @@ class Item(abc.ABC):
     Raises:
       ValidationError: If validation fails.
     """
+    if not self._oid or not isinstance(self._oid, int):
+      raise ValidationError('item ID not set or set to non-integer')
     return
 
   @abc.abstractmethod
@@ -144,10 +180,10 @@ class ItemList(abc.ABC):
     """
     # Make sure any 'init load' item already has an oid
     if initial_load and not item.oid:
-      raise IllegalStateError('ItemList.add_item', 'Old Item missing oid!')
+      raise IllegalStateError('ItemList.add_item', 'Old item missing oid!')
     # Make sure any new item does not have an oid
     if not initial_load and item.oid:
-      raise IllegalStateError('ItemList.add_item', 'New Intry has oid!')
+      raise IllegalStateError('ItemList.add_item', 'New item has oid!')
 
     if not initial_load:
       # Set the oid correctly
@@ -212,37 +248,3 @@ class ItemList(abc.ABC):
     """
     for item in self.items:
       item._validate()
-
-
-class Error(Exception):
-  """Base class for exceptions for this program."""
-  pass
-
-
-class ReadOnlyError(Error):
-  """Raised when attempts to change a read only property."""
-  pass
-
-
-class IllegalStateError(Error):
-  """Error used to signal something is wrong, but its not clear why."""
-  def __init__(self, method, msg):
-    Error.__init__(self)
-    self.message = '%s in method %s\n\tMSG: %s' % \
-      ('IllegalStateError', method, msg)
-
-
-class ValidationError(Error):
-  """Error raised when item or list validation fails."""
-  def __init__(self, msg):
-    Error.__init__(self)
-    self.message = '%s: %s' % ('ValidationError', msg)
-
-
-class InvalidIDError(Error):
-  """Error raised when a specified item oid does not exist."""
-
-  def __init__(self, method, msg):
-    Error.__init__(self)
-    self.message = '%s in method %s\n\tMSG: %s' % (
-      'InvalidIDError', method, msg)

@@ -20,7 +20,9 @@ class EntryMatcherTags(sjb.common.base.ItemMatcher):
       tags: Set of tags to match (can be primary or secondary.)
     """
     self.tags = tags
-    self.andor = andor
+    self._andor = andor
+    if self._andor != SEARCH_AND and self._andor != SEARCH_OR:
+      raise sjb.common.base.IllegalStateError('EntryMatcherTags.__init__', 'Bad andor argument: '+str(self._andor))
 
   def matches(self, item):
     """Returns true if the item has any/all of the specified tags."""
@@ -29,20 +31,17 @@ class EntryMatcherTags(sjb.common.base.ItemMatcher):
     if not self.tags:
       return True
 
-    if self.andor is SEARCH_AND:
+    if self._andor is SEARCH_AND:
       for tag in self.tags:
         if tag != item.primary and tag not in item.tags:
           return False
       return True
 
-    elif self.andor is SEARCH_OR:
+    else:
       for tag in self.tags:
         if tag == item.primary or tag in item.tags:
           return True
       return False
-    else:
-      raise sjb.common.base.IllegalStateError(
-        'Entry.matches', 'invalid andor argument '+str(self.andor))
 
 
 class Entry(sjb.common.base.Item):
@@ -85,7 +84,11 @@ class Entry(sjb.common.base.Item):
       raise sjb.common.base.ValidationError('Bad answer: '+str(self.answer))
     if not isinstance(self.tags, set):
       raise sjb.common.base.ValidationError('Bad tags: '+str(self.tags))
-
+    for tag in self.tags:
+      if not tag or not isinstance(tag, str):
+        raise sjb.common.base.ValidationError('Bad tag: '+str(tag))
+      if tag == self.primary:
+        raise sjb.common.base.ValidationError('Primary cannot be tag: '+str(tag))
     if self.oid is not None and not isinstance(self.oid, int):
       raise sjb.common.base.ValidationError('Bad oid: '+str(self.oid))
 
@@ -137,8 +140,13 @@ class CheatSheet(sjb.common.base.ItemList):
     self._tag_set = set()
 
   @property
+  def primary_set(self):
+    """set(str): Set of primary keys in this list."""
+    return set(self._primary_map.keys())
+
+  @property
   def tag_set(self):
-    """set(str): TODO: Set of tags in this CheatSheet."""
+    """set(str): TODO: Make immutable TODO: Set of tags in this CheatSheet."""
     return self._tag_set
 
   @property
@@ -155,12 +163,18 @@ class CheatSheet(sjb.common.base.ItemList):
       initial_load: Indicates that this entry object is from the cheat sheet
         file and is not a new addition to the cheat sheet.
 
+    Returns:
+      Entry: the newly added Entry object.
+
     Raises:
-      cheatsheet.base_classes.IllegalStateError: If initial_load is False but
-        entry has an oid OR if initial_load is True but entry lacks an oid.
+      sjb.common.base.IllegalStateError: If initial_load is False, but the
+        item has its oid attribute set.
+      sjb.common.base.IllegalStateError: If initial_load is True, but the item
+        does not have the 'oid' field set.
     """
     super().add_item(item, initial_load=initial_load)
     self._update_object_maps(item)
+    return item
 
   def remove_item(self, oid):
     """Removes the entry with the specified oid and updates meta data.
@@ -194,7 +208,7 @@ class CheatSheet(sjb.common.base.ItemList):
     item.primary = primary if primary is not None else item.primary
     item.clue = clue if clue is not None else item.clue
     item.answer = answer if answer is not None else item.answer
-    item.tags = tags if tags is not None else item.tags
+    item.tags = set(tags) if tags is not None else item.tags
 
     # Mark as modified only if the object is changed.
     if original_item != item:
@@ -202,21 +216,6 @@ class CheatSheet(sjb.common.base.ItemList):
       self._recompute_object_maps()
 
     return item
-
-  def get_new_tags(self, primary, tags):
-    """Computes set of primary and tags that are not in database.
-
-    Arguments:
-      primary: str primary tag to check if present in primary set.
-      tags: set(str) of tags to check if present in tag set.
-
-    Returns:
-      # TODO: of primary + all tags that are new to database.
-    """
-    new_elts = tags - self._tag_set
-    if primary not in self._primary_map:
-      new_elts.add(primary)
-    return new_elts
 
   def _update_object_maps(self, item):
     """Updates meta objects to reflect the contents of item."""

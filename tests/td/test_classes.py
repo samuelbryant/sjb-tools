@@ -17,101 +17,101 @@ class TestTodo(object):
 
   def test_init_tags_set(self):
     t = Todo('some text', tags=['a', 'b'])
-    assert(isinstance(t.tags, set))
+    assert isinstance(t.tags, set)
 
   def test_init_default_priority(self):
     t = Todo('some text', priority=None)
-    assert(t.priority == PriorityEnum.DEFAULT.value)
+    assert t.priority == PriorityEnum.DEFAULT.value
     t = Todo('some text', priority=PriorityEnum.URGENT.value)
-    assert(t.priority == PriorityEnum.URGENT.value)
+    assert t.priority == PriorityEnum.URGENT.value
 
   def test_init_default_finished(self):
     t = Todo('some text')
-    assert(t.finished == False)
+    assert t.finished == False
     t = Todo('some text', finished=True)
-    assert(t.finished == True)
+    assert t.finished == True
 
   def test_oid_write_once(self):
     t = Todo('some text', oid=None)
-    assert(not t.oid)
+    assert not t.oid
     t.oid = 5
-    assert(t.oid == 5)
+    assert t.oid == 5
     with pytest.raises(base.ReadOnlyError):
       t.oid = 6
 
   def test_oid_readonly(self):
     t = Todo('some text', oid=4)
-    assert(t.oid == 4)
+    assert t.oid == 4
     with pytest.raises(base.ReadOnlyError):
       t.oid = 5
 
   def test_equality_same_oid(self):
     t1 = Todo('some text', oid=3)
     t2 = Todo('diff text', oid=3)
-    assert(t1 != t2)
+    assert t1 != t2
 
     t1 = Todo('same text', oid=3)
     t2 = Todo('same text', oid=3)
-    assert(t1 == t2)
+    assert t1 == t2
 
   def test_equality_tag_order(self):
     t1 = Todo('some text', tags=set(['a', 'b', 'tag']), oid=3)
     t2 = Todo('some text', tags=set(['a', 'b', 'tag']), oid=3)
-    assert(t1 == t2)
+    assert t1 == t2
 
     t1 = Todo('some text', tags=['a', 'b', 'tag'], oid=3)
     t2 = Todo('some text', tags=set(['a', 'b', 'tag']), oid=3)
-    assert(t1 == t2)
+    assert t1 == t2
 
     t1 = Todo('some text', tags=['tag', 'b', 'a', 'tag'], oid=3)
     t2 = Todo('some text', tags=set(['a', 'b', 'tag']), oid=3)
-    assert(t1 == t2)
+    assert t1 == t2
 
     t1 = Todo('some text', tags=['tag', 'a', 'a', 'tag'], oid=3)
     t2 = Todo('some text', tags=set(['a', 'b', 'tag']), oid=3)
-    assert(t1 != t2)
+    assert t1 != t2
 
   def test_equality_all_same(self):
     t1 = self.make_todo()
     t2 = self.make_todo()
-    assert(t1 == t2)
+    assert t1 == t2
 
   def test_equality_diff_text(self):
     t1 = self.make_todo()
     t2 = self.make_todo()
     t2.text = 'diff text'
-    assert(t1 != t2)
+    assert t1 != t2
 
   def test_equality_diff_priority(self):
     t1 = self.make_todo()
     t2 = self.make_todo()
     t2.priority = PriorityEnum.LONG_TERM
-    assert(t1 != t2)
+    assert t1 != t2
 
   def test_equality_diff_finished(self):
     t1 = self.make_todo()
     t2 = self.make_todo()
     t2.finished = False
-    assert(t1 != t2)
+    assert t1 != t2
 
   def test_equality_diff_created_date(self):
     t1 = self.make_todo()
     t2 = self.make_todo()
     t1.created_date = '1527004163.5411422'
     t2.created_date = '1527004163.5411411'
-    assert(t1 != t2)
+    assert t1 != t2
 
   def test_equality_diff_finished_date(self):
     t1 = self.make_todo()
     t2 = self.make_todo()
     t1.finished_date = '1527004163.5411422'
     t2.finished_date = '1527004163.5411411'
-    assert(t1 != t2)
+    assert t1 != t2
 
   def test_equality_diff_oid(self):
     t1 = self.make_todo(oid=4)
     t2 = self.make_todo(oid=1)
-    assert(t1 != t2)
+    assert t1 != t2
 
   def test_from_dict_goodvalues(self):
     d = {
@@ -124,13 +124,13 @@ class TestTodo(object):
       'oid': 3
     }
     t = Todo.from_dict(d)
-    assert(t.text == 'some text')
-    assert(t.tags == set({'one', 'two'}))
-    assert(t.priority == PriorityEnum.URGENT.value)
-    assert(t.finished == False)
-    assert(t.created_date == '1527004163.5411422')
-    assert(t.finished_date == '1527004113.5411422')
-    assert(t.oid == 3)
+    assert t.text == 'some text'
+    assert t.tags == set({'one', 'two'})
+    assert t.priority == PriorityEnum.URGENT.value
+    assert t.finished == False
+    assert t.created_date == '1527004163.5411422'
+    assert t.finished_date == '1527004113.5411422'
+    assert t.oid == 3
 
 
 class TestTodoList(object):
@@ -139,11 +139,18 @@ class TestTodoList(object):
   mock_time.return_value = 4163.5411422
 
   def test_init(self):
-    l = TodoList(version='0.1.3', modified_date='1527004163.5411422')
-    assert(l.version == '0.1.3')
-    assert(l.modified_date == '1527004163.5411422')
-    assert(l.modified == False)
-    assert(l.size() == 0)
+    l = TodoList(version='0.1.3', modified_date=1234.1234)
+    assert l.version == '0.1.3'
+    assert l.modified_date == 1234.1234
+    assert l.modified == False
+    assert l.size() == 0
+
+  def test_init_defaults(self):
+    l = TodoList()
+    assert l.version == None
+    assert l.modified_date == None
+    assert l.modified == False
+    assert l.size() == 0
 
   @mock.patch('time.time', mock_time)
   def test_add_item_new(self):
@@ -151,11 +158,13 @@ class TestTodoList(object):
     item = Todo('new toto item')
     l.add_item(item, initial_load=False)
 
-    assert(item.created_date == 4163.5411422)
-    assert(item.finished == False)
-    assert(not item.finished_date)
-    assert(l.size() == 1)
-    assert(l.modified == True)
+    assert item.created_date == 4163.5411422
+    assert item.finished == False
+    assert not item.finished_date
+    assert l.size() == 1
+    assert l.modified == True
+    assert l.modified_date == 4163.5411422
+    assert TestTodoList.mock_time.call_count == 2
 
   @mock.patch('time.time', mock_time)
   def test_add_item_new_has_id(self):
@@ -171,11 +180,11 @@ class TestTodoList(object):
     i2 = Todo('new item', tags=['tag2', 'tag3'])
 
     l.add_item(i1, initial_load=False)
-    assert(l.get_tags() == set(['tag1', 'tag2']))
+    assert l.tag_set == set(['tag1', 'tag2'])
     l.add_item(i2, initial_load=False)
-    assert(l.get_tags() == set(['tag1', 'tag2', 'tag3']))
-    assert(l.size() == 2)
-    assert(l.modified == True)
+    assert l.tag_set == set(['tag1', 'tag2', 'tag3'])
+    assert l.size() == 2
+    assert l.modified == True
 
   @mock.patch('time.time', mock_time)
   def test_add_item_initial_load(self):
@@ -184,14 +193,14 @@ class TestTodoList(object):
       'old item', oid=1, tags=['tag1', 'tag2'], created_date='some date')
     i2 = Todo('new item', oid=2, tags=['tag2', 'tag3'], finished=True)
 
-    assert(l.modified == False)
+    assert l.modified == False
     l.add_item(i1, initial_load=True)
     l.add_item(i2, initial_load=True)
-    assert(i1.created_date == 'some date')
-    assert(i2.finished == True)
-    assert(l.get_tags() == set(['tag1', 'tag2', 'tag3']))
-    assert(l.size() == 2)
-    assert(l.modified == False)
+    assert i1.created_date == 'some date'
+    assert i2.finished == True
+    assert l.tag_set == set(['tag1', 'tag2', 'tag3'])
+    assert l.size() == 2
+    assert l.modified == False
 
   @mock.patch('time.time', mock_time)
   def test_add_item_initial_load_no_id(self):
@@ -208,6 +217,17 @@ class TestTodoList(object):
     with pytest.raises(base.IllegalStateError):
       l.add_item(Todo('new todo item', oid=5), initial_load=True)
 
+  def test_add_item_new_is_finished(self):
+    l = TodoList()
+    with pytest.raises(base.IllegalStateError):
+      l.add_item(Todo('new', finished=True, finished_date=1234.1234))
+      l.validate()
+
+  def test_add_item_new_has_creation_date(self):
+    l = TodoList()
+    with pytest.raises(base.IllegalStateError):
+      l.add_item(Todo('new', created_date=1234.1234))
+
   def test_get_item_new_item(self):
     l = TodoList()
     i1 = Todo('old toto item')
@@ -215,7 +235,7 @@ class TestTodoList(object):
     l.add_item(i1, initial_load=False)
     l.add_item(i2, initial_load=False)
 
-    assert(i2 == l.get_item(2))
+    assert i2 == l.get_item(2)
 
   def test_get_item_old_item(self):
     l = TodoList()
@@ -224,7 +244,7 @@ class TestTodoList(object):
     l.add_item(i1, initial_load=True)
     l.add_item(i2, initial_load=False)
 
-    assert(i1 == l.get_item(10))
+    assert i1 == l.get_item(10)
 
   def test_get_item_id_inc(self):
     l = TodoList()
@@ -233,7 +253,7 @@ class TestTodoList(object):
     l.add_item(i1, initial_load=True)
     l.add_item(i2, initial_load=False)
 
-    assert(i2 == l.get_item(11))
+    assert i2 == l.get_item(11)
 
   def test_get_item_bad_id(self):
     l = TodoList()
@@ -248,11 +268,11 @@ class TestTodoList(object):
     i1 = Todo('old toto item', oid=3, tags=set(['a', 'b']))
     l.add_item(i1, initial_load=True)
 
-    assert(not l.get_item(3).finished)
+    assert not l.get_item(3).finished
     l.complete_item(3, set_complete=True)
-    assert(l.get_item(3).finished)
-    assert(l.get_item(3).finished_date == 4163.5411422)
-    assert(l.get_item(3).created_date != 4163.5411422)
+    assert l.get_item(3).finished
+    assert l.get_item(3).finished_date == 4163.5411422
+    assert l.get_item(3).created_date != 4163.5411422
 
   @mock.patch('time.time', mock_time)
   def test_complete_item_reverse(self):
@@ -260,11 +280,11 @@ class TestTodoList(object):
     i1 = Todo('old toto item', oid=3, tags=set(['a', 'b']))
     l.add_item(i1, initial_load=True)
     l.complete_item(3, set_complete=True)
-    assert(l.get_item(3).finished)
-    assert(l.get_item(3).finished_date == 4163.5411422)
+    assert l.get_item(3).finished
+    assert l.get_item(3).finished_date == 4163.5411422
     l.complete_item(3, set_complete=False)
-    assert(not l.get_item(3).finished)
-    assert(not l.get_item(3).finished_date)
+    assert not l.get_item(3).finished
+    assert not l.get_item(3).finished_date
 
   @mock.patch('time.time', mock_time)
   def test_complete_item_already_completed(self):
@@ -288,29 +308,29 @@ class TestTodoList(object):
     i1 = Todo('old toto item', oid=3, tags=set(['a', 'b']))
     l.add_item(i1, initial_load=True)
 
-    assert(l.size() == 1)
-    assert(l.get_item(3) == i1)
-    assert(l.get_tags() == set(['a', 'b']))
+    assert l.size() == 1
+    assert l.get_item(3) == i1
+    assert l.tag_set == set(['a', 'b'])
     l.remove_item(3)
-    assert(l.size() == 0)
+    assert l.size() == 0
     with pytest.raises(base.InvalidIDError):
       l.get_item(3)
-    assert(l.get_tags() == set())
-    assert(l.modified)
+    assert l.tag_set == set()
+    assert l.modified
 
   def test_remove_item_after_initial(self):
     l = TodoList()
     i1 = Todo('old toto item', tags=set(['a', 'b']))
     l.add_item(i1, initial_load=False)
 
-    assert(l.size() == 1)
-    assert(l.get_item(1) == i1)
-    assert(l.get_tags() == set(['a', 'b']))
+    assert l.size() == 1
+    assert l.get_item(1) == i1
+    assert l.tag_set == set(['a', 'b'])
     l.remove_item(1)
-    assert(l.size() == 0)
+    assert l.size() == 0
     with pytest.raises(base.InvalidIDError):
       l.get_item(1)
-    assert(l.get_tags() == set())
+    assert l.tag_set == set()
 
   def test_remove_item_tagset(self):
     l = TodoList()
@@ -319,9 +339,9 @@ class TestTodoList(object):
     l.add_item(i1, initial_load=True)
     l.add_item(i2, initial_load=True)
 
-    assert(l.get_tags() == set(['a', 'b', 'c', 'd']))
+    assert l.tag_set == set(['a', 'b', 'c', 'd'])
     l.remove_item(1)
-    assert(l.get_tags() == set(['b', 'c', 'd']))
+    assert l.tag_set == set(['b', 'c', 'd'])
 
   def test_remove_item_bad_id(self):
     l = TodoList()
@@ -345,7 +365,7 @@ class TestTodoList(object):
     l.add_item(
       Todo('old toto item', oid=1, tags=set(['a', 'b', 'c'])),
       initial_load=True)
-    assert(bool(l.get_item(1)))
+    assert bool(l.get_item(1))
 
   def test_remove_item_complex(self):
     l = self.setup_initial_list([
@@ -360,16 +380,16 @@ class TestTodoList(object):
     for n in newly:
       l.add_item(n, initial_load=False)
 
-    assert(l.size() == 5)
-    assert(l.get_tags() == set(['a','b','c','d']))
+    assert l.size() == 5
+    assert l.tag_set == set(['a','b','c','d'])
     l.remove_item(1)
-    assert(l.size() == 4)
-    assert(l.get_tags() == set(['b','c','d']))
-    assert(l.modified)
+    assert l.size() == 4
+    assert l.tag_set == set(['b','c','d'])
+    assert l.modified
     l.add_item(
       Todo('first todo item', tags=set(['a', 'b'])), initial_load=False)
-    assert(l.size() == 5)
-    assert(l.get_tags() == set(['a','b','c','d']))
+    assert l.size() == 5
+    assert l.tag_set == set(['a','b','c','d'])
 
   def test_update_item_text(self):
     l = self.setup_initial_list([
@@ -377,11 +397,11 @@ class TestTodoList(object):
       Todo('2nd todo item', oid=2, tags=set()),
       Todo('3rd', oid=10, tags=set(['c']))
     ])
-    assert(l.get_item(1).text == 'original text')
+    assert l.get_item(1).text == 'original text'
     l.update_item(1, text='new text')
-    assert(l.get_item(1).text == 'new text')
-    assert(l.get_tags() == set(['a','b','c']))
-    assert(l.modified)
+    assert l.get_item(1).text == 'new text'
+    assert l.tag_set == set(['a','b','c'])
+    assert l.modified
 
   def test_update_item_tags(self):
     l = self.setup_initial_list([
@@ -389,10 +409,10 @@ class TestTodoList(object):
       Todo('2nd todo item', oid=2, tags=set()),
       Todo('3rd', oid=10, tags=set(['c']))
     ])
-    assert(l.get_tags() == set(['a','b','c']))
+    assert l.tag_set == set(['a','b','c'])
     l.update_item(1, tags=['a','d'])
-    assert(l.get_tags() == set(['a','d','c']))
-    assert(l.modified)
+    assert l.tag_set == set(['a','d','c'])
+    assert l.modified
 
   def test_update_item_priority(self):
     l = self.setup_initial_list([
@@ -400,11 +420,11 @@ class TestTodoList(object):
       Todo('2nd todo item', oid=2, tags=set()),
       Todo('3rd', oid=10, tags=set(['c']))
     ])
-    assert(l.get_item(1).priority == PriorityEnum.DEFAULT.value)
+    assert l.get_item(1).priority == PriorityEnum.DEFAULT.value
     l.update_item(1, priority=PriorityEnum.URGENT.value)
-    assert(l.get_item(1).priority == PriorityEnum.URGENT.value)
-    assert(l.get_tags() == set(['a','b','c']))
-    assert(l.modified)
+    assert l.get_item(1).priority == PriorityEnum.URGENT.value
+    assert l.tag_set == set(['a','b','c'])
+    assert l.modified
 
   def test_update_item_nochange(self):
     l = self.setup_initial_list([
@@ -414,7 +434,7 @@ class TestTodoList(object):
     ])
 
     l.update_item(1, text='first todo item', priority=PriorityEnum.DEFAULT.value, tags=set(['a', 'b']))
-    assert(not l.modified)
+    assert not l.modified
 
   def test_update_item_bad_id(self):
     l = self.setup_initial_list([
@@ -437,7 +457,7 @@ class TestTodoList(object):
 
     ret = l.query_items(TodoMatcher())
     for t in lib:
-      assert(t in ret)
+      assert t in ret
 
   def test_query_priority(self):
     lib = [
@@ -450,7 +470,7 @@ class TestTodoList(object):
     l = self.setup_initial_list(lib)
 
     ret = l.query_items(TodoMatcher(priority=PriorityEnum.URGENT.value))
-    assert(ret == [lib[1]])
+    assert ret == [lib[1]]
 
   def test_query_tag(self):
     lib = [
@@ -463,10 +483,10 @@ class TestTodoList(object):
     l = self.setup_initial_list(lib)
 
     ret = l.query_items(TodoMatcher(tags=['a']))
-    assert(len(ret) == 3)
-    assert(lib[0] in ret)
-    assert(lib[2] in ret)
-    assert(lib[4] in ret)
+    assert len(ret) == 3
+    assert lib[0] in ret
+    assert lib[2] in ret
+    assert lib[4] in ret
 
   def test_query_tags(self):
     lib = [
@@ -479,9 +499,9 @@ class TestTodoList(object):
     l = self.setup_initial_list(lib)
 
     ret = l.query_items(TodoMatcher(tags=['a', 'b']))
-    assert(len(ret) == 2)
-    assert(lib[0] in ret)
-    assert(lib[4] in ret)
+    assert len(ret) == 2
+    assert lib[0] in ret
+    assert lib[4] in ret
 
   def test_query_tags_finished(self):
     lib = [
@@ -494,7 +514,7 @@ class TestTodoList(object):
     l = self.setup_initial_list(lib)
 
     ret = l.query_items(TodoMatcher(finished=True))
-    assert(ret == [lib[3]])
+    assert ret == [lib[3]]
 
   def test_query_tags_not_finished(self):
     lib = [
@@ -507,11 +527,11 @@ class TestTodoList(object):
     l = self.setup_initial_list(lib)
 
     ret = l.query_items(TodoMatcher(finished=False))
-    assert(len(ret) == 4)
-    assert(lib[0] in ret)
-    assert(lib[1] in ret)
-    assert(lib[2] in ret)
-    assert(lib[4] in ret)
+    assert len(ret) == 4
+    assert lib[0] in ret
+    assert lib[1] in ret
+    assert lib[2] in ret
+    assert lib[4] in ret
 
   def run_validate(self, todos):
     l = TodoList()
@@ -595,6 +615,23 @@ class TestTodoList(object):
     l.get_item(1).priority = PriorityEnum.DEFAULT.value
     l.validate()
 
+  def test_validate_invalid_tags(self):
+    l = TodoList()
+    l.add_item(Todo(text='text', tags={'a'}))
+    l.validate()
+    with pytest.raises(base.ValidationError):
+      l = TodoList()
+      l.add_item(Todo(text='text', tags={'a', ''}))
+      l.validate()
+    with pytest.raises(base.ValidationError):
+      l = TodoList()
+      l.add_item(Todo(text='text', tags={'a', 34}))
+      l.validate()
+    with pytest.raises(base.ValidationError):
+      l = TodoList()
+      l.add_item(Todo(text='text', tags={'a', None}))
+      l.validate()
+
   def test_validate_finished_no_date(self):
     l = TodoList()
     l.add_item(Todo('some text'))
@@ -651,27 +688,27 @@ class TestTodoList(object):
   @mock.patch('time.time', mock_time)
   def test_modified_date_add_new(self):
     l = TodoList(version='version str', modified_date=1234.1234)
-    assert(l.modified_date == 1234.1234)
+    assert l.modified_date == 1234.1234
     l.add_item(Todo('a new todo'))
-    assert(l.modified_date == 4163.5411422)
+    assert l.modified_date == 4163.5411422
 
   @mock.patch('time.time', mock_time)
   def test_modified_date_update(self):
     l = TodoList(version='version str', modified_date=1234.1234)
-    assert(l.modified_date == 1234.1234)
+    assert l.modified_date == 1234.1234
     l.add_item(Todo('a new todo', oid=1, created_date=4.4), initial_load=True)
-    assert(l.modified_date == 1234.1234)
+    assert l.modified_date == 1234.1234
     l.update_item(1, text='howdy')
-    assert(l.modified_date == 4163.5411422)
+    assert l.modified_date == 4163.5411422
 
   @mock.patch('time.time', mock_time)
   def test_modified_date_remove(self):
     l = TodoList(version='version str', modified_date=1234.1234)
-    assert(l.modified_date == 1234.1234)
+    assert l.modified_date == 1234.1234
     l.add_item(Todo('a new todo', oid=1, created_date=4.4), initial_load=True)
-    assert(l.modified_date == 1234.1234)
+    assert l.modified_date == 1234.1234
     l.remove_item(1)
-    assert(l.modified_date == 4163.5411422)
+    assert l.modified_date == 4163.5411422
 
   @mock.patch('time.time', mock_time)
   def test_to_dict(self):
@@ -733,15 +770,15 @@ class TestTodoList(object):
       l.add_item(n, initial_load=False)
 
     d = l.to_dict()['todo_list']
-    assert(d['version'] == 'version str')
-    assert(d['modified_date'] == 4163.5411422)
-    assert(len(d.keys()) == 3)
+    assert d['version'] == 'version str'
+    assert d['modified_date'] == 4163.5411422
+    assert len(d.keys()) == 3
     todos = d['todos']
-    assert(len(todos) == 5)
+    assert len(todos) == 5
     for e in init_exp:
-      assert(e in todos)
+      assert e in todos
     for e in new_exp:
-      assert(e in todos)
+      assert e in todos
 
   def test_from_dict(self):
     d = {'todo_list': {
@@ -795,10 +832,11 @@ class TestTodoList(object):
       Todo('new item 2', oid=7, created_date=4163.5411422)
     ]
     l = TodoList.from_dict(d)
-    assert(not l.modified)
-    assert(l.version == 'version str')
-    assert(l.modified_date == 4.1)
+    assert not l.modified
+    assert l.version == 'version str'
+    assert l.modified_date == 4.1
 
-    assert(l.size() == 5)
+    assert l.size() == 5
     for t in l.items:
       assert t in exp_todos
+    assert l.tag_set == {'c', 'd'}

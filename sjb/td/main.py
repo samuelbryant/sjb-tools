@@ -157,7 +157,7 @@ class Program(object):
 
     # check if any tag is new and prompts user before continuing
     args.tags = args.tags or set()
-    new_tags = args.tags - tl.get_tags()
+    new_tags = args.tags - tl.tag_set
     if new_tags and not skip_tag_prompt:
       print('hello')
       question = (

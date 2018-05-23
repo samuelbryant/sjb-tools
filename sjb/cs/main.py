@@ -176,7 +176,7 @@ class Program(object):
       args.clue, args.answer, primary=args.tags[0], tags=args.tags[1])
 
     # check if any tag or the primary is new and prompt user before continuing
-    new_elts = cs.get_new_tags(args.tags[0], args.tags[1])
+    new_elts = args.tags[1] - cs.tag_set
     if new_elts and not skip_tag_prompt:
       question = (
         'The following tags are not present in the database: ' + \
